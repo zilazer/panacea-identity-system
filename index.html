@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Panacea Identity System is a bilingual brand design system for panacea, 人間良藥, allheilmittel, and the icon a."
+    />
+    <link rel="icon" href="assets/logo/current/panacea-icon-a-current.png" />
+    <title>Panacea Identity System</title>
+    <style>
+      :root {
+        --ink: #0a0b0b;
+        --paper: #f2f0ea;
+        --muted: #7a7b76;
+        --line: #c8c5bd;
+        --blue: #172a4d;
+        --silver: #c9cbc7;
+        --white: #fffdf7;
+        --max: 1180px;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Arial, Helvetica, "PingFang SC", "Hiragino Sans GB", sans-serif;
+        letter-spacing: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .nav {
+        position: fixed;
+        z-index: 20;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 18px clamp(20px, 4vw, 56px);
+        color: var(--white);
+        mix-blend-mode: difference;
+      }
+
+      .nav__mark {
+        height: 18px;
+        width: auto;
+        display: block;
+        filter: invert(1);
+      }
+
+      .nav__links {
+        display: flex;
+        gap: clamp(14px, 2vw, 28px);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .hero {
+        min-height: 92vh;
+        position: relative;
+        display: flex;
+        align-items: flex-end;
+        overflow: hidden;
+        color: var(--white);
+        background: var(--ink);
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background:
+          linear-gradient(180deg, rgba(10, 11, 11, 0.14), rgba(10, 11, 11, 0.8)),
+          url("assets/vehicle/reference/tesla-model-3-2025-china-deep-blue-reference.png") center / cover no-repeat;
+      }
+
+      .hero::after {
+        content: "";
+        position: absolute;
+        inset: auto 0 0 0;
+        height: 30vh;
+        background: linear-gradient(180deg, rgba(10, 11, 11, 0), rgba(10, 11, 11, 0.72));
+      }
+
+      .hero__content {
+        position: relative;
+        z-index: 2;
+        width: min(var(--max), calc(100% - 40px));
+        margin: 0 auto;
+        padding: 0 0 9vh;
+      }
+
+      .hero__logo {
+        width: min(680px, 84vw);
+        display: block;
+        margin-bottom: 32px;
+        filter: invert(1);
+      }
+
+      .hero__kicker,
+      .section__kicker,
+      .meta {
+        font-size: 12px;
+        line-height: 1.45;
+        text-transform: uppercase;
+        color: var(--silver);
+      }
+
+      .hero h1 {
+        margin: 0;
+        max-width: 820px;
+        font-size: clamp(36px, 7vw, 92px);
+        line-height: 0.98;
+        font-weight: 500;
+      }
+
+      .hero__summary {
+        margin-top: 28px;
+        max-width: 680px;
+        font-size: clamp(16px, 2vw, 22px);
+        line-height: 1.55;
+        color: var(--silver);
+      }
+
+      .band {
+        border-top: 1px solid var(--line);
+        padding: clamp(56px, 9vw, 116px) clamp(20px, 4vw, 56px);
+      }
+
+      .band--dark {
+        background: var(--ink);
+        color: var(--white);
+        border-top-color: #303231;
+      }
+
+      .section {
+        width: min(var(--max), 100%);
+        margin: 0 auto;
+      }
+
+      .section__head {
+        display: grid;
+        grid-template-columns: minmax(160px, 0.45fr) 1fr;
+        gap: clamp(28px, 6vw, 80px);
+        align-items: start;
+        margin-bottom: clamp(34px, 6vw, 70px);
+      }
+
+      .section h2 {
+        margin: 0;
+        font-size: clamp(30px, 5vw, 64px);
+        line-height: 1.02;
+        font-weight: 500;
+      }
+
+      .lead {
+        margin: 0;
+        max-width: 760px;
+        font-size: clamp(18px, 2.4vw, 28px);
+        line-height: 1.42;
+      }
+
+      .lead + .lead {
+        margin-top: 18px;
+        color: var(--muted);
+      }
+
+      .band--dark .lead + .lead,
+      .band--dark .muted {
+        color: var(--silver);
+      }
+
+      .layer-grid {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        border-top: 1px solid var(--line);
+        border-left: 1px solid var(--line);
+      }
+
+      .layer {
+        min-height: 260px;
+        padding: 24px;
+        border-right: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 28px;
+      }
+
+      .layer__asset {
+        font-size: clamp(26px, 4vw, 48px);
+        line-height: 1;
+        font-weight: 500;
+      }
+
+      .layer__desc {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .rules {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        background: var(--line);
+      }
+
+      .rule {
+        background: var(--paper);
+        padding: 28px;
+        min-height: 190px;
+      }
+
+      .rule strong {
+        display: block;
+        font-size: 18px;
+        margin-bottom: 18px;
+      }
+
+      .rule p {
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      .vehicle {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: clamp(28px, 5vw, 70px);
+        align-items: center;
+      }
+
+      .vehicle__image {
+        width: 100%;
+        aspect-ratio: 782 / 644;
+        object-fit: cover;
+        border: 1px solid #343635;
+      }
+
+      .vehicle__specs {
+        display: grid;
+        gap: 18px;
+      }
+
+      .spec {
+        display: grid;
+        grid-template-columns: 140px 1fr;
+        gap: 18px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid #343635;
+      }
+
+      .spec dt {
+        color: var(--silver);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      .spec dd {
+        margin: 0;
+        line-height: 1.45;
+      }
+
+      .palette {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 18px;
+        margin-top: 34px;
+      }
+
+      .swatch {
+        min-height: 150px;
+        border: 1px solid #343635;
+        display: flex;
+        align-items: flex-end;
+        padding: 18px;
+        color: var(--ink);
+      }
+
+      .swatch--silver {
+        background: var(--silver);
+      }
+
+      .swatch--white {
+        background: var(--white);
+      }
+
+      .swatch--gunmetal {
+        background: #3d4242;
+        color: var(--white);
+      }
+
+      .manual {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1px;
+        background: var(--line);
+      }
+
+      .manual__item {
+        background: var(--paper);
+        padding: 24px;
+        min-height: 150px;
+      }
+
+      .manual__item span {
+        display: block;
+        color: var(--muted);
+        margin-bottom: 28px;
+      }
+
+      .manual__item h3 {
+        margin: 0;
+        font-size: 24px;
+        font-weight: 500;
+      }
+
+      .asset-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1px;
+        background: #343635;
+      }
+
+      .asset-panel {
+        min-height: 320px;
+        background: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 36px;
+      }
+
+      .asset-panel img {
+        width: min(520px, 100%);
+        max-height: 220px;
+        object-fit: contain;
+      }
+
+      .asset-panel--light {
+        background: var(--paper);
+      }
+
+      .asset-panel--light img {
+        filter: none;
+      }
+
+      .asset-panel--dark img {
+        filter: invert(1);
+      }
+
+      .footer {
+        padding: 36px clamp(20px, 4vw, 56px);
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        color: var(--muted);
+        border-top: 1px solid var(--line);
+        font-size: 12px;
+        text-transform: uppercase;
+      }
+
+      @media (max-width: 860px) {
+        .nav {
+          position: absolute;
+          align-items: flex-start;
+        }
+
+        .nav__links {
+          flex-wrap: wrap;
+          justify-content: flex-end;
+        }
+
+        .section__head,
+        .vehicle,
+        .asset-row {
+          grid-template-columns: 1fr;
+        }
+
+        .layer-grid,
+        .rules,
+        .palette,
+        .manual {
+          grid-template-columns: 1fr;
+        }
+
+        .hero {
+          min-height: 88vh;
+        }
+
+        .layer,
+        .rule,
+        .manual__item {
+          min-height: auto;
+        }
+
+        .spec {
+          grid-template-columns: 1fr;
+          gap: 8px;
+        }
+
+        .footer {
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="nav" aria-label="Primary navigation">
+      <a href="#top" aria-label="Panacea Identity System">
+        <img class="nav__mark" src="assets/logo/current/panacea-master-solid-current.svg" alt="panacea" />
+      </a>
+      <nav class="nav__links">
+        <a href="#system">System</a>
+        <a href="#vehicle">Vehicle</a>
+        <a href="#manual">Manual</a>
+        <a href="#assets">Assets</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero__content">
+          <img class="hero__logo" src="assets/logo/current/panacea-master-outline-current.svg" alt="panacea" />
+          <p class="hero__kicker">Panacea Identity System / 人間良藥 / allheilmittel</p>
+          <h1 id="hero-title">Architectural identity for objects, vehicles, archives, and quiet systems.</h1>
+          <p class="hero__summary">
+            一套长期维护的品牌识别系统：不是单个 Logo，而是可延展到车辆、包装、产品、软件、招牌与档案的设计语言。
+          </p>
+        </div>
+      </section>
+
+      <section id="system" class="band">
+        <div class="section">
+          <div class="section__head">
+            <p class="section__kicker">01 / Brand Layers</p>
+            <div>
+              <h2>Four layers, one system.</h2>
+              <p class="lead">`panacea`, `人間良藥`, `allheilmittel`, and `a` are not competing marks. They are scale-specific layers of one identity.</p>
+              <p class="lead">四层不是互相竞争的 Logo，而是根据语境、尺度与材料分工的品牌系统。</p>
+            </div>
+          </div>
+
+          <div class="layer-grid">
+            <article class="layer">
+              <p class="meta">Master Brand / 主品牌</p>
+              <div class="layer__asset">panacea</div>
+              <p class="layer__desc">Primary public-facing mark / 主要对外标识</p>
+            </article>
+            <article class="layer">
+              <p class="meta">Concept Layer / 理念层</p>
+              <div class="layer__asset">人間良藥</div>
+              <p class="layer__desc">Brand philosophy and cultural layer / 品牌哲学与文化语境</p>
+            </article>
+            <article class="layer">
+              <p class="meta">Archive Layer / 档案层</p>
+              <div class="layer__asset">allheilmittel</div>
+              <p class="layer__desc">Research, archive, editorial context / 研究、档案、编辑语境</p>
+            </article>
+            <article class="layer">
+              <p class="meta">Icon Layer / 图标层</p>
+              <div class="layer__asset">a</div>
+              <p class="layer__desc">App, stamp, seal, wheel cap, avatar / App、印章、封印、轮毂盖、头像</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="band">
+        <div class="section">
+          <div class="section__head">
+            <p class="section__kicker">02 / Design Language</p>
+            <div>
+              <h2>Less typography, more symbol.</h2>
+              <p class="lead">The wordmark is an original geometric lettering system: uniform stroke, 45-degree chamfer, modular construction, open geometry.</p>
+              <p class="lead">字标不是普通字体，而是一套原创几何字母系统：统一线宽、45 度切角、模块化构成、开放式几何。</p>
+            </div>
+          </div>
+
+          <div class="rules">
+            <article class="rule">
+              <strong>Uniform stroke / 统一线宽</strong>
+              <p>Every mark should feel constructed from the same industrial logic. 所有标识应像从同一套工业逻辑中构造出来。</p>
+            </article>
+            <article class="rule">
+              <strong>45-degree chamfer / 45 度切角</strong>
+              <p>The chamfer is the system's recurring architectural detail. 切角是系统中反复出现的建筑化细节。</p>
+            </article>
+            <article class="rule">
+              <strong>Open geometry / 开放几何</strong>
+              <p>Open counters and folded forms make the mark read as a symbol. 开放字腔与折线结构让字标更接近符号。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="vehicle" class="band band--dark">
+        <div class="section">
+          <div class="section__head">
+            <p class="section__kicker">03 / Vehicle Identity</p>
+            <div>
+              <h2>Tesla Model 3, China, September 2025.</h2>
+              <p class="lead">The current vehicle program is built around the user's deep metallic blue Tesla Model 3, purchased in mainland China in September 2025.</p>
+              <p class="lead">当前车辆项目围绕用户于 2025 年 9 月在中国大陆购买的深蓝金属色 Tesla Model 3 展开。</p>
+            </div>
+          </div>
+
+          <div class="vehicle">
+            <img
+              class="vehicle__image"
+              src="assets/vehicle/reference/tesla-model-3-2025-china-deep-blue-reference.png"
+              alt="Deep blue Tesla Model 3 reference"
+            />
+            <div>
+              <dl class="vehicle__specs">
+                <div class="spec">
+                  <dt>Intent / 意图</dt>
+                  <dd>Minimal intervention, point graphics, discoverable placement. 最小介入、点状图形、可被发现的位置。</dd>
+                </div>
+                <div class="spec">
+                  <dt>Finish / 工艺</dt>
+                  <dd>Die-cut, no background, matte automotive vinyl. 模切、无底色、哑光车规贴膜。</dd>
+                </div>
+                <div class="spec">
+                  <dt>Placement / 位置</dt>
+                  <dd>Headlight corner, camera housing, rear quarter window, charging port, wheel cap. 头灯角、摄像头外壳、后三角窗、充电口、轮毂盖。</dd>
+                </div>
+              </dl>
+
+              <div class="palette" aria-label="Recommended vehicle sticker colors">
+                <div class="swatch swatch--silver">Matte silver / 哑光银</div>
+                <div class="swatch swatch--white">Matte white / 哑光白</div>
+                <div class="swatch swatch--gunmetal">Gunmetal gray / 枪灰</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="manual" class="band">
+        <div class="section">
+          <div class="section__head">
+            <p class="section__kicker">04 / Manual Structure</p>
+            <div>
+              <h2>From sticker idea to vehicle identity manual.</h2>
+              <p class="lead">The output should become a manual with placement strategy, blueprint diagrams, size rules, material standards, color logic, and installation guidance.</p>
+              <p class="lead">最终输出应成为一本手册，包含位置策略、蓝图图示、尺寸规则、材料标准、色彩逻辑与安装指南。</p>
+            </div>
+          </div>
+
+          <div class="manual">
+            <article class="manual__item"><span>01</span><h3>Cover / 封面</h3></article>
+            <article class="manual__item"><span>02</span><h3>Philosophy / 理念</h3></article>
+            <article class="manual__item"><span>03</span><h3>Vehicle Blueprint / 车辆蓝图</h3></article>
+            <article class="manual__item"><span>04</span><h3>Placement System / 位置系统</h3></article>
+            <article class="manual__item"><span>05</span><h3>Sticker Library / 贴纸资产库</h3></article>
+            <article class="manual__item"><span>06</span><h3>Size Guide / 尺寸指南</h3></article>
+            <article class="manual__item"><span>07</span><h3>Material Guide / 材料指南</h3></article>
+            <article class="manual__item"><span>08</span><h3>Color Guide / 色彩指南</h3></article>
+            <article class="manual__item"><span>09</span><h3>Installation Guide / 安装指南</h3></article>
+            <article class="manual__item"><span>10</span><h3>Gallery / 图库</h3></article>
+          </div>
+        </div>
+      </section>
+
+      <section id="assets" class="band band--dark">
+        <div class="section">
+          <div class="section__head">
+            <p class="section__kicker">05 / Current Assets</p>
+            <div>
+              <h2>Current production sources.</h2>
+              <p class="lead">The latest `panacea` master files are SVG-first. PNG files are previews, not production masters.</p>
+              <p class="lead">最新版 `panacea` 主文件以 SVG 为准。PNG 是预览文件，不是生产母版。</p>
+            </div>
+          </div>
+
+          <div class="asset-row">
+            <div class="asset-panel asset-panel--light">
+              <img src="assets/logo/current/panacea-master-solid-current.svg" alt="panacea solid master" />
+            </div>
+            <div class="asset-panel asset-panel--dark">
+              <img src="assets/logo/current/panacea-master-outline-current.svg" alt="panacea outline master" />
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>Panacea Identity System</span>
+      <span>人間良藥 / allheilmittel / Vehicle Identity Manual</span>
+    </footer>
+  </body>
+</html>
