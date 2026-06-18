@@ -1,185 +1,179 @@
 # Panacea Identity System / Panacea 品牌识别系统
 
-Panacea Identity System is the long-term brand design system for `panacea`, `人間良藥`, `allheilmittel`, and the icon `a`.
+<p align="center">
+  <img src="assets/logo/current/panacea-master-solid-current.svg" alt="panacea" width="520" />
+</p>
 
-Panacea 品牌识别系统是为 `panacea`、`人間良藥`、`allheilmittel` 与图标 `a` 建立的长期品牌设计系统。
+Panacea is a long-term identity system for `panacea`, `人間良藥`, `allheilmittel`, and the icon `a`. It connects an original architectural typeface, a 26-part photographic alphabet, vehicle identity studies, production assets, and interactive design tools.
 
-This project is not a logo exploration folder. It is a maintainable identity system for vehicles, packaging, signage, products, software, editorial material, objects, and architectural applications.
+Panacea 是围绕 `panacea`、`人間良藥`、`allheilmittel` 与图标 `a` 建立的长期品牌识别系统。项目将原创建筑字体、26 组建筑摄影字母、车辆识别研究、生产资产与交互设计工具整合为同一套语言。
 
-这个项目不是一个 Logo 探索文件夹，而是一套可长期维护的品牌识别系统，覆盖车辆、包装、招牌、产品、软件、编辑出版物、物件与建筑应用。
+This is not a logo exploration folder. It is a maintainable system for vehicles, packaging, signage, products, software, editorial material, objects, and architecture.
+
+这不是一个 Logo 探索文件夹，而是一套面向车辆、包装、招牌、产品、软件、编辑出版物、物件与建筑应用的可维护系统。
+
+## Explore / 项目入口
+
+| Entry / 入口 | Purpose / 内容 |
+| --- | --- |
+| [`index.html`](index.html) | Project landing page / 项目入口页 |
+| [`panacea.html`](panacea.html) | Architectural type system, live font specimen, and the complete Architectural Alphabet / 建筑字体系统、在线字样测试与完整建筑字母志 |
+| [`3d-preview.html`](3d-preview.html) | Tesla Model 3 PNG decal placement study / Tesla Model 3 PNG 贴纸三维位置研究 |
+| [`assets/architectural-alphabet/`](assets/architectural-alphabet/) | 26 architectural archetype photographs and mapping / 26 张建筑原型摄影及对应关系 |
+| [`assets/font/PanaceaArchitectural-Regular.ttf`](assets/font/PanaceaArchitectural-Regular.ttf) | Installable Panacea Architectural Regular font / 可安装字体 |
+
+GitHub Pages is not currently enabled for this repository. To view the project locally:
+
+当前仓库尚未启用 GitHub Pages。请在项目根目录启动本地静态服务器：
+
+```bash
+python3 -m http.server 8765
+```
+
+Then open / 然后打开：
+
+- `http://127.0.0.1:8765/`
+- `http://127.0.0.1:8765/panacea.html`
+- `http://127.0.0.1:8765/3d-preview.html`
+
+The 3D preview loads Three.js modules from `unpkg.com`, so it requires an internet connection even though the vehicle model is stored locally.
+
+三维预览的车辆模型保存在本地，但 Three.js 模块从 `unpkg.com` 加载，因此使用时仍需联网。
+
+## Three Active Programs / 三个当前项目
+
+### 1. Architectural Alphabet / 建筑字母志
+
+**PANACEA — Architectural Alphabet** maps every glyph in Panacea Architectural Regular to an architectural archetype. The website presents 26 continuous spreads: the font glyph on a construction grid at left, and its architectural photograph at right.
+
+**PANACEA — Architectural Alphabet** 将字体中的每个字母对应到一种建筑原型。网页以 26 组连续双页呈现：左页是网格中的字体字形，右页是对应建筑摄影。
+
+Series constants / 系列统一规则：
+
+- winter, 10:00 AM / 冬季上午 10 点
+- dense fog, no people / 大雾、无人
+- concrete industrial architecture / 混凝土工业建筑
+- wet ground and cool neutral gray / 湿地面与冷灰色调
+- telephoto compression and systematic composition / 长焦压缩与类型学构图
+- no logos, vehicles, signage, text, or plant subject / 无 Logo、车辆、标识、文字或植物主体
+
+![Four-bay concrete colonnade for the glyph w](assets/architectural-alphabet/photos/w-colonnade-group.png)
+
+Full mapping / 完整映射：[Architectural Alphabet README](assets/architectural-alphabet/README.md)
+
+### 2. Architectural Type System / 建筑字体系统
+
+Panacea Architectural Regular is an original geometric typeface derived from the `panacea` wordmark. Uppercase and lowercase input share the same architectural glyph outlines.
+
+Panacea Architectural Regular 是从 `panacea` 字标推演出的原创几何字体。大写与小写输入映射到同一组建筑构件式轮廓。
+
+Core rules / 核心规则：
+
+- one structural stroke weight / 统一结构线宽
+- modular construction / 模块化构成
+- open counters and straight components / 开放字腔与直线构件
+- shared roof angle / 统一屋檐角度
+- no decorative curves / 不使用装饰性曲线
+
+Font assets / 字体资产：
+
+- `assets/font/PanaceaArchitectural-Regular.ttf`
+- `assets/font/source/panacea-alphabet-2nd.svg`
+- `tools/build_panacea_font.py`
+- `assets/font/README.md`
+
+The current font covers `A-Z`, `a-z`, and space. Numerals and punctuation are not included yet.
+
+当前字体包含 `A-Z`、`a-z` 与空格，尚未包含数字和标点。
+
+### 3. Tesla Model 3 Vehicle Identity / Tesla Model 3 车辆识别
+
+The vehicle program applies the same restrained architectural language to a September 2025 mainland China Model 3 RWD in deep metallic blue. It focuses on small die-cut decals and discoverable placement rather than full-body graphics.
+
+车辆项目把同一套克制的建筑语言应用于用户 2025 年 9 月购入的中国大陆深蓝色 Model 3 后轮驱动版。重点是小尺度模切贴纸与可被发现的位置，而不是大面积车身图案。
+
+Vehicle direction / 车辆方向：
+
+- minimal intervention / 最小介入
+- architectural detail / 建筑化细节
+- hidden branding / 隐藏式品牌
+- quiet luxury / 安静的高级感
+- point graphics, not full-body graphics / 点状图形，不做大面积覆盖
+
+The current deliverables include multi-view raster blueprints, placement specifications, a production guide, a local glTF preview model, and an interactive PNG decal projection tool.
+
+当前成果包括多视角栅格图纸、位置规范、制作指南、本地 glTF 预览模型，以及交互式 PNG 贴纸投射工具。
+
+Important: the 3D model is for visual placement studies only. Final sticker dimensions require physical measurement on the actual vehicle.
+
+重要：三维模型只用于视觉位置研究，最终贴纸尺寸仍需在实车上测量。
 
 ## Brand Layers / 品牌层级
 
 | Layer / 层级 | Asset / 资产 | Role / 作用 |
 | --- | --- | --- |
-| Master Brand / 主品牌 | `panacea` | Primary brand mark / 主要品牌标识 |
-| Concept Layer / 理念层 | `人間良藥` | Brand philosophy / 品牌理念 |
-| Archive Layer / 档案层 | `allheilmittel` | Research, archive, editorial, lab context / 研究、档案、编辑与实验室语境 |
-| Icon Layer / 图标层 | `a` | App icon, stamp, sticker, seal, wheel cap, avatar / App 图标、印章、贴纸、封印、轮毂盖、头像 |
+| Master Brand / 主品牌 | `panacea` | Primary public-facing mark / 主要对外标识 |
+| Concept Layer / 理念层 | `人間良藥` | Philosophy, editions, and cultural context / 品牌哲学、版本与文化语境 |
+| Archive Layer / 档案层 | `allheilmittel` | Research, documentation, and archival systems / 研究、文档与档案系统 |
+| Icon Layer / 图标层 | `a` | Small surfaces, app icons, stickers, and stamps / 小尺度表面、App 图标、贴纸与印章 |
 
-These layers are not competing logos. They are used by context and scale.
+These are contextual layers of one identity, not competing logos.
 
-这四层不是互相竞争的 Logo，而是根据场景与尺度分工使用。
+它们是同一套识别系统在不同语境下的层级，而不是互相竞争的 Logo。
 
-## Current Focus / 当前重点
-
-The active design program is:
-
-当前设计项目是：
-
-**Panacea Tesla Model 3 Sticker Design System / Panacea Tesla Model 3 车贴设计系统**
-
-Vehicle identity direction:
-
-车辆识别方向：
-
-- minimal intervention / 最小介入
-- architectural detail / 建筑化细节
-- hidden branding / 隐藏式品牌
-- discoverable placement / 可被发现的位置
-- quiet luxury / 安静的高级感
-- point graphics, not full-body graphics / 点状图形，不做大面积车身图案
-
-The output should become an official **Panacea Vehicle Identity Manual**, not a single mockup.
-
-最终输出应成为一套正式的 **Panacea Vehicle Identity Manual / Panacea 车辆识别手册**，而不是单张效果图。
-
-## Design Language / 设计语言
-
-- uniform stroke weight / 统一线宽
-- 45-degree chamfer language / 45 度切角语言
-- modular construction / 模块化构成
-- open geometric forms / 开放式几何形态
-- no decorative curves / 不使用装饰性曲线
-- symbol-first thinking / 符号优先
-- industrial, editorial, architectural tone / 工业、编辑、建筑化气质
-- timeless rather than trendy / 永恒感优先于潮流感
-
-Reference attitude: Braun, FRAMA, Aesop, Acne Studios, Rimowa, New Tendency, Jasper Morrison, Dieter Rams.
-
-参考气质：Braun、FRAMA、Aesop、Acne Studios、Rimowa、New Tendency、Jasper Morrison、Dieter Rams。
-
-## Project Structure / 项目结构
+## Repository Structure / 仓库结构
 
 ```text
-index.html
+index.html                         Project entry / 项目入口
+panacea.html                       Type system + Architectural Alphabet
+3d-preview.html                    Model 3 decal preview / 三维贴纸预览
 assets/
+  architectural-alphabet/
+    photos/                        26 architectural photographs / 26 张建筑摄影
+  font/                            TTF and vector source / 字体与矢量源文件
   logo/
-    current/       Current active marks / 当前有效标识
-    legacy/        Historical references and prior assets / 历史参考与旧资产
+    current/                       Active production marks / 当前生产标识
+    legacy/                        Historical references / 历史参考
+  site/                            Shared CSS and JavaScript / 网站样式与脚本
+  type/                            Type-system presentation assets / 字体展示资产
+  vehicle/
+    3d/                            STL and glTF preview assets / 三维资产
+    blueprints/                    Placement and vehicle drawings / 车辆图纸
+    reference/                     Real vehicle reference / 实车参考
 docs/
   identity-system.md
-  manuals/
-    tesla-model-3-sticker-guide.md
+  manuals/tesla-model-3-sticker-guide.md
   specs/
-    vehicle-sticker-spec.md
     model3-sticker-placement-blueprint.md
-  prompts/
-    lead-design-system-architect.md
+    vehicle-3d-preview-model.md
+    vehicle-sticker-spec.md
+tools/
+  build_panacea_font.py
 ```
 
-## Website / 网页
+## Key Documentation / 核心文档
 
-The project includes a static website at `index.html` for GitHub Pages deployment.
+- [Identity system](docs/identity-system.md) / 品牌识别原则
+- [Architectural Alphabet](assets/architectural-alphabet/README.md) / 建筑字母映射
+- [Font files and rebuild instructions](assets/font/README.md) / 字体文件与重新构建
+- [Tesla sticker guide](docs/manuals/tesla-model-3-sticker-guide.md) / Tesla 车贴指南
+- [Sticker production specification](docs/specs/vehicle-sticker-spec.md) / 贴纸制作规范
+- [Model 3 placement blueprint](docs/specs/model3-sticker-placement-blueprint.md) / Model 3 位置图纸
+- [3D preview model](docs/specs/vehicle-3d-preview-model.md) / 三维预览模型
+- [Vehicle asset index](assets/vehicle/ASSET_INDEX.md) / 车辆资产索引
+- [Logo asset index](assets/logo/ASSET_INDEX.md) / Logo 资产索引
 
-项目包含一个位于 `index.html` 的静态网页，可直接用于 GitHub Pages 部署。
-
-Recommended GitHub Pages setting:
-
-推荐 GitHub Pages 设置：
-
-- Source: deploy from branch / 来源：从分支部署
-- Branch: `main` / 分支：`main`
-- Folder: `/root` / 目录：`/root`
-
-The website presents the identity concept, four-layer brand system, Tesla Model 3 vehicle identity direction, a 3D sticker preview tool, manual structure, and current production assets.
-
-网页展示品牌概念、四层品牌系统、Tesla Model 3 车辆识别方向、3D 车贴预览工具、手册结构与当前生产资产。
-
-## Blueprint / 图纸
-
-The first sticker placement measurement draft is available at:
-
-第一版车贴位置测量图纸位于：
-
-- `assets/vehicle/blueprints/model3-sticker-placement-blueprint-v0.2.svg`
-- `assets/vehicle/blueprints/model3-rwd-blue-realistic-side-blueprint-v0.3.svg`
-- `assets/vehicle/blueprints/model3-rwd-blue-realistic-side-raster-v0.4.png`
-- `assets/vehicle/blueprints/model3-rwd-blue-front-raster-v0.5.png`
-- `assets/vehicle/blueprints/model3-rwd-blue-driver-side-raster-v0.5.png`
-- `assets/vehicle/blueprints/model3-rwd-blue-passenger-side-raster-v0.5.png`
-- `assets/vehicle/blueprints/model3-rwd-blue-rear-raster-v0.5.png`
-- `assets/vehicle/blueprints/model3-rwd-blue-top-raster-v0.5.png`
-- `docs/specs/model3-sticker-placement-blueprint.md`
-
-This blueprint identifies candidate sticker zones, suggested sizes, rotation angles, curvature-radius estimates, and required field-verification measurements.
-
-这张图纸标记了候选贴纸区域、建议尺寸、旋转角度、曲率半径估算与必须实车复测的测量字段。
-
-The current drawing is based on the user's September 2025 mainland China Tesla Model 3 base RWD blue version, not a Performance or modified version.
-
-当前图纸基于用户 2025 年 9 月中国大陆 Tesla Model 3 后轮驱动入门版蓝色车型绘制，不按 Performance 或改装版本绘制。
-
-The V0.3 realistic side-view blueprint is the visual-detail standard for future blueprint views.
-
-V0.3 写实侧视图是后续所有车辆图纸视图的视觉细节标准。
-
-The V0.4 raster side-view is the current realism target and should be used as the base image for sticker measurement overlays.
-
-V0.4 栅格侧视图是当前写实目标，应作为后续贴纸测量标注的底图。
-
-The V0.5 raster set expands the realistic base to front, rear, driver side, passenger side, and top views.
-
-V0.5 栅格组把写实底图扩展到前视、后视、驾驶侧、乘客侧与顶视。
-
-## 3D Preview / 三维预览
-
-The project now includes a local glTF Model 3 preview asset and an `index.html` Three.js preview section for web-based sticker placement studies:
-
-项目现在包含一个本地 glTF Model 3 预览资产，并在 `index.html` 中加入了 Three.js 预览区，用于网页三维车贴位置研究：
-
-- `assets/vehicle/3d/model3-highland-preview/Poppyseed.gltf`
-- `docs/specs/vehicle-3d-preview-model.md`
-
-The preview tool supports PNG decal import, drag-to-place projection on the car surface, scale, rotation, opacity, and front/side/rear/top camera presets.
-
-预览工具支持导入 PNG 贴纸、在车身表面拖动投射定位、缩放、旋转、透明度调整，以及前视、侧视、后视、顶视相机预设。
-
-This model is for visual preview and interaction prototyping, not final physical measurement.
-
-该模型用于视觉预览与交互原型，不用于最终实物测量。
-
-## Asset Status / 资产状态
-
-Current active assets:
-
-当前有效资产：
+## Active Production Assets / 当前生产资产
 
 - `assets/logo/current/panacea-master-solid-current.svg`
 - `assets/logo/current/panacea-master-outline-current.svg`
 - `assets/logo/current/panacea-icon-a-current.svg`
-- `assets/vehicle/reference/tesla-model-3-2025-china-deep-blue-reference.png`
+- `assets/font/PanaceaArchitectural-Regular.ttf`
 
-Legacy/reference assets:
+Raster logos in `assets/logo/legacy/` and `assets/logo/previous/` are retained as historical context only. New web and production work should use the current SVG sources.
 
-历史 / 参考资产：
+`assets/logo/legacy/` 与 `assets/logo/previous/` 中的栅格 Logo 仅作为历史语境保留。新的网页与生产工作应使用当前 SVG 源文件。
 
-- `assets/logo/legacy/renliang-thin-print.svg`
+## Repository / 仓库
 
-PNG logo files in `assets/logo/legacy` and `assets/logo/previous` are deprecated raster context only. Webpage brand imagery should use SVG.
-
-`assets/logo/legacy` 与 `assets/logo/previous` 中的 PNG logo 文件仅作为已弃用栅格语境保留。网页品牌图像应使用 SVG。
-
-Legacy assets are source context. They should not override the current four-layer system without an explicit design decision.
-
-历史资产是来源语境。除非有明确的设计决策，否则它们不应覆盖当前四层品牌系统。
-
-## Vehicle Reference / 车辆参考
-
-The current vehicle reference is the user's Tesla Model 3 purchased in mainland China in September 2025. The supplied photo shows a deep metallic blue body color.
-
-当前车辆参考为用户于 2025 年 9 月在中国大陆购买的 Tesla Model 3。根据提供照片，车身颜色为深蓝金属色。
-
-For this vehicle, exterior sticker proposals should prioritize matte silver and matte white on dark glass or trim, and low-contrast gunmetal gray only where it remains legible on blue paint.
-
-针对这辆车，外部车贴方案应优先考虑在深色玻璃或饰条上使用哑光银与哑光白；枪灰只应在深蓝车漆上仍能保持可读性的位置使用。
+GitHub: <https://github.com/zilazer/panacea-identity-system>

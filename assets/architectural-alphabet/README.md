@@ -51,4 +51,4 @@ This series maps every glyph in Panacea Architectural Regular to an architectura
 ## Output folders / 输出目录
 
 - `photos/`: architectural photographs / 建筑摄影原片
-- `spreads/`: grid glyph + photograph spreads / 字母网格与摄影双页
+- `../../panacea.html`: 26 responsive grid-glyph + photograph spreads / 26 组响应式字母网格与摄影双页

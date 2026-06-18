@@ -52,9 +52,9 @@ Use this model for web-based 3D preview:
 
 ## Web Integration / 网页集成
 
-The current implementation lives in `index.html` under the `#preview3d` section.
+The current implementation lives in the standalone `3d-preview.html` page, linked from `index.html`.
 
-当前实现位于 `index.html` 的 `#preview3d` 区域。
+当前实现位于独立的 `3d-preview.html` 页面，并由 `index.html` 入口页链接进入。
 
 Runtime behavior:
 
