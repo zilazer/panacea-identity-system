@@ -22,9 +22,18 @@ This is not a logo exploration folder. It is a maintainable system for vehicles,
 | [`assets/architectural-alphabet/`](assets/architectural-alphabet/) | 26 architectural archetype photographs and mapping / 26 张建筑原型摄影及对应关系 |
 | [`assets/font/PanaceaArchitectural-Regular.ttf`](assets/font/PanaceaArchitectural-Regular.ttf) | Installable Panacea Architectural Regular font / 可安装字体 |
 
-GitHub Pages is not currently enabled for this repository. To view the project locally:
+Live website / 在线网站：
 
-当前仓库尚未启用 GitHub Pages。请在项目根目录启动本地静态服务器：
+<https://zilazer.github.io/panacea-identity-system/>
+
+Direct pages / 页面直达：
+
+- Architectural Type System + Alphabet / 建筑字体系统与建筑字母志：<https://zilazer.github.io/panacea-identity-system/panacea.html>
+- Model 3 3D Preview / Model 3 三维预览：<https://zilazer.github.io/panacea-identity-system/3d-preview.html>
+
+To view the project locally:
+
+如需本地查看，请在项目根目录启动静态服务器：
 
 ```bash
 python3 -m http.server 8765
