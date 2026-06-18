@@ -1,0 +1,154 @@
+body.vehicle-3d-page {
+  overflow: hidden;
+  background: #d7d5cf;
+}
+
+.viewer {
+  position: relative;
+  min-height: 100vh;
+  background: #d7d5cf;
+  overflow: hidden;
+}
+
+.viewer canvas {
+  display: block;
+  width: 100%;
+  height: 100vh;
+  min-height: 620px;
+}
+
+.viewer__hud {
+  position: absolute;
+  z-index: 2;
+  top: 32px;
+  left: 32px;
+  right: 32px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  pointer-events: none;
+}
+
+.viewer__title {
+  max-width: 560px;
+}
+
+.viewer__title p {
+  margin: 0 0 8px;
+  color: #4d504d;
+}
+
+.viewer__title h1 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(30px, 5vw, 40px);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.viewer__controls {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 8px;
+  pointer-events: auto;
+}
+
+.viewer__button {
+  appearance: none;
+  min-height: 32px;
+  padding: 4px 16px;
+  border: 0;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.58);
+  color: var(--ink);
+  cursor: pointer;
+  font-weight: 500;
+}
+
+.viewer__button:hover,
+.viewer__button:focus-visible {
+  background: rgba(255, 255, 255, 0.92);
+  outline: none;
+}
+
+.viewer__status {
+  position: absolute;
+  z-index: 2;
+  left: 32px;
+  bottom: 32px;
+  color: #393c39;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.viewer__decal {
+  position: absolute;
+  z-index: 2;
+  right: 32px;
+  bottom: 32px;
+  width: min(340px, calc(100% - 36px));
+  padding: 16px;
+  border: 0;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(18px);
+  color: var(--ink);
+}
+
+.viewer__decal label {
+  display: block;
+  margin-bottom: 12px;
+  color: #4d504d;
+}
+
+.viewer__decal input[type="file"] {
+  width: 100%;
+  margin-top: 8px;
+  color: #4d504d;
+}
+
+.viewer__slider {
+  display: grid;
+  grid-template-columns: 74px 1fr 42px;
+  align-items: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.viewer__slider input {
+  width: 100%;
+  accent-color: var(--ink);
+}
+
+.viewer__slider output {
+  color: #4d504d;
+  text-align: right;
+}
+
+@media (max-width: 760px) {
+  .viewer canvas {
+    min-height: 720px;
+  }
+
+  .viewer__hud {
+    left: 18px;
+    right: 18px;
+    flex-direction: column;
+  }
+
+  .viewer__controls {
+    justify-content: flex-start;
+  }
+
+  .viewer__status {
+    left: 18px;
+    bottom: 18px;
+  }
+
+  .viewer__decal {
+    right: 18px;
+    bottom: 58px;
+  }
+}

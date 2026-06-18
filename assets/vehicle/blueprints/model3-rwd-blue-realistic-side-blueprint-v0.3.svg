@@ -1,0 +1,224 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="760" viewBox="0 0 1800 760">
+  <defs>
+    <style>
+      .paper { fill: #f3efe4; }
+      .line { fill: none; stroke: #7b7c73; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+      .thin { fill: none; stroke: #9a998f; stroke-width: 1.35; stroke-linecap: round; stroke-linejoin: round; }
+      .hair { fill: none; stroke: #aaa89d; stroke-width: 0.85; stroke-linecap: round; stroke-linejoin: round; }
+      .body { fill: #172a4d; opacity: 0.1; stroke: none; }
+      .glass { fill: #111; opacity: 0.08; stroke: none; }
+      .shadow { fill: #77786f; opacity: 0.12; }
+      .sticker { fill: #111; }
+      .silver { fill: #c9cbc7; stroke: #222; stroke-width: 0.7; }
+      .call { fill: #f3efe4; stroke: #242520; stroke-width: 1.3; }
+      .dash { fill: none; stroke: #8f8e84; stroke-width: 1.2; stroke-dasharray: 6 7; stroke-linecap: round; }
+      .dim { fill: none; stroke: #2d2d28; stroke-width: 1.1; marker-start: url(#arrow); marker-end: url(#arrow); }
+      .title { font: 500 30px Arial, sans-serif; fill: #111; letter-spacing: 0; }
+      .label { font: 700 15px Arial, sans-serif; fill: #111; letter-spacing: 0; }
+      .small { font: 13px Arial, sans-serif; fill: #4f504b; }
+      .micro { font: 10.5px Arial, sans-serif; fill: #5b5b55; }
+      .num { font: 700 16px Arial, sans-serif; fill: #111; text-anchor: middle; dominant-baseline: central; }
+    </style>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="4.5" refY="4.5" orient="auto-start-reverse">
+      <path d="M0,0 L9,4.5 L0,9 Z" fill="#2d2d28"/>
+    </marker>
+  </defs>
+
+  <rect class="paper" width="1800" height="760"/>
+
+  <g transform="translate(74 58)">
+    <text class="title" x="0" y="0">Panacea Model 3 RWD Base Sticker Placement: Realistic Side Blueprint</text>
+    <text class="small" x="0" y="30">2025 mainland China base rear-wheel-drive Model 3, deep blue body / 写实侧视图 V0.3 / all local dimensions require field verification</text>
+  </g>
+
+  <g id="vehicle-side" transform="translate(110 118)">
+    <!-- ground and shadow -->
+    <ellipse class="shadow" cx="820" cy="452" rx="735" ry="34"/>
+    <line class="hair" x1="48" y1="452" x2="1588" y2="452"/>
+
+    <!-- realistic body mass -->
+    <path class="body" d="M78 377
+      C100 320 151 277 235 247
+      C302 182 430 120 626 105
+      C821 91 1048 121 1232 201
+      C1321 239 1403 288 1492 347
+      C1522 367 1538 394 1524 415
+      C1507 439 1436 452 1347 458
+      L300 458
+      C207 456 126 440 78 414
+      C60 404 61 394 78 377 Z"/>
+
+    <!-- outer silhouette: Highland-like smooth nose, fastback roof, clean rear deck -->
+    <path class="line" d="M72 381
+      C93 322 148 279 236 248
+      C309 181 432 121 624 105
+      C824 89 1046 121 1231 201
+      C1321 240 1408 289 1493 348
+      C1523 369 1538 393 1524 415
+      C1503 444 1428 455 1344 459
+      L305 459
+      C202 459 118 441 72 414
+      C54 403 55 394 72 381 Z"/>
+
+    <!-- front nose, bumper and lower intake -->
+    <path class="line" d="M72 381 C123 369 188 356 260 349"/>
+    <path class="thin" d="M94 402 C142 418 230 426 330 426"/>
+    <path class="thin" d="M116 334 C170 326 223 314 270 294"/>
+    <path class="line" d="M96 354 C142 332 199 318 260 312 C229 340 158 360 96 354"/>
+    <path class="hair" d="M89 388 C116 384 155 382 194 383"/>
+
+    <!-- rear bumper, trunk lid, no spoiler -->
+    <path class="line" d="M1390 322 C1436 334 1481 352 1510 377"/>
+    <path class="thin" d="M1282 277 C1378 289 1451 313 1494 348"/>
+    <path class="thin" d="M1368 404 C1416 400 1472 405 1518 417"/>
+    <path class="line" d="M1326 330 C1381 323 1443 333 1494 356 C1448 372 1374 369 1324 349"/>
+    <path class="hair" d="M1243 229 C1296 245 1342 262 1384 284"/>
+
+    <!-- window greenhouse -->
+    <path class="glass" d="M282 259
+      C374 165 489 128 624 119
+      C777 111 925 128 1080 182
+      C1139 203 1194 229 1246 263
+      L282 259 Z"/>
+    <path class="line" d="M282 259
+      C374 165 489 128 624 119
+      C777 111 925 128 1080 182
+      C1139 203 1194 229 1246 263"/>
+    <path class="thin" d="M320 251 C410 174 508 142 624 135 C758 127 896 143 1043 190 C1105 210 1161 235 1210 263"/>
+    <path class="thin" d="M451 150 L404 260"/>
+    <path class="line" d="M666 119 L666 459"/>
+    <path class="line" d="M851 131 L871 458"/>
+    <path class="thin" d="M1077 181 L1040 274"/>
+    <path class="hair" d="M285 260 L1245 263"/>
+
+    <!-- belt line and shoulder surface -->
+    <path class="line" d="M239 292 C385 314 675 323 997 311 C1178 305 1329 318 1447 352"/>
+    <path class="thin" d="M241 317 C411 342 791 354 1124 337"/>
+    <path class="thin" d="M330 389 C457 418 946 420 1134 388"/>
+    <path class="hair" d="M364 362 C530 384 846 390 1056 373"/>
+
+    <!-- door cuts and handles -->
+    <path class="line" d="M414 270 C400 316 389 379 384 459"/>
+    <path class="thin" d="M675 322 L676 459"/>
+    <path class="thin" d="M866 322 L869 459"/>
+    <path class="thin" d="M517 307 L570 307"/>
+    <path class="thin" d="M901 305 L954 305"/>
+    <path class="thin" d="M255 287 L226 287"/>
+    <path class="thin" d="M1187 292 L1220 286"/>
+
+    <!-- side camera and charging door -->
+    <path class="line" d="M288 284 L331 276 L342 292 L304 303 Z"/>
+    <path class="thin" d="M1260 296 C1304 293 1332 305 1344 328 C1310 340 1274 335 1254 316 Z"/>
+
+    <!-- rocker and lower side sculpt -->
+    <path class="line" d="M285 424 C430 445 955 448 1147 423"/>
+    <path class="thin" d="M350 400 L1018 400"/>
+    <path class="hair" d="M376 418 C493 432 916 433 1056 418"/>
+
+    <!-- wheels: realistic multi-spoke standard wheel treatment -->
+    <g transform="translate(315 455)">
+      <circle class="line" cx="0" cy="0" r="92"/>
+      <circle class="thin" cx="0" cy="0" r="76"/>
+      <circle class="thin" cx="0" cy="0" r="49"/>
+      <circle class="line" cx="0" cy="0" r="16"/>
+      <g class="thin">
+        <path d="M0 -72 L9 -20 L0 -16 L-9 -20 Z"/>
+        <path d="M0 72 L9 20 L0 16 L-9 20 Z"/>
+        <path d="M72 0 L20 9 L16 0 L20 -9 Z"/>
+        <path d="M-72 0 L-20 9 L-16 0 L-20 -9 Z"/>
+        <path d="M51 -51 L20 -8 L8 -20 Z"/>
+        <path d="M-51 51 L-20 8 L-8 20 Z"/>
+        <path d="M51 51 L8 20 L20 8 Z"/>
+        <path d="M-51 -51 L-8 -20 L-20 -8 Z"/>
+        <path d="M28 -66 L15 -20"/>
+        <path d="M66 -28 L20 -15"/>
+        <path d="M66 28 L20 15"/>
+        <path d="M28 66 L15 20"/>
+        <path d="M-28 66 L-15 20"/>
+        <path d="M-66 28 L-20 15"/>
+        <path d="M-66 -28 L-20 -15"/>
+        <path d="M-28 -66 L-15 -20"/>
+      </g>
+      <circle class="hair" cx="0" cy="0" r="84"/>
+    </g>
+
+    <g transform="translate(1220 455)">
+      <circle class="line" cx="0" cy="0" r="92"/>
+      <circle class="thin" cx="0" cy="0" r="76"/>
+      <circle class="thin" cx="0" cy="0" r="49"/>
+      <circle class="line" cx="0" cy="0" r="16"/>
+      <g class="thin">
+        <path d="M0 -72 L9 -20 L0 -16 L-9 -20 Z"/>
+        <path d="M0 72 L9 20 L0 16 L-9 20 Z"/>
+        <path d="M72 0 L20 9 L16 0 L20 -9 Z"/>
+        <path d="M-72 0 L-20 9 L-16 0 L-20 -9 Z"/>
+        <path d="M51 -51 L20 -8 L8 -20 Z"/>
+        <path d="M-51 51 L-20 8 L-8 20 Z"/>
+        <path d="M51 51 L8 20 L20 8 Z"/>
+        <path d="M-51 -51 L-8 -20 L-20 -8 Z"/>
+        <path d="M28 -66 L15 -20"/>
+        <path d="M66 -28 L20 -15"/>
+        <path d="M66 28 L20 15"/>
+        <path d="M28 66 L15 20"/>
+        <path d="M-28 66 L-15 20"/>
+        <path d="M-66 28 L-20 15"/>
+        <path d="M-66 -28 L-20 -15"/>
+        <path d="M-28 -66 L-15 -20"/>
+      </g>
+      <circle class="hair" cx="0" cy="0" r="84"/>
+    </g>
+
+    <!-- wheel arches -->
+    <path class="line" d="M218 453 C222 397 259 362 315 362 C371 362 408 397 412 453"/>
+    <path class="line" d="M1123 453 C1127 397 1164 362 1220 362 C1276 362 1313 397 1317 453"/>
+    <path class="hair" d="M200 449 C205 383 249 344 315 344 C381 344 425 383 430 449"/>
+    <path class="hair" d="M1105 449 C1110 383 1154 344 1220 344 C1286 344 1330 383 1335 449"/>
+
+    <!-- sticker candidates on realistic body -->
+    <rect class="silver" x="282" y="282" width="50" height="13" transform="rotate(-10 307 288.5)"/>
+    <rect class="sticker" x="574" y="334" width="78" height="18" transform="rotate(1.5 613 343)"/>
+    <rect class="silver" x="704" y="338" width="20" height="20"/>
+    <rect class="silver" x="1018" y="215" width="72" height="15" transform="rotate(8 1054 222.5)"/>
+    <rect class="silver" x="1257" y="310" width="46" height="12" transform="rotate(-5 1280 316)"/>
+    <rect class="sticker" x="1209" y="444" width="22" height="22"/>
+
+    <!-- callouts -->
+    <circle class="call" cx="251" cy="246" r="18"/><text class="num" x="251" y="246">5</text>
+    <line class="dash" x1="266" y1="258" x2="307" y2="288"/>
+    <text class="small" x="42" y="248">Fender blade / 50x13 mm</text>
+    <text class="micro" x="42" y="268">rot -10 deg / local R approx 900 mm</text>
+
+    <circle class="call" cx="622" cy="300" r="18"/><text class="num" x="622" y="300">6</text>
+    <line class="dash" x1="622" y1="318" x2="613" y2="343"/>
+    <text class="small" x="648" y="297">Door lower wordmark / 78x18 mm</text>
+    <text class="micro" x="648" y="317">rot +1.5 deg / flat chord 130 mm</text>
+
+    <circle class="call" cx="755" cy="346" r="18"/><text class="num" x="755" y="346">7</text>
+    <line class="dash" x1="737" y1="346" x2="724" y2="348"/>
+    <text class="small" x="777" y="342">B-pillar icon / 20x20 mm</text>
+    <text class="micro" x="777" y="362">rot 0 deg / black glass plane</text>
+
+    <circle class="call" cx="1084" cy="184" r="18"/><text class="num" x="1084" y="184">8</text>
+    <line class="dash" x1="1076" y1="202" x2="1054" y2="222"/>
+    <text class="small" x="1110" y="181">Rear quarter glass / 72x15 mm</text>
+    <text class="micro" x="1110" y="201">rot +8 deg / glass edge alignment</text>
+
+    <circle class="call" cx="1338" cy="300" r="18"/><text class="num" x="1338" y="300">9</text>
+    <line class="dash" x1="1320" y1="306" x2="1280" y2="316"/>
+    <text class="small" x="1362" y="296">Charging-port edge / 46x12 mm</text>
+    <text class="micro" x="1362" y="316">rot -5 deg / field verify gap</text>
+
+    <circle class="call" cx="1262" cy="500" r="18"/><text class="num" x="1262" y="500">W</text>
+    <line class="dash" x1="1250" y1="486" x2="1221" y2="455"/>
+    <text class="small" x="1286" y="498">Wheel cap icon / 20-22 mm</text>
+    <text class="micro" x="1286" y="518">centered / owner-visible detail</text>
+
+    <!-- dimensions -->
+    <line class="dim" x1="72" y1="610" x2="1524" y2="610"/>
+    <text class="micro" x="798" y="636" text-anchor="middle">overall length reference 4694 mm / used for drawing proportion only</text>
+    <line class="dim" x1="315" y1="578" x2="1220" y2="578"/>
+    <text class="micro" x="768" y="568" text-anchor="middle">wheelbase reference 2875 mm</text>
+    <line class="dim" x1="574" y1="366" x2="652" y2="366"/>
+    <text class="micro" x="613" y="385" text-anchor="middle">78 mm planning mark</text>
+  </g>
+</svg>

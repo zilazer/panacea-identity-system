@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Independent Tesla Model 3 PNG decal placement preview for Panacea." />
+    <link rel="icon" href="assets/logo/current/panacea-icon-a-current.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/site/css/base.css" />
+    <link rel="stylesheet" href="assets/site/css/vehicle-3d.css" />
+    <title>panacea.design.system.v0.1</title>
+  </head>
+  <body class="vehicle-3d-page">
+    <main class="viewer" aria-labelledby="preview-title">
+      <div class="viewer__hud">
+        <div class="viewer__title">
+          <p>3D Preview / PNG decal placement</p>
+          <h1 id="preview-title">Model 3 placement study.</h1>
+        </div>
+        <div class="viewer__controls" aria-label="3D view controls">
+          <button class="viewer__button" type="button" data-view="side">Side</button>
+          <button class="viewer__button" type="button" data-view="front">Front</button>
+          <button class="viewer__button" type="button" data-view="rear">Rear</button>
+          <button class="viewer__button" type="button" data-view="top">Top</button>
+        </div>
+      </div>
+      <canvas id="vehicle3d" aria-label="3D preview of Model 3"></canvas>
+      <div class="viewer__decal" aria-label="PNG decal preview controls">
+        <label>
+          PNG decal / PNG 贴纸
+          <input id="decalFile" type="file" accept="image/png" />
+        </label>
+        <div class="viewer__slider">
+          <span>Size</span>
+          <input id="decalSize" type="range" min="0.12" max="1.4" step="0.01" value="0.42" />
+          <output id="decalSizeValue">42</output>
+        </div>
+        <div class="viewer__slider">
+          <span>Rotate</span>
+          <input id="decalRotate" type="range" min="-180" max="180" step="1" value="0" />
+          <output id="decalRotateValue">0</output>
+        </div>
+        <div class="viewer__slider">
+          <span>Opacity</span>
+          <input id="decalOpacity" type="range" min="0.2" max="1" step="0.01" value="0.92" />
+          <output id="decalOpacityValue">92</output>
+        </div>
+      </div>
+      <div class="viewer__status" id="vehicle3dStatus">Loading local model / 正在加载本地模型</div>
+    </main>
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+      }
+    </script>
+    <script type="module" src="assets/site/js/vehicle-3d/main.js"></script>
+  </body>
+</html>

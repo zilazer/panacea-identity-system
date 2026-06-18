@@ -1,8 +1,8 @@
 # Panacea Tesla Model 3 Sticker Guide / Panacea Tesla Model 3 车贴指南
 
-Target vehicle: Tesla Model 3, purchased in mainland China in September 2025. The supplied vehicle reference shows a deep metallic blue body color.
+Target vehicle: Tesla Model 3 RWD base trim, purchased in mainland China in September 2025. The supplied vehicle reference shows a deep metallic blue body color.
 
-目标车型：Tesla Model 3，2025 年 9 月购于中国大陆。根据提供的车辆参考图，车身颜色为深蓝金属色。
+目标车型：Tesla Model 3 后轮驱动入门版，2025 年 9 月购于中国大陆。根据提供的车辆参考图，车身颜色为深蓝金属色。
 
 This guide should become a complete design manual rather than a single rendering.
 
@@ -51,9 +51,39 @@ Blueprints should prioritize panel lines, lights, cameras, handles, ports, wheel
 
 蓝图应优先标注钣金线、灯组、摄像头、门把手、接口、轮毂几何与玻璃边界。
 
+The vehicle drawing should follow the cheapest mainland China Model 3 version available to the user in September 2025: base RWD, blue paint, standard exterior, no Performance spoiler, no sport body kit.
+
+车辆绘制应遵循用户在 2025 年 9 月中国大陆可以买到的最便宜 Model 3 版本：后轮驱动入门版、蓝色车漆、标准外观、无 Performance 尾翼、无运动套件。
+
 Use `assets/vehicle/reference/tesla-model-3-2025-china-deep-blue-reference.png` as the current real-vehicle reference for color, trim contrast, glass darkness, and placement scale.
 
 使用 `assets/vehicle/reference/tesla-model-3-2025-china-deep-blue-reference.png` 作为当前真实车辆参考，用于判断颜色、饰条对比、玻璃深度与贴附尺度。
+
+Current measurement blueprint:
+
+当前测量图纸：
+
+- `assets/vehicle/blueprints/model3-sticker-placement-blueprint-v0.2.svg`
+- `assets/vehicle/blueprints/model3-rwd-blue-realistic-side-blueprint-v0.3.svg`
+- `assets/vehicle/blueprints/model3-rwd-blue-realistic-side-raster-v0.4.png`
+- `assets/vehicle/blueprints/model3-rwd-blue-front-raster-v0.5.png`
+- `assets/vehicle/blueprints/model3-rwd-blue-driver-side-raster-v0.5.png`
+- `assets/vehicle/blueprints/model3-rwd-blue-passenger-side-raster-v0.5.png`
+- `assets/vehicle/blueprints/model3-rwd-blue-rear-raster-v0.5.png`
+- `assets/vehicle/blueprints/model3-rwd-blue-top-raster-v0.5.png`
+- `docs/specs/model3-sticker-placement-blueprint.md`
+
+The realistic side-view drawing in V0.3 is the visual-detail standard for future front, rear, top, and detail-zone blueprints.
+
+V0.3 的写实侧视图是后续前视、后视、顶视与局部细节图纸的视觉细节标准。
+
+The V0.4 raster side-view is the current realism target. Use it as the base for future sticker measurement overlays.
+
+V0.4 栅格侧视图是当前写实目标。后续贴纸测量标注应以它作为底图。
+
+The V0.5 raster set now covers front, rear, driver side, passenger side, and top views.
+
+V0.5 栅格组现在覆盖前视、后视、驾驶侧、乘客侧与顶视。
 
 ## 04 Placement System / 位置系统
 

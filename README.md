@@ -73,6 +73,7 @@ docs/
     tesla-model-3-sticker-guide.md
   specs/
     vehicle-sticker-spec.md
+    model3-sticker-placement-blueprint.md
   prompts/
     lead-design-system-architect.md
 ```
@@ -91,9 +92,62 @@ Recommended GitHub Pages setting:
 - Branch: `main` / 分支：`main`
 - Folder: `/root` / 目录：`/root`
 
-The website presents the identity concept, four-layer brand system, Tesla Model 3 vehicle identity direction, manual structure, and current production assets.
+The website presents the identity concept, four-layer brand system, Tesla Model 3 vehicle identity direction, a 3D sticker preview tool, manual structure, and current production assets.
 
-网页展示品牌概念、四层品牌系统、Tesla Model 3 车辆识别方向、手册结构与当前生产资产。
+网页展示品牌概念、四层品牌系统、Tesla Model 3 车辆识别方向、3D 车贴预览工具、手册结构与当前生产资产。
+
+## Blueprint / 图纸
+
+The first sticker placement measurement draft is available at:
+
+第一版车贴位置测量图纸位于：
+
+- `assets/vehicle/blueprints/model3-sticker-placement-blueprint-v0.2.svg`
+- `assets/vehicle/blueprints/model3-rwd-blue-realistic-side-blueprint-v0.3.svg`
+- `assets/vehicle/blueprints/model3-rwd-blue-realistic-side-raster-v0.4.png`
+- `assets/vehicle/blueprints/model3-rwd-blue-front-raster-v0.5.png`
+- `assets/vehicle/blueprints/model3-rwd-blue-driver-side-raster-v0.5.png`
+- `assets/vehicle/blueprints/model3-rwd-blue-passenger-side-raster-v0.5.png`
+- `assets/vehicle/blueprints/model3-rwd-blue-rear-raster-v0.5.png`
+- `assets/vehicle/blueprints/model3-rwd-blue-top-raster-v0.5.png`
+- `docs/specs/model3-sticker-placement-blueprint.md`
+
+This blueprint identifies candidate sticker zones, suggested sizes, rotation angles, curvature-radius estimates, and required field-verification measurements.
+
+这张图纸标记了候选贴纸区域、建议尺寸、旋转角度、曲率半径估算与必须实车复测的测量字段。
+
+The current drawing is based on the user's September 2025 mainland China Tesla Model 3 base RWD blue version, not a Performance or modified version.
+
+当前图纸基于用户 2025 年 9 月中国大陆 Tesla Model 3 后轮驱动入门版蓝色车型绘制，不按 Performance 或改装版本绘制。
+
+The V0.3 realistic side-view blueprint is the visual-detail standard for future blueprint views.
+
+V0.3 写实侧视图是后续所有车辆图纸视图的视觉细节标准。
+
+The V0.4 raster side-view is the current realism target and should be used as the base image for sticker measurement overlays.
+
+V0.4 栅格侧视图是当前写实目标，应作为后续贴纸测量标注的底图。
+
+The V0.5 raster set expands the realistic base to front, rear, driver side, passenger side, and top views.
+
+V0.5 栅格组把写实底图扩展到前视、后视、驾驶侧、乘客侧与顶视。
+
+## 3D Preview / 三维预览
+
+The project now includes a local glTF Model 3 preview asset and an `index.html` Three.js preview section for web-based sticker placement studies:
+
+项目现在包含一个本地 glTF Model 3 预览资产，并在 `index.html` 中加入了 Three.js 预览区，用于网页三维车贴位置研究：
+
+- `assets/vehicle/3d/model3-highland-preview/Poppyseed.gltf`
+- `docs/specs/vehicle-3d-preview-model.md`
+
+The preview tool supports PNG decal import, drag-to-place projection on the car surface, scale, rotation, opacity, and front/side/rear/top camera presets.
+
+预览工具支持导入 PNG 贴纸、在车身表面拖动投射定位、缩放、旋转、透明度调整，以及前视、侧视、后视、顶视相机预设。
+
+This model is for visual preview and interaction prototyping, not final physical measurement.
+
+该模型用于视觉预览与交互原型，不用于最终实物测量。
 
 ## Asset Status / 资产状态
 
@@ -103,20 +157,18 @@ Current active assets:
 
 - `assets/logo/current/panacea-master-solid-current.svg`
 - `assets/logo/current/panacea-master-outline-current.svg`
-- `assets/logo/current/panacea-master-solid-current.png`
-- `assets/logo/current/panacea-master-outline-current.png`
-- `assets/logo/current/panacea-icon-a-current.png`
+- `assets/logo/current/panacea-icon-a-current.svg`
 - `assets/vehicle/reference/tesla-model-3-2025-china-deep-blue-reference.png`
 
 Legacy/reference assets:
 
 历史 / 参考资产：
 
-- `assets/logo/legacy/renliang-transparent-red-line.png`
-- `assets/logo/legacy/renliang-monochrome-stack.png`
-- `assets/logo/legacy/renliang-red-line-only.png`
-- `assets/logo/legacy/allheilmittel-renliang-lockup.png`
-- `assets/logo/legacy/allheilmittel-white-outline-black-bg.png`
+- `assets/logo/legacy/renliang-thin-print.svg`
+
+PNG logo files in `assets/logo/legacy` and `assets/logo/previous` are deprecated raster context only. Webpage brand imagery should use SVG.
+
+`assets/logo/legacy` 与 `assets/logo/previous` 中的 PNG logo 文件仅作为已弃用栅格语境保留。网页品牌图像应使用 SVG。
 
 Legacy assets are source context. They should not override the current four-layer system without an explicit design decision.
 
