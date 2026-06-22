@@ -1,6 +1,6 @@
 @font-face {
   font-family: "Panacea Architectural";
-  src: url("../../font/PanaceaArchitectural-Regular.ttf") format("truetype");
+  src: url("../../font/PanaceaArchitectural-Regular.ttf?v=0.3.0") format("truetype");
   font-style: normal;
   font-weight: 400;
   font-display: block;
@@ -437,20 +437,27 @@ body.panacea-page {
   scrollbar-width: thin;
 }
 
-.alphabet-image-frame {
+.alphabet-live-frame {
   position: relative;
-  min-width: 1080px;
-  aspect-ratio: 1330 / 194;
+  width: max-content;
+  min-width: 1680px;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.42);
+  background-color: rgba(255, 255, 255, 0.42);
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--line) 35%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--line) 35%, transparent) 1px, transparent 1px);
+  background-size: calc(var(--unit) * 4) calc(var(--unit) * 4);
 }
 
-.alphabet-image-frame img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  max-width: none;
-  object-fit: contain;
+.alphabet-live-frame p {
+  width: max-content;
+  margin: 0;
+  padding: calc(var(--unit) * 10) calc(var(--unit) * 8);
+  font-family: "Panacea Architectural", sans-serif;
+  font-size: 176px;
+  font-weight: 400;
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .architectural-alphabet {
@@ -847,8 +854,13 @@ body.panacea-page {
     margin-right: calc(var(--grid-margin) * -1);
   }
 
-  .alphabet-image-frame {
-    min-width: 1080px;
+  .alphabet-live-frame {
+    min-width: 1500px;
+  }
+
+  .alphabet-live-frame p {
+    padding: calc(var(--unit) * 8) calc(var(--unit) * 4);
+    font-size: 152px;
   }
 
   .font-release__specimen {

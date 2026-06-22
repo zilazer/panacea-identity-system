@@ -16,15 +16,36 @@ from fontTools.svgLib.path import parse_path
 
 
 UNITS_PER_EM = 1000
-SOURCE_BASELINE = 377.5
+SOURCE_BASELINE = 393.5
 SOURCE_SCALE = 3.2
 SIDE_BEARING = 40
 ASCENDER = 850
 DESCENDER = -260
 LINE_GAP = 100
+FONT_VERSION = "0.3"
+LETTER_CHARS = "abcdefghijklmnopqrstuvwxyz"
+PUNCTUATION_GLYPHS = {
+    ",": "comma",
+    ".": "period",
+    "?": "question",
+}
+SUPPORTED_CHARS = set(LETTER_CHARS) | set(PUNCTUATION_GLYPHS)
+
+
+def parse_transform(value: str) -> tuple[float, float, float, float, float, float]:
+    match = re.fullmatch(
+        r"\s*translate\(\s*([-+0-9.eE]+)(?:[\s,]+([-+0-9.eE]+))?\s*\)\s*",
+        value,
+    )
+    if match is None:
+        raise ValueError(f"Unsupported SVG transform: {value!r}")
+    return (1, 0, 0, 1, float(match.group(1)), float(match.group(2) or 0))
 
 
 def draw_element(element: ET.Element, pen) -> None:
+    if transform := element.attrib.get("transform"):
+        pen = TransformPen(pen, parse_transform(transform))
+
     tag = element.tag.rsplit("}", 1)[-1]
     if tag == "path":
         parse_path(element.attrib["d"], pen)
@@ -36,6 +57,10 @@ def draw_element(element: ET.Element, pen) -> None:
         for point in points[1:]:
             pen.lineTo(point)
         pen.closePath()
+        return
+    if tag == "g":
+        for child in element:
+            draw_element(child, pen)
         return
     raise ValueError(f"Unsupported SVG element: {tag}")
 
@@ -57,20 +82,26 @@ def build_font(source_svg: Path, output_ttf: Path) -> None:
     elements = {
         element.attrib["id"]: element
         for element in root.iter()
-        if len(element.attrib.get("id", "")) == 1 and element.attrib["id"].islower()
+        if element.attrib.get("id") in SUPPORTED_CHARS
     }
-    expected = set("abcdefghijklmnopqrstuvwxyz")
+    expected = SUPPORTED_CHARS
     if set(elements) != expected:
         missing = "".join(sorted(expected - set(elements)))
         extra = "".join(sorted(set(elements) - expected))
-        raise ValueError(f"Expected a-z glyphs; missing={missing!r}, extra={extra!r}")
+        raise ValueError(f"Unexpected glyph set; missing={missing!r}, extra={extra!r}")
 
-    glyph_order = [".notdef", "space", *sorted(elements)]
+    character_order = [*LETTER_CHARS, *PUNCTUATION_GLYPHS]
+    glyph_names = {
+        character: PUNCTUATION_GLYPHS.get(character, character)
+        for character in character_order
+    }
+    glyph_order = [".notdef", "space", *(glyph_names[character] for character in character_order)]
     glyphs = {".notdef": empty_glyph(), "space": empty_glyph()}
     metrics = {".notdef": (500, 0), "space": (300, 0)}
 
-    for name in sorted(elements):
-        element = elements[name]
+    for character in character_order:
+        name = glyph_names[character]
+        element = elements[character]
         x_min, _, x_max, _ = get_bounds(element)
         pen = TTGlyphPen(None)
         transform = (
@@ -87,10 +118,12 @@ def build_font(source_svg: Path, output_ttf: Path) -> None:
         advance_width = int(round((outline_width + SIDE_BEARING * 2) / 10) * 10)
         metrics[name] = (advance_width, SIDE_BEARING)
 
-    cmap = {}
-    for name in sorted(elements):
+    cmap = {ord(" "): "space"}
+    for name in LETTER_CHARS:
         cmap[ord(name)] = name
         cmap[ord(name.upper())] = name
+    for character, name in PUNCTUATION_GLYPHS.items():
+        cmap[ord(character)] = name
 
     builder = FontBuilder(UNITS_PER_EM, isTTF=True)
     builder.setupGlyphOrder(glyph_order)
@@ -102,10 +135,10 @@ def build_font(source_svg: Path, output_ttf: Path) -> None:
         {
             "familyName": "Panacea Architectural",
             "styleName": "Regular",
-            "uniqueFontIdentifier": "Panacea Architectural Regular 0.1",
+            "uniqueFontIdentifier": f"Panacea Architectural Regular {FONT_VERSION}",
             "fullName": "Panacea Architectural Regular",
             "psName": "PanaceaArchitectural-Regular",
-            "version": "Version 0.1",
+            "version": f"Version {FONT_VERSION}",
         }
     )
     builder.setupOS2(
@@ -130,7 +163,7 @@ def main() -> None:
     parser.add_argument(
         "--source",
         type=Path,
-        default=Path("assets/font/source/panacea-alphabet-2nd.svg"),
+        default=Path("assets/font/source/panacea-alphabet-3rd.svg"),
     )
     parser.add_argument(
         "--output",

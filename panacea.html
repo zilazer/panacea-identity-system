@@ -10,10 +10,10 @@
     <link rel="icon" href="assets/logo/current/panacea-icon-a-current.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="assets/site/css/base.css" />
     <link rel="stylesheet" href="assets/site/css/panacea.css" />
-    <title>panacea.architectural.type.system.v0.3</title>
+    <title>panacea.architectural.type.system.v0.4</title>
   </head>
   <body class="panacea-page">
-    <div class="version-tag" aria-label="Version">v0.3.0</div>
+    <div class="version-tag" aria-label="Version">v0.4.0</div>
 
     <main>
       <section class="cover page-grid" aria-labelledby="cover-title">
@@ -122,14 +122,14 @@
       </section>
 
       <section class="section alphabet page-grid" aria-labelledby="alphabet-title">
-        <p class="section__index">05 / Alphabet / 小写字母表</p>
+        <p class="section__index">05 / Alphabet + Punctuation / 字母与标点</p>
         <div class="section__heading">
-          <h2 id="alphabet-title">Twenty-six assemblies.</h2>
-          <p>同一网格上的二十六种装配。</p>
+          <h2 id="alphabet-title">Twenty-six letters. Three marks.</h2>
+          <p>同一网格上的二十六个字母与三个标点。</p>
         </div>
-        <p class="section__intro">One continuous field reveals the rhythm of the system. No glyph exists outside the grammar.</p>
-        <div class="alphabet-scroll" tabindex="0" aria-label="Panacea lowercase alphabet a to z">
-          <div class="alphabet-image-frame"><img src="assets/type/panacea-alphabet-grid.png" alt="Panacea lowercase alphabet aligned to repeated grid units" /></div>
+        <p class="section__intro">The active font renders one continuous field: a-z, comma, period, and question mark.</p>
+        <div class="alphabet-scroll" tabindex="0" aria-label="Panacea lowercase alphabet a to z, comma, period, and question mark">
+          <div class="alphabet-live-frame"><p>abcdefghijklmnopqrstuvwxyz,.?</p></div>
         </div>
       </section>
 
@@ -186,17 +186,19 @@
         <div class="font-release__specimen" aria-label="Uppercase and lowercase font comparison">
           <p>panacea</p>
           <p>PANACEA</p>
+          <p>f,.?</p>
         </div>
         <div class="font-release__download">
-          <div><strong>Panacea Architectural Regular</strong><span>TTF · A-Z · a-z · Space</span></div>
-          <a class="button-link" href="assets/font/PanaceaArchitectural-Regular.ttf" download>Download TTF / 下载字体</a>
+          <div><strong>Panacea Architectural Regular 0.3</strong><span>TTF · A-Z · a-z · Space · , . ?</span></div>
+          <a class="button-link" href="assets/font/PanaceaArchitectural-Regular.ttf?v=0.3.0" download="PanaceaArchitectural-Regular.ttf">Download TTF / 下载字体</a>
         </div>
         <form class="font-playground" id="font-playground">
           <div class="font-playground__heading">
             <label for="font-preview-input">Type specimen / 输入文字</label>
-            <span>A-Z · a-z · Space · Line break</span>
+            <span>A-Z · a-z · Space · , . ? · Line break</span>
           </div>
-          <textarea id="font-preview-input" rows="3" wrap="off" spellcheck="false">panacea</textarea>
+          <textarea id="font-preview-input" rows="3" wrap="off" spellcheck="false">panacea,
+form?</textarea>
           <div class="font-playground__actions">
             <button class="button-link" id="export-font-png" type="submit">Export transparent PNG / 导出透明 PNG</button>
             <output id="font-export-status" for="font-preview-input" aria-live="polite"></output>
@@ -205,7 +207,7 @@
       </section>
 
       <footer class="closing page-grid">
-        <p class="closing__version">Panacea Architectural Type System · v0.3.0</p>
+        <p class="closing__version">Panacea Architectural Type System · v0.4.0</p>
         <blockquote>
           <strong>Not a Typeface.</strong>
           <span>A System of Architectural Components.</span>

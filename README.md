@@ -87,13 +87,13 @@ Core rules / 核心规则：
 Font assets / 字体资产：
 
 - `assets/font/PanaceaArchitectural-Regular.ttf`
-- `assets/font/source/panacea-alphabet-2nd.svg`
+- `assets/font/source/panacea-alphabet-3rd.svg`
 - `tools/build_panacea_font.py`
 - `assets/font/README.md`
 
-The current font covers `A-Z`, `a-z`, and space. Numerals and punctuation are not included yet.
+The current font is Version 0.3 and covers `A-Z`, `a-z`, space, comma, period, and question mark. Numerals and other punctuation are not included yet.
 
-当前字体包含 `A-Z`、`a-z` 与空格，尚未包含数字和标点。
+当前字体为 0.3 版，包含 `A-Z`、`a-z`、空格、逗号、句号与问号，尚未包含数字和其他标点。
 
 ### 3. Tesla Model 3 Vehicle Identity / Tesla Model 3 车辆识别
 
