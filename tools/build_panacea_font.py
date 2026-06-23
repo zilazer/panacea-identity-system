@@ -16,13 +16,13 @@ from fontTools.svgLib.path import parse_path
 
 
 UNITS_PER_EM = 1000
-SOURCE_BASELINE = 393.5
+SOURCE_BASELINE = 261.14181
 SOURCE_SCALE = 3.2
 SIDE_BEARING = 40
 ASCENDER = 850
 DESCENDER = -260
 LINE_GAP = 100
-FONT_VERSION = "0.3"
+FONT_VERSION = "0.4"
 LETTER_CHARS = "abcdefghijklmnopqrstuvwxyz"
 PUNCTUATION_GLYPHS = {
     ",": "comma",
@@ -163,7 +163,7 @@ def main() -> None:
     parser.add_argument(
         "--source",
         type=Path,
-        default=Path("assets/font/source/panacea-alphabet-3rd.svg"),
+        default=Path("assets/font/source/panacea-alphabet-4th.svg"),
     )
     parser.add_argument(
         "--output",

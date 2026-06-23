@@ -5,7 +5,7 @@ const exportSvgButton = document.querySelector("#export-font-svg");
 const status = document.querySelector("#font-export-status");
 
 const FONT_FAMILY = "Panacea Architectural";
-const FONT_URL = "assets/font/PanaceaArchitectural-Regular.ttf?v=0.3.0";
+const FONT_URL = "assets/font/PanaceaArchitectural-Regular.ttf?v=0.4.0";
 const FONT_SIZE = 240;
 const LINE_HEIGHT = 300;
 const PADDING = 80;
