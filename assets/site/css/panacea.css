@@ -661,6 +661,12 @@ body.panacea-page {
   align-items: flex-start;
 }
 
+.font-playground__export-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--unit) * 1.5);
+}
+
 .font-playground__actions output {
   padding-top: calc(var(--unit) * 2);
   text-align: right;
@@ -889,6 +895,10 @@ body.panacea-page {
   .font-playground textarea {
     min-height: 192px;
     font-size: 64px;
+  }
+
+  .font-playground__export-buttons {
+    flex-direction: column;
   }
 
   .font-playground__actions output {
