@@ -5,219 +5,884 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="Panacea Architectural Type System: a lowercase glyph system derived from architectural components."
+      content="Panacea Architectural Type System: an interactive architectural alphabet lattice and font specimen tool."
     />
+    <title>panacea.architectural.type.system.v0.6</title>
     <link rel="icon" href="assets/logo/current/panacea-icon-a-current.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="assets/site/css/base.css" />
-    <link rel="stylesheet" href="assets/site/css/panacea.css" />
-    <title>panacea.architectural.type.system.v0.5</title>
+    <style>
+      @font-face {
+        font-family: "Panacea Architectural";
+        src: url("assets/font/PanaceaArchitectural-Regular.ttf?v=0.4.0") format("truetype");
+        font-style: normal;
+        font-weight: 400;
+        font-display: block;
+      }
+
+      :root {
+        --paper: #f5f5f2;
+        --ink: #111111;
+        --muted: #6f6f6a;
+        --line: #111111;
+        --soft-line: rgba(17, 17, 17, 0.28);
+        --unit: 8px;
+        --ease: cubic-bezier(0.5, 0, 0, 0.75);
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Inter, "IBM Plex Sans", Arial, Helvetica, "PingFang SC", "Hiragino Sans GB", sans-serif;
+        font-size: 14px;
+        line-height: 1.45;
+      }
+
+      button {
+        border: 0;
+        border-radius: 0;
+        padding: 0;
+        background: transparent;
+        color: inherit;
+        font: inherit;
+        text-align: left;
+        cursor: pointer;
+      }
+
+      img {
+        display: block;
+        width: 100%;
+      }
+
+      .page {
+        min-height: 100vh;
+      }
+
+      .hero {
+        position: relative;
+        min-height: min(64vw, 820px);
+        overflow: hidden;
+        border-bottom: 1px solid var(--line);
+        background: #d6d8da;
+      }
+
+      .hero img {
+        width: 100%;
+        height: 100%;
+        min-height: min(64vw, 820px);
+        object-fit: cover;
+      }
+
+      .hero__heading {
+        position: absolute;
+        top: 40px;
+        left: 48px;
+        z-index: 1;
+        max-width: min(760px, calc(100% - 96px));
+        margin: 0;
+        color: #ffffff;
+        font-family: "Panacea Architectural", sans-serif;
+        font-size: clamp(36px, 5vw, 82px);
+        font-weight: 400;
+        line-height: 1.05;
+      }
+
+      .lattice-wrap {
+        border-bottom: 1px solid var(--line);
+      }
+
+      .lattice {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        background: var(--line);
+        gap: 1px;
+      }
+
+      .tile {
+        --tile-brightness: 0.8;
+        display: grid;
+        grid-template-columns: 56px minmax(0, 1fr);
+        min-height: 250px;
+        overflow: hidden;
+        background: var(--paper);
+        filter: brightness(var(--tile-brightness));
+        transition: filter 180ms var(--ease), box-shadow 180ms var(--ease);
+      }
+
+      .tile:hover,
+      .tile:focus-visible {
+        --tile-brightness: 1;
+        outline: none;
+        box-shadow: inset 0 0 0 2px var(--ink);
+      }
+
+      .tile__glyph {
+        display: grid;
+        place-items: center;
+        min-width: 0;
+        padding: 16px 8px;
+        border-right: 1px solid var(--soft-line);
+      }
+
+      .tile__glyph-char {
+        font-family: "Panacea Architectural", sans-serif;
+        font-size: 58px;
+        line-height: 1;
+      }
+
+      .tile__image {
+        min-width: 0;
+        height: 100%;
+      }
+
+      .tile__image img {
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .lattice-footer {
+        grid-column: span 1;
+        display: grid;
+        place-items: center;
+        min-height: 250px;
+        padding: 24px;
+        background: #f8f8f5;
+        border: 0;
+        cursor: pointer;
+      }
+
+      .lattice-footer:hover,
+      .lattice-footer:focus-visible {
+        outline: none;
+        box-shadow: inset 0 0 0 2px var(--ink);
+      }
+
+      .lattice-footer__identity {
+        display: grid;
+        justify-items: center;
+        gap: 12px;
+        width: min(220px, 86%);
+      }
+
+      .lattice-footer__logo {
+        position: relative;
+        width: 100%;
+        aspect-ratio: 1446 / 593;
+        overflow: hidden;
+      }
+
+      .lattice-footer__logo img {
+        position: absolute;
+        top: -88.2%;
+        left: -20.263%;
+        width: 153.389%;
+        max-width: none;
+      }
+
+      .lattice-footer__subtitle {
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(8px, 0.85vw, 12px);
+        line-height: 1;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+      }
+
+      .lattice-spacer {
+        grid-column: span 3;
+        min-height: 250px;
+        background: #f8f8f5;
+      }
+
+      .font-overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 70;
+        display: grid;
+        place-items: center;
+        padding: clamp(24px, 5vw, 80px);
+        background: rgba(245, 245, 242, 0.28);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 180ms var(--ease);
+      }
+
+      .font-overlay.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .font-modal {
+        position: relative;
+        display: grid;
+        gap: 24px;
+        width: min(1440px, 100%);
+        max-height: 100%;
+        padding: 32px;
+        overflow: auto;
+        border: 1px solid var(--line);
+        background: var(--paper);
+        box-shadow: 0 24px 80px rgba(17, 17, 17, 0.22);
+      }
+
+      .font-modal__close {
+        position: absolute;
+        top: 18px;
+        right: 18px;
+        width: 40px;
+        height: 40px;
+        display: grid;
+        place-items: center;
+        border: 1px solid var(--line);
+        background: var(--paper);
+        font-size: 24px;
+        line-height: 1;
+      }
+
+      .font-modal__close:hover,
+      .font-modal__close:focus-visible {
+        outline: none;
+        background: var(--ink);
+        color: var(--paper);
+      }
+
+      .font-modal__heading {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+        padding-right: 56px;
+      }
+
+      .font-modal__heading label {
+        font-size: clamp(22px, 2.2vw, 34px);
+        font-weight: 600;
+      }
+
+      .font-modal__heading span,
+      .font-modal__status {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .font-modal textarea {
+        width: 100%;
+        min-height: 310px;
+        resize: none;
+        padding: 48px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+        outline: none;
+        background: transparent;
+        color: var(--ink);
+        font-family: "Panacea Architectural", sans-serif;
+        font-size: clamp(72px, 8.5vw, 142px);
+        line-height: 1.15;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+      }
+
+      .font-modal textarea:focus {
+        box-shadow: inset 0 0 0 1px var(--line);
+      }
+
+      .font-modal__actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        gap: 16px;
+      }
+
+      .font-modal__button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 56px;
+        padding: 0 28px;
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--ink);
+        font-size: 18px;
+      }
+
+      .font-modal__button:hover,
+      .font-modal__button:focus-visible {
+        outline: none;
+        background: var(--ink);
+        color: var(--paper);
+      }
+
+      .font-modal__button:disabled {
+        cursor: not-allowed;
+        opacity: 0.4;
+      }
+
+      .font-modal__status {
+        min-height: 56px;
+        display: inline-flex;
+        align-items: center;
+        margin-left: auto;
+      }
+
+      .overlay {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        display: grid;
+        place-items: center;
+        padding: clamp(24px, 5vw, 80px);
+        background: rgba(245, 245, 242, 0.18);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 180ms var(--ease);
+      }
+
+      .overlay.is-open {
+        opacity: 1;
+        pointer-events: auto;
+      }
+
+      .detail {
+        display: grid;
+        grid-template-columns: 48fr 52fr;
+        width: 100%;
+        height: 100%;
+        border: 1px solid var(--line);
+        background: var(--paper);
+        box-shadow: 0 24px 80px rgba(17, 17, 17, 0.2);
+        cursor: zoom-out;
+      }
+
+      .detail__glyph {
+        position: relative;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        border-right: 1px solid var(--line);
+        background-color: rgba(255, 255, 255, 0.36);
+        background-image:
+          linear-gradient(to right, rgba(17, 17, 17, 0.36) 1px, transparent 1px),
+          linear-gradient(to bottom, rgba(17, 17, 17, 0.36) 1px, transparent 1px);
+        background-size: 32px 32px;
+      }
+
+      .detail__glyph::before,
+      .detail__glyph::after {
+        content: "";
+        position: absolute;
+        background: var(--line);
+        opacity: 0.7;
+      }
+
+      .detail__glyph::before {
+        width: 1px;
+        height: 100%;
+        left: 50%;
+      }
+
+      .detail__glyph::after {
+        width: 100%;
+        height: 1px;
+        top: 50%;
+      }
+
+      .detail__glyph span {
+        position: relative;
+        z-index: 1;
+        font-family: "Panacea Architectural", sans-serif;
+        font-size: clamp(220px, 30vw, 520px);
+        line-height: 1;
+      }
+
+      .detail__figure {
+        display: grid;
+        grid-template-rows: 1fr auto;
+        min-width: 0;
+        margin: 0;
+        background: #d5d7d9;
+      }
+
+      .detail__image {
+        position: relative;
+        min-height: 0;
+      }
+
+      .detail__image img {
+        height: 100%;
+        object-fit: cover;
+      }
+
+      .detail__version {
+        position: absolute;
+        top: 32px;
+        right: 80px;
+        font-weight: 600;
+      }
+
+      .detail__caption {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        padding: 16px 24px;
+        border-top: 1px solid var(--line);
+        background: var(--paper);
+        font-size: 14px;
+        line-height: 1.25;
+      }
+
+      .detail__caption strong {
+        font-weight: 700;
+      }
+
+      .detail__caption span {
+        text-align: right;
+      }
+
+      @media (max-width: 1100px) {
+        .hero {
+          min-height: 72vh;
+        }
+
+        .hero img {
+          min-height: 72vh;
+        }
+
+        .hero__heading {
+          top: 24px;
+          left: 24px;
+          max-width: calc(100% - 48px);
+        }
+
+        .lattice {
+          grid-template-columns: repeat(2, minmax(260px, 1fr));
+          overflow-x: auto;
+        }
+
+        .tile {
+          min-height: 220px;
+        }
+
+        .lattice-footer {
+          grid-column: 1 / -1;
+          grid-template-columns: 1fr;
+          align-items: start;
+          min-height: 192px;
+          padding: 32px 24px;
+        }
+
+        .lattice-footer__identity {
+          width: min(420px, 86%);
+        }
+
+        .lattice-spacer {
+          display: none;
+        }
+
+        .font-modal {
+          padding: 24px;
+        }
+
+        .font-modal__heading {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .font-modal textarea {
+          min-height: 220px;
+          padding: 24px;
+          font-size: 64px;
+        }
+
+        .font-modal__status {
+          width: 100%;
+          margin-left: 0;
+        }
+
+        .detail {
+          grid-template-columns: 1fr;
+        }
+
+        .detail__glyph {
+          min-height: 72vw;
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .detail__figure {
+          min-height: 72vw;
+        }
+
+        .detail__image img {
+          aspect-ratio: 3 / 2;
+        }
+
+        .detail__version {
+          top: 20px;
+          right: 24px;
+        }
+
+        .detail__caption {
+          align-items: flex-start;
+          flex-direction: column;
+        }
+
+        .detail__caption span {
+          text-align: left;
+        }
+      }
+    </style>
   </head>
-  <body class="panacea-page">
-    <div class="version-tag" aria-label="Version">v0.5.0</div>
-
-    <main>
-      <section class="cover page-grid" aria-labelledby="cover-title">
-        <h1 class="cover__mark" id="cover-title">
-          <img src="assets/logo/current/panacea-master-solid-current.png" alt="panacea" />
-        </h1>
-        <div class="cover__meta">
-          <p>Panacea Architectural Type System</p>
-          <p>源于 panacea 的建筑构件式字形系统。</p>
-        </div>
-        <blockquote class="cover__statement">
-          <strong>Not a Typeface.</strong>
-          <span>A System of Architectural Components.</span>
-          <small>不是一套字体，而是一套建筑构件系统。</small>
-        </blockquote>
+  <body>
+    <main class="page">
+      <section class="hero" aria-labelledby="page-title">
+        <img src="assets/type/panacea-architectural-reference.png" alt="Repeated concrete structural bays in dense fog" />
+        <h1 class="hero__heading" id="page-title">Panacea Architectural Type System</h1>
       </section>
 
-      <section class="section source page-grid" aria-labelledby="source-title">
-        <p class="section__index">01 / Source / 源字</p>
-        <div class="section__heading">
-          <h2 id="source-title">The wordmark is the source.</h2>
-          <p>字标不是字体的应用结果，而是整套字形语法的起点。</p>
-        </div>
-        <div class="section__intro">
-          <p>The lowercase system begins with five parent glyphs found inside panacea.</p>
-          <p>所有字母均从 panacea 中已有的五个母字形推演，而不是被分别设计。</p>
-        </div>
-        <figure class="source-wordmark">
-          <div class="source-wordmark__grid">
-            <img src="assets/logo/current/panacea-master-solid-current.svg" alt="panacea source wordmark on construction grid" />
+      <section class="lattice-wrap" aria-label="Architectural alphabet lattice">
+        <div class="lattice" id="alphabet-lattice"></div>
+      </section>
+
+      <div class="overlay" id="alphabet-overlay" aria-hidden="true">
+        <section class="detail" id="alphabet-detail" aria-live="polite" role="dialog" aria-modal="true" aria-label="Architectural alphabet detail">
+          <div class="detail__glyph" aria-hidden="true">
+            <span id="detail-glyph">a</span>
           </div>
-          <figcaption>Original source / 原始字标</figcaption>
-        </figure>
-        <div class="parent-glyphs" aria-label="Parent glyphs p a n c e">
-          <figure><div class="glyph-stage"><img class="glyph-stage__grid" src="assets/type/panacea-grid-unit.png" alt="" /><span class="glyph-sprite glyph-sprite--p"><img src="assets/type/panacea-alphabet-2nd.png" alt="" /></span></div><figcaption>p</figcaption></figure>
-          <figure><div class="glyph-stage"><img class="glyph-stage__grid" src="assets/type/panacea-grid-unit.png" alt="" /><span class="glyph-sprite glyph-sprite--a"><img src="assets/type/panacea-alphabet-2nd.png" alt="" /></span></div><figcaption>a</figcaption></figure>
-          <figure><div class="glyph-stage"><img class="glyph-stage__grid" src="assets/type/panacea-grid-unit.png" alt="" /><span class="glyph-sprite glyph-sprite--n"><img src="assets/type/panacea-alphabet-2nd.png" alt="" /></span></div><figcaption>n</figcaption></figure>
-          <figure><div class="glyph-stage"><img class="glyph-stage__grid" src="assets/type/panacea-grid-unit.png" alt="" /><span class="glyph-sprite glyph-sprite--c"><img src="assets/type/panacea-alphabet-2nd.png" alt="" /></span></div><figcaption>c</figcaption></figure>
-          <figure><div class="glyph-stage"><img class="glyph-stage__grid" src="assets/type/panacea-grid-unit.png" alt="" /><span class="glyph-sprite glyph-sprite--e"><img src="assets/type/panacea-alphabet-2nd.png" alt="" /></span></div><figcaption>e</figcaption></figure>
-        </div>
-      </section>
-
-      <section class="section components page-grid" aria-labelledby="components-title">
-        <p class="section__index">02 / Components / 构件</p>
-        <div class="section__heading">
-          <h2 id="components-title">Six components. One language.</h2>
-          <p>六种有限构件，组成二十六个小写字母。</p>
-        </div>
-        <p class="section__intro">The alphabet is assembled like a structure: columns carry, beams connect, roofs set direction, and openings preserve space.</p>
-        <div class="component-table" role="table" aria-label="Architectural components">
-          <div class="component-row component-row--head" role="row"><span>构件 / Component</span><span>结构 / Form</span><span>作用 / Function</span></div>
-          <div class="component-row" role="row"><strong>柱 / Column</strong><svg viewBox="0 0 96 48"><path d="M48 6V42" /></svg><p>承担高度 / Carries height</p></div>
-          <div class="component-row" role="row"><strong>梁 / Beam</strong><svg viewBox="0 0 96 48"><path d="M18 24H78" /></svg><p>连接空间 / Connects space</p></div>
-          <div class="component-row" role="row"><strong>屋檐 / Roof</strong><svg viewBox="0 0 96 48"><path d="M18 16L78 32" /></svg><p>建立方向 / Sets direction</p></div>
-          <div class="component-row" role="row"><strong>门洞 / Portal</strong><svg viewBox="0 0 96 48"><path d="M26 40V10H70V40" /></svg><p>形成字腔 / Forms the counter</p></div>
-          <div class="component-row" role="row"><strong>悬挑 / Cantilever</strong><svg viewBox="0 0 96 48"><path d="M36 40V16H72" /></svg><p>制造开放端 / Creates an open end</p></div>
-          <div class="component-row" role="row"><strong>转折 / Joint</strong><svg viewBox="0 0 96 48"><path d="M34 10V38H72" /></svg><p>改变受力方向 / Changes direction</p></div>
-        </div>
-        <figure class="architecture-reference">
-          <img src="assets/type/panacea-architectural-reference.png" alt="Repeated concrete structural bays with columns, portals, and sloped roofs" />
-          <figcaption>
-            <strong>Architecture as glyph logic / 建筑作为字形逻辑</strong>
-            <div>
-              <p>The type system borrows the order of repeated structural bays: columns establish rhythm, openings preserve negative space, and sloped roofs give every unit a shared direction.</p>
-              <p>这套字形借用连续建筑单元的秩序：柱建立节奏，门洞保留负空间，倾斜屋檐让每个字母共享同一方向。</p>
+          <figure class="detail__figure">
+            <div class="detail__image">
+              <img id="detail-image" src="assets/architectural-alphabet/photos/a-single-portal.png" alt="Single concrete portal in dense winter fog" />
+              <span class="detail__version">v0.6.0</span>
             </div>
-          </figcaption>
-        </figure>
-      </section>
+            <figcaption class="detail__caption">
+              <strong id="detail-title">a · Portal / 门洞</strong>
+              <span id="detail-caption">Single portal factory / 单门厂房</span>
+            </figcaption>
+          </figure>
+        </section>
+      </div>
 
-      <section class="section grammar page-grid" aria-labelledby="grammar-title">
-        <p class="section__index">03 / Grammar / 规则</p>
-        <div class="section__heading">
-          <h2 id="grammar-title">A finite grammar.</h2>
-          <p>字形的差异来自组合，不来自装饰。</p>
-        </div>
-        <p class="section__intro">Every glyph accepts the same structural agreement. The system stays recognizable even when the letter changes.</p>
-        <div class="grammar-grid">
-          <article><span>01</span><strong>8</strong><h3>Base unit / 基础单位</h3><p>Every coordinate resolves to the 8-unit module.</p></article>
-          <article><span>02</span><strong>6×16</strong><h3>Module grid / 模块网格</h3><p>Standard glyphs occupy a 48 × 128 field.</p></article>
-          <article><span>03</span><strong>8</strong><h3>Stroke / 统一线宽</h3><p>One weight across every structural component.</p></article>
-          <article><span>04</span><strong>15.9°</strong><h3>Roof angle / 屋檐角度</h3><p>Measured from the original panacea wordmark.</p></article>
-          <article><span>05</span><strong>32·48·64</strong><h3>Width / 字宽</h3><p>Narrow, standard, and wide structural bays.</p></article>
-          <article><span>06</span><strong>0</strong><h3>Decorative curves / 装饰曲线</h3><p>Open counters and straight construction only.</p></article>
-        </div>
-        <figure class="grid-unit-specimen">
-          <div class="grid-unit-specimen__image"><img src="assets/type/panacea-grid-unit.png" alt="Panacea glyph grid unit" /></div>
-          <figcaption><strong>Grid unit / 网格单元</strong><span>Vertical bays, two horizontal levels, and the original roof angle.</span></figcaption>
-        </figure>
-      </section>
-
-      <section class="section deconstruction page-grid" aria-labelledby="deconstruction-title">
-        <p class="section__index">04 / Deconstruction / 解构</p>
-        <div class="section__heading">
-          <h2 id="deconstruction-title">Letters are assemblies.</h2>
-          <p>字母是构件的不同装配结果。</p>
-        </div>
-        <p class="section__intro">The parent glyphs expose the grammar. Their parts repeat, rotate, extend, or remain open.</p>
-        <div class="deconstruction-list">
-          <article class="deconstruction-card"><div class="glyph-stage"><img class="glyph-stage__grid" src="assets/type/panacea-grid-unit.png" alt="" /><span class="glyph-sprite glyph-sprite--p"><img src="assets/type/panacea-alphabet-2nd.png" alt="" /></span></div><h3>p</h3><ol><li>Column / 柱</li><li>Roof / 屋檐</li><li>Cantilever / 悬挑</li><li>Descender / 下伸</li></ol></article>
-          <article class="deconstruction-card"><div class="glyph-stage"><img class="glyph-stage__grid" src="assets/type/panacea-grid-unit.png" alt="" /><span class="glyph-sprite glyph-sprite--a"><img src="assets/type/panacea-alphabet-2nd.png" alt="" /></span></div><h3>a</h3><ol><li>Portal / 门洞</li><li>Beam / 梁</li><li>Roof / 屋檐</li><li>Open counter / 开放字腔</li></ol></article>
-          <article class="deconstruction-card"><div class="glyph-stage"><img class="glyph-stage__grid" src="assets/type/panacea-grid-unit.png" alt="" /><span class="glyph-sprite glyph-sprite--n"><img src="assets/type/panacea-alphabet-2nd.png" alt="" /></span></div><h3>n</h3><ol><li>Column × 2 / 双柱</li><li>Roof / 屋檐</li><li>Portal / 门洞</li></ol></article>
-          <article class="deconstruction-card"><div class="glyph-stage"><img class="glyph-stage__grid" src="assets/type/panacea-grid-unit.png" alt="" /><span class="glyph-sprite glyph-sprite--c"><img src="assets/type/panacea-alphabet-2nd.png" alt="" /></span></div><h3>c</h3><ol><li>Column / 柱</li><li>Roof / 屋檐</li><li>Open end / 开放端</li></ol></article>
-          <article class="deconstruction-card"><div class="glyph-stage"><img class="glyph-stage__grid" src="assets/type/panacea-grid-unit.png" alt="" /><span class="glyph-sprite glyph-sprite--e"><img src="assets/type/panacea-alphabet-2nd.png" alt="" /></span></div><h3>e</h3><ol><li>Column / 柱</li><li>Roof / 屋檐</li><li>Beam / 梁</li><li>Open end / 开放端</li></ol></article>
-        </div>
-      </section>
-
-      <section class="section alphabet page-grid" aria-labelledby="alphabet-title">
-        <p class="section__index">05 / Alphabet + Punctuation / 字母与标点</p>
-        <div class="section__heading">
-          <h2 id="alphabet-title">Twenty-six letters. Three marks.</h2>
-          <p>同一网格上的二十六个字母与三个标点。</p>
-        </div>
-        <p class="section__intro">The active font renders one continuous field: a-z, comma, period, and question mark.</p>
-        <div class="alphabet-scroll" tabindex="0" aria-label="Panacea lowercase alphabet a to z, comma, period, and question mark">
-          <div class="alphabet-live-frame"><p>abcdefghijklmnopqrstuvwxyz,.?</p></div>
-        </div>
-      </section>
-
-      <section class="section architectural-alphabet page-grid" aria-labelledby="architectural-alphabet-title">
-        <p class="section__index">06 / Architectural Alphabet / 建筑字母志</p>
-        <div class="section__heading">
-          <h2 id="architectural-alphabet-title">Letters found in architecture.</h2>
-          <p>字母不是来自文字，而是来自建筑。</p>
-        </div>
-        <div class="section__intro">
-          <p>Twenty-six glyphs are paired with twenty-six architectural archetypes.</p>
-          <p>Winter · 10:00 AM · Dense fog · Concrete · Wet ground</p>
-        </div>
-        <div class="architectural-alphabet__book">
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>a</span></div><figure><img src="assets/architectural-alphabet/photos/a-single-portal.png" alt="Single concrete portal in dense winter fog" /><figcaption><strong>a · Portal / 门洞</strong><span>Single portal factory / 单门厂房</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>b</span></div><figure><img src="assets/architectural-alphabet/photos/b-warehouse-elevator-shaft.png" alt="Concrete warehouse with external elevator shaft" /><figcaption><strong>b · Elevator shaft / 电梯井</strong><span>Warehouse + vertical core / 仓库与竖向核心</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>c</span></div><figure><img src="assets/architectural-alphabet/photos/c-open-folded-wall.png" alt="Open L-shaped concrete wall" /><figcaption><strong>c · Open wall / 开放折墙</strong><span>L-shaped enclosure / L 型围合</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>d</span></div><figure><img src="assets/architectural-alphabet/photos/d-factory-vertical-core.png" alt="Factory with vertical concrete core" /><figcaption><strong>d · Vertical core / 核心筒</strong><span>Factory body + core / 厂房主体与核心筒</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>e</span></div><figure><img src="assets/architectural-alphabet/photos/e-cantilever-slab.png" alt="Brutalist concrete cantilever slab" /><figcaption><strong>e · Cantilever / 挑板</strong><span>Horizontal concrete projection / 水平混凝土悬挑</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>f</span></div><figure><img src="assets/architectural-alphabet/photos/f-industrial-canopy.png" alt="Minimal industrial concrete canopy" /><figcaption><strong>f · Canopy / 雨棚</strong><span>Roof without building / 没有下部的屋檐</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>g</span></div><figure><img src="assets/architectural-alphabet/photos/g-underground-ramp-factory.png" alt="Concrete factory with underground ramp" /><figcaption><strong>g · Underground ramp / 地下坡道</strong><span>Factory descending below grade / 厂房向地下延伸</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>h</span></div><figure><img src="assets/architectural-alphabet/photos/h-double-column-colonnade.png" alt="Double-column concrete colonnade" /><figcaption><strong>h · Colonnade / 双柱柱廊</strong><span>Two columns + long roof / 双柱与长屋顶</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>i</span></div><figure><img src="assets/architectural-alphabet/photos/i-concrete-tower.png" alt="Solitary concrete tower in fog" /><figcaption><strong>i · Tower / 塔</strong><span>The quietest structure / 最安静的结构</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>j</span></div><figure><img src="assets/architectural-alphabet/photos/j-bent-signal-tower.png" alt="Bent concrete signal tower" /><figcaption><strong>j · Bent tower / 折塔</strong><span>Signal tower disappearing in fog / 消失于雾中的信号塔</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>k</span></div><figure><img src="assets/architectural-alphabet/photos/k-industrial-fire-stair.png" alt="Industrial fire stair and connecting platform" /><figcaption><strong>k · Fire stair / 消防楼梯</strong><span>Vertical circulation + platform / 垂直交通与平台</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>l</span></div><figure><img src="assets/architectural-alphabet/photos/l-concrete-corner.png" alt="Ninety-degree concrete factory corner" /><figcaption><strong>l · Corner / 转角</strong><span>90-degree concrete wall / 90 度混凝土墙</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>m</span></div><figure><img src="assets/architectural-alphabet/photos/m-three-bay-factory.png" alt="Three-bay concrete factory receding into fog" /><figcaption><strong>m · Three bays / 三跨</strong><span>Repeated factory rhythm / 连续厂房节奏</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>n</span></div><figure><img src="assets/architectural-alphabet/photos/n-two-bay-factory.png" alt="Two-bay concrete factory receding into fog" /><figcaption><strong>n · Two bays / 双跨</strong><span>A shorter structural rhythm / 更短的结构节奏</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>o</span></div><figure><img src="assets/architectural-alphabet/photos/o-square-courtyard.png" alt="Square concrete courtyard and open sky" /><figcaption><strong>o · Courtyard / 天井</strong><span>A square opening to the sky / 通向天空的方形开口</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>p</span></div><figure><img src="assets/architectural-alphabet/photos/p-ramp-warehouse.png" alt="Concrete ramp warehouse" /><figcaption><strong>p · Ramp warehouse / 坡道仓库</strong><span>Freight opening + transport ramp / 货运口与运输坡道</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>q</span></div><figure><img src="assets/architectural-alphabet/photos/q-sunken-courtyard.png" alt="Sunken courtyard with underground driveway" /><figcaption><strong>q · Sunken court / 地下庭院</strong><span>Courtyard + underground route / 庭院与地下车道</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>r</span></div><figure><img src="assets/architectural-alphabet/photos/r-gatehouse.png" alt="Minimal concrete gatehouse" /><figcaption><strong>r · Gatehouse / 门卫室</strong><span>Column + compact canopy / 立柱与紧凑挑檐</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>s</span></div><figure><img src="assets/architectural-alphabet/photos/s-continuous-folded-wall.png" alt="Continuous folded concrete wall" /><figcaption><strong>s · Folded wall / 连续折墙</strong><span>Space drawn by one wall / 一面墙画出的空间</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>t</span></div><figure><img src="assets/architectural-alphabet/photos/t-landmark-tower-crossbeam.png" alt="Concrete landmark tower with crossbeam" /><figcaption><strong>t · Landmark tower / 地标塔</strong><span>The series' vertical marker / 系列中的垂直地标</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>u</span></div><figure><img src="assets/architectural-alphabet/photos/u-three-sided-courtyard.png" alt="Three-sided concrete courtyard" /><figcaption><strong>u · Enclosed court / 围合庭院</strong><span>Three walls + standing water / 三面墙与积水</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>v</span></div><figure><img src="assets/architectural-alphabet/photos/v-concrete-canyon.png" alt="Concrete walls forming a canyon" /><figcaption><strong>v · Concrete canyon / 混凝土峡谷</strong><span>Two walls converge / 两面折墙汇聚</span></figcaption></figure></article>
-          <article class="alphabet-spread alphabet-spread--cover"><div class="alphabet-spread__glyph"><span>w</span></div><figure><img src="assets/architectural-alphabet/photos/w-colonnade-group.png" alt="Four-bay concrete colonnade disappearing into fog" /><figcaption><strong>w · Colonnade group / 四跨柱廊群</strong><span>Series cover / 系列封面</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>x</span></div><figure><img src="assets/architectural-alphabet/photos/x-crossed-structural-joint.png" alt="Crossed steel beams and bolted structural joint" /><figcaption><strong>x · Structural node / 结构节点</strong><span>Crossed steel + bolted plate / 交叉钢梁与螺栓板</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>y</span></div><figure><img src="assets/architectural-alphabet/photos/y-transport-tower-bridge.png" alt="Concrete chimney with elevated transport bridge" /><figcaption><strong>y · Transport tower / 运输塔</strong><span>Chimney + conveyor bridge / 烟囱与运输桥</span></figcaption></figure></article>
-          <article class="alphabet-spread"><div class="alphabet-spread__glyph"><span>z</span></div><figure><img src="assets/architectural-alphabet/photos/z-switchback-ramp-roof.png" alt="Switchback concrete ramp under a roof" /><figcaption><strong>z · Switchback ramp / 折返坡道</strong><span>Continuous circulation + roof / 连续坡道与屋顶</span></figcaption></figure></article>
-        </div>
-      </section>
-
-      <section class="section font-release page-grid" aria-labelledby="font-release-title">
-        <p class="section__index">07 / Font File / 字体文件</p>
-        <div class="section__heading">
-          <h2 id="font-release-title">One shape. Two cases.</h2>
-          <p>同一字形，同时响应大写与小写输入。</p>
-        </div>
-        <div class="section__intro">
-          <p>Panacea Architectural Regular is an installable TrueType font. A-Z and a-z share the same outlines.</p>
-          <p>可安装的 TrueType 字体；大小写字符映射至同一组轮廓。</p>
-        </div>
-        <div class="font-release__specimen" aria-label="Uppercase and lowercase font comparison">
-          <p>panacea</p>
-          <p>PANACEA</p>
-          <p>f,.?</p>
-        </div>
-        <div class="font-release__download">
-          <div><strong>Panacea Architectural Regular 0.4</strong><span>TTF · A-Z · a-z · Space · , . ?</span></div>
-          <a class="button-link" href="assets/font/PanaceaArchitectural-Regular.ttf?v=0.4.0" download="PanaceaArchitectural-Regular.ttf">Download TTF / 下载字体</a>
-        </div>
-        <form class="font-playground" id="font-playground">
-          <div class="font-playground__heading">
-            <label for="font-preview-input">Type specimen / 输入文字</label>
+      <div class="font-overlay" id="font-overlay" aria-hidden="true">
+        <section class="font-modal" role="dialog" aria-modal="true" aria-labelledby="font-modal-title">
+          <button class="font-modal__close" id="font-modal-close" type="button" aria-label="Close font tester">×</button>
+          <div class="font-modal__heading">
+            <label id="font-modal-title" for="font-preview-input">Type specimen / 输入文字</label>
             <span>A-Z · a-z · Space · , . ? · Line break</span>
           </div>
-          <textarea id="font-preview-input" rows="3" wrap="off" spellcheck="false">panacea,
+          <textarea id="font-preview-input" rows="2" wrap="soft" spellcheck="false">panacea,
 form?</textarea>
-          <div class="font-playground__actions">
-            <div class="font-playground__export-buttons">
-              <button class="button-link" id="export-font-png" type="submit">Export transparent PNG / 导出透明 PNG</button>
-              <button class="button-link" id="export-font-svg" type="button">Export SVG / 导出 SVG</button>
-            </div>
-            <output id="font-export-status" for="font-preview-input" aria-live="polite"></output>
+          <div class="font-modal__actions">
+            <button class="font-modal__button" id="export-font-png" type="button">Export transparent PNG / 导出透明 PNG</button>
+            <button class="font-modal__button" id="export-font-svg" type="button">Export SVG / 导出 SVG</button>
+            <a class="font-modal__button" href="assets/font/PanaceaArchitectural-Regular.ttf?v=0.4.0" download="PanaceaArchitectural-Regular.ttf">Download TTF / 下载字体</a>
+            <output class="font-modal__status" id="font-export-status" for="font-preview-input" aria-live="polite"></output>
           </div>
-        </form>
-      </section>
-
-      <footer class="closing page-grid">
-        <p class="closing__version">Panacea Architectural Type System · v0.5.0</p>
-        <blockquote>
-          <strong>Not a Typeface.</strong>
-          <span>A System of Architectural Components.</span>
-          <small>不是一套字体，而是一套建筑构件系统。</small>
-        </blockquote>
-      </footer>
+        </section>
+      </div>
     </main>
-    <script type="module" src="assets/site/js/font-preview.js"></script>
+
+    <script>
+      const entries = [
+        ["a", "Portal / 门洞", "Single portal factory / 单门厂房", "portal", "assets/architectural-alphabet/photos/a-single-portal.png", "Single concrete portal in dense winter fog"],
+        ["b", "Elevator shaft / 电梯井", "Warehouse + vertical core / 仓库与竖向核心", "core", "assets/architectural-alphabet/photos/b-warehouse-elevator-shaft.png", "Concrete warehouse with external elevator shaft"],
+        ["c", "Open wall / 开放折墙", "L-shaped enclosure / L 型围合", "wall", "assets/architectural-alphabet/photos/c-open-folded-wall.png", "Open L-shaped concrete wall"],
+        ["d", "Vertical core / 核心筒", "Factory body + core / 厂房主体与核心筒", "volume", "assets/architectural-alphabet/photos/d-factory-vertical-core.png", "Factory with vertical concrete core"],
+        ["e", "Cantilever / 挑板", "Horizontal concrete projection / 水平混凝土悬挑", "ledge", "assets/architectural-alphabet/photos/e-cantilever-slab.png", "Brutalist concrete cantilever slab"],
+        ["f", "Canopy / 雨棚", "Roof without building / 没有下部的屋檐", "canopy", "assets/architectural-alphabet/photos/f-industrial-canopy.png", "Minimal industrial concrete canopy"],
+        ["g", "Underground ramp / 地下坡道", "Factory descending below grade / 厂房向地下延伸", "ramp", "assets/architectural-alphabet/photos/g-underground-ramp-factory.png", "Concrete factory with underground ramp"],
+        ["h", "Colonnade / 双柱柱廊", "Two columns + long roof / 双柱与长屋顶", "colonnade", "assets/architectural-alphabet/photos/h-double-column-colonnade.png", "Double-column concrete colonnade"],
+        ["i", "Tower / 塔", "The quietest structure / 最安静的结构", "tower", "assets/architectural-alphabet/photos/i-concrete-tower.png", "Solitary concrete tower in fog"],
+        ["j", "Bent tower / 折塔", "Signal tower disappearing in fog / 消失于雾中的信号塔", "mast", "assets/architectural-alphabet/photos/j-bent-signal-tower.png", "Bent concrete signal tower"],
+        ["k", "Fire stair / 消防楼梯", "Vertical circulation + platform / 垂直交通与平台", "stair", "assets/architectural-alphabet/photos/k-industrial-fire-stair.png", "Industrial fire stair and connecting platform"],
+        ["l", "Corner / 转角", "90-degree concrete wall / 90 度混凝土墙", "corner", "assets/architectural-alphabet/photos/l-concrete-corner.png", "Ninety-degree concrete factory corner"],
+        ["m", "Three bays / 三跨", "Repeated factory rhythm / 连续厂房节奏", "triple bay", "assets/architectural-alphabet/photos/m-three-bay-factory.png", "Three-bay concrete factory receding into fog"],
+        ["n", "Two bays / 双跨", "A shorter structural rhythm / 更短的结构节奏", "double bay", "assets/architectural-alphabet/photos/n-two-bay-factory.png", "Two-bay concrete factory receding into fog"],
+        ["o", "Courtyard / 天井", "A square opening to the sky / 通向天空的方形开口", "courtyard", "assets/architectural-alphabet/photos/o-square-courtyard.png", "Square concrete courtyard and open sky"],
+        ["p", "Ramp warehouse / 坡道仓库", "Freight opening + transport ramp / 货运口与运输坡道", "platform", "assets/architectural-alphabet/photos/p-ramp-warehouse.png", "Concrete ramp warehouse"],
+        ["q", "Sunken court / 地下庭院", "Courtyard + underground route / 庭院与地下车道", "sunken", "assets/architectural-alphabet/photos/q-sunken-courtyard.png", "Sunken courtyard with underground driveway"],
+        ["r", "Gatehouse / 门卫室", "Column + compact canopy / 立柱与紧凑挑檐", "pavilion", "assets/architectural-alphabet/photos/r-gatehouse.png", "Minimal concrete gatehouse"],
+        ["s", "Folded wall / 连续折墙", "Space drawn by one wall / 一面墙画出的空间", "fold", "assets/architectural-alphabet/photos/s-continuous-folded-wall.png", "Continuous folded concrete wall"],
+        ["t", "Landmark tower / 地标塔", "The series' vertical marker / 系列中的垂直地标", "beacon", "assets/architectural-alphabet/photos/t-landmark-tower-crossbeam.png", "Concrete landmark tower with crossbeam"],
+        ["u", "Enclosed court / 围合庭院", "Three walls + standing water / 三面墙与积水", "courtyard", "assets/architectural-alphabet/photos/u-three-sided-courtyard.png", "Three-sided concrete courtyard"],
+        ["v", "Concrete canyon / 混凝土峡谷", "Two walls converge / 两面折墙汇聚", "valley", "assets/architectural-alphabet/photos/v-concrete-canyon.png", "Concrete walls forming a canyon"],
+        ["w", "Colonnade group / 四跨柱廊群", "Series cover / 系列封面", "colonnade", "assets/architectural-alphabet/photos/w-colonnade-group.png", "Four-bay concrete colonnade disappearing into fog"],
+        ["x", "Structural node / 结构节点", "Crossed steel + bolted plate / 交叉钢梁与螺栓板", "node", "assets/architectural-alphabet/photos/x-crossed-structural-joint.png", "Crossed steel beams and bolted structural joint"],
+        ["y", "Transport tower / 运输塔", "Chimney + conveyor bridge / 烟囱与运输桥", "yardarm", "assets/architectural-alphabet/photos/y-transport-tower-bridge.png", "Concrete chimney with elevated transport bridge"],
+        ["z", "Switchback ramp / 折返坡道", "Continuous circulation + roof / 连续坡道与屋顶", "zigzag", "assets/architectural-alphabet/photos/z-switchback-ramp-roof.png", "Switchback concrete ramp under a roof"]
+      ];
+
+      const lattice = document.querySelector("#alphabet-lattice");
+      const detail = {
+        glyph: document.querySelector("#detail-glyph"),
+        image: document.querySelector("#detail-image"),
+        title: document.querySelector("#detail-title"),
+        caption: document.querySelector("#detail-caption"),
+        section: document.querySelector("#alphabet-detail"),
+        overlay: document.querySelector("#alphabet-overlay")
+      };
+      const fontModal = {
+        overlay: document.querySelector("#font-overlay"),
+        close: document.querySelector("#font-modal-close"),
+        input: document.querySelector("#font-preview-input"),
+        exportPng: document.querySelector("#export-font-png"),
+        exportSvg: document.querySelector("#export-font-svg"),
+        status: document.querySelector("#font-export-status")
+      };
+      const FONT_FAMILY = "Panacea Architectural";
+      const FONT_URL = "assets/font/PanaceaArchitectural-Regular.ttf?v=0.4.0";
+      const FONT_SIZE = 240;
+      const LINE_HEIGHT = 300;
+      const EXPORT_PADDING = 80;
+      const EXPORT_SCALE = 2;
+      let fontDataUriPromise;
+
+      function renderTile(entry) {
+        const [glyph, archetype, caption, keyword, image, alt] = entry;
+        const tile = document.createElement("button");
+        tile.className = "tile";
+        tile.type = "button";
+        tile.dataset.glyph = glyph;
+        tile.setAttribute("aria-label", `${glyph} ${archetype} ${caption}`);
+        tile.innerHTML = `
+          <span class="tile__glyph">
+            <span class="tile__glyph-char">${glyph}</span>
+          </span>
+          <span class="tile__image"><img src="${image}" alt="${alt}" loading="lazy"></span>
+        `;
+        tile.addEventListener("click", () => selectEntry(entry, true));
+        return tile;
+      }
+
+      function renderFooter() {
+        const footer = document.createElement("button");
+        footer.className = "lattice-footer";
+        footer.type = "button";
+        footer.setAttribute("aria-label", "Open Panacea font tester");
+        footer.innerHTML = `
+          <div class="lattice-footer__identity">
+            <div class="lattice-footer__logo">
+              <img src="assets/logo/current/panacea-master-solid-current.png" alt="panacea" loading="lazy">
+            </div>
+            <p class="lattice-footer__subtitle">Architectural Alphabet</p>
+          </div>
+        `;
+        footer.addEventListener("click", openFontModal);
+        return footer;
+      }
+
+      function selectEntry(entry, shouldScroll) {
+        const [glyph, archetype, caption, , image, alt] = entry;
+        detail.glyph.textContent = glyph;
+        detail.image.src = image;
+        detail.image.alt = alt;
+        detail.title.textContent = `${glyph} · ${archetype}`;
+        detail.caption.textContent = caption;
+        history.replaceState(null, "", `#alphabet-${glyph}`);
+        if (shouldScroll) {
+          openOverlay();
+        }
+      }
+
+      function openOverlay() {
+        detail.overlay.classList.add("is-open");
+        detail.overlay.setAttribute("aria-hidden", "false");
+      }
+
+      function closeOverlay() {
+        detail.overlay.classList.remove("is-open");
+        detail.overlay.setAttribute("aria-hidden", "true");
+      }
+
+      function openFontModal() {
+        fontModal.overlay.classList.add("is-open");
+        fontModal.overlay.setAttribute("aria-hidden", "false");
+        requestAnimationFrame(() => fontModal.input.focus());
+      }
+
+      function closeFontModal() {
+        fontModal.overlay.classList.remove("is-open");
+        fontModal.overlay.setAttribute("aria-hidden", "true");
+      }
+
+      function updateFontButtons() {
+        const isEmpty = fontModal.input.value.length === 0;
+        fontModal.exportPng.disabled = isEmpty;
+        fontModal.exportSvg.disabled = isEmpty;
+        if (!isEmpty) fontModal.status.textContent = "";
+      }
+
+      function safeFilename(text, extension) {
+        const compact = text
+          .trim()
+          .replace(/\s+/g, "-")
+          .replace(/[^a-zA-Z-]/g, "")
+          .slice(0, 40);
+        return compact ? `panacea-${compact}.${extension}` : `panacea-type.${extension}`;
+      }
+
+      async function getExportMetrics(text) {
+        await document.fonts.load(`${FONT_SIZE}px "${FONT_FAMILY}"`);
+        const lines = text.split("\n");
+        const canvas = document.createElement("canvas");
+        const context = canvas.getContext("2d");
+        context.font = `${FONT_SIZE}px "${FONT_FAMILY}"`;
+        const maxLineWidth = Math.max(...lines.map((line) => context.measureText(line || " ").width));
+        const textHeight = FONT_SIZE * 1.11 + Math.max(0, lines.length - 1) * LINE_HEIGHT;
+        const logicalWidth = Math.ceil(maxLineWidth + EXPORT_PADDING * 2);
+        const logicalHeight = Math.ceil(textHeight + EXPORT_PADDING * 2);
+        const firstBaseline = EXPORT_PADDING + FONT_SIZE * 0.85;
+        return { lines, logicalWidth, logicalHeight, firstBaseline };
+      }
+
+      function setExportDisabled(isDisabled) {
+        fontModal.exportPng.disabled = isDisabled;
+        fontModal.exportSvg.disabled = isDisabled;
+      }
+
+      function downloadBlob(blob, filename) {
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = filename;
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function escapeXml(text) {
+        return text
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
+      }
+
+      function arrayBufferToBase64(buffer) {
+        const bytes = new Uint8Array(buffer);
+        let binary = "";
+        bytes.forEach((byte) => {
+          binary += String.fromCharCode(byte);
+        });
+        return btoa(binary);
+      }
+
+      async function getFontDataUri() {
+        if (!fontDataUriPromise) {
+          fontDataUriPromise = fetch(FONT_URL)
+            .then((response) => {
+              if (!response.ok) throw new Error("Font download failed");
+              return response.arrayBuffer();
+            })
+            .then((buffer) => `data:font/ttf;base64,${arrayBufferToBase64(buffer)}`);
+        }
+        return fontDataUriPromise;
+      }
+
+      async function exportFontPng() {
+        const text = fontModal.input.value;
+        if (!text) return;
+        setExportDisabled(true);
+        fontModal.status.textContent = "Rendering / 正在生成";
+        const { lines, logicalWidth, logicalHeight, firstBaseline } = await getExportMetrics(text);
+        const canvas = document.createElement("canvas");
+        canvas.width = logicalWidth * EXPORT_SCALE;
+        canvas.height = logicalHeight * EXPORT_SCALE;
+        const context = canvas.getContext("2d");
+        context.scale(EXPORT_SCALE, EXPORT_SCALE);
+        context.clearRect(0, 0, logicalWidth, logicalHeight);
+        context.fillStyle = "#000000";
+        context.font = `${FONT_SIZE}px "${FONT_FAMILY}"`;
+        context.textBaseline = "alphabetic";
+        lines.forEach((line, index) => {
+          context.fillText(line, EXPORT_PADDING, firstBaseline + index * LINE_HEIGHT);
+        });
+        const blob = await new Promise((resolve) => canvas.toBlob(resolve, "image/png"));
+        if (!blob) throw new Error("PNG export failed");
+        downloadBlob(blob, safeFilename(text, "png"));
+        fontModal.status.textContent = `${canvas.width} × ${canvas.height}px · Transparent / 透明背景`;
+        setExportDisabled(false);
+      }
+
+      async function exportFontSvg() {
+        const text = fontModal.input.value;
+        if (!text) return;
+        setExportDisabled(true);
+        fontModal.status.textContent = "Rendering SVG / 正在生成 SVG";
+        const [{ lines, logicalWidth, logicalHeight, firstBaseline }, fontDataUri] = await Promise.all([
+          getExportMetrics(text),
+          getFontDataUri()
+        ]);
+        const tspans = lines
+          .map((line, index) => {
+            const y = firstBaseline + index * LINE_HEIGHT;
+            const value = line.length > 0 ? escapeXml(line) : "&#160;";
+            return `<tspan x="${EXPORT_PADDING}" y="${y}" xml:space="preserve">${value}</tspan>`;
+          })
+          .join("\n    ");
+        const svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="${logicalWidth}" height="${logicalHeight}" viewBox="0 0 ${logicalWidth} ${logicalHeight}">
+  <defs>
+    <style>
+      @font-face {
+        font-family: "${FONT_FAMILY}";
+        src: url("${fontDataUri}") format("truetype");
+      }
+    </style>
+  </defs>
+  <text fill="#000000" font-family="${FONT_FAMILY}" font-size="${FONT_SIZE}" dominant-baseline="alphabetic">
+    ${tspans}
+  </text>
+</svg>
+`;
+        downloadBlob(new Blob([svg], { type: "image/svg+xml;charset=utf-8" }), safeFilename(text, "svg"));
+        fontModal.status.textContent = `${logicalWidth} × ${logicalHeight}px · SVG / 矢量文件`;
+        setExportDisabled(false);
+      }
+
+      detail.section.addEventListener("click", closeOverlay);
+      fontModal.close.addEventListener("click", closeFontModal);
+      fontModal.input.addEventListener("input", updateFontButtons);
+      fontModal.exportPng.addEventListener("click", async () => {
+        try {
+          await exportFontPng();
+        } catch (error) {
+          fontModal.status.textContent = "Export failed / 导出失败";
+          setExportDisabled(false);
+          console.error(error);
+        }
+      });
+      fontModal.exportSvg.addEventListener("click", async () => {
+        try {
+          await exportFontSvg();
+        } catch (error) {
+          fontModal.status.textContent = "SVG export failed / SVG 导出失败";
+          setExportDisabled(false);
+          console.error(error);
+        }
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeOverlay();
+          closeFontModal();
+        }
+      });
+
+      entries.forEach((entry) => lattice.appendChild(renderTile(entry)));
+      lattice.appendChild(renderFooter());
+      const spacer = document.createElement("div");
+      spacer.className = "lattice-spacer";
+      lattice.appendChild(spacer);
+
+      const hashGlyph = location.hash.replace("#alphabet-", "");
+      const initialEntry = entries.find(([glyph]) => glyph === hashGlyph) || entries[0];
+      selectEntry(initialEntry, false);
+      updateFontButtons();
+    </script>
   </body>
 </html>

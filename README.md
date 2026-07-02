@@ -17,7 +17,7 @@ This is not a logo exploration folder. It is a maintainable system for vehicles,
 | Entry / 入口 | Purpose / 内容 |
 | --- | --- |
 | [`index.html`](index.html) | Project landing page / 项目入口页 |
-| [`panacea.html`](panacea.html) | Architectural type system, live font specimen, and the complete Architectural Alphabet / 建筑字体系统、在线字样测试与完整建筑字母志 |
+| [`panacea.html`](panacea.html) | Interactive Architectural Alphabet lattice with click-to-open specimens and font export tools / 可交互建筑字母格栅、点击展开样本与字体导出工具 |
 | [`3d-preview.html`](3d-preview.html) | Tesla Model 3 PNG decal placement study / Tesla Model 3 PNG 贴纸三维位置研究 |
 | [`assets/architectural-alphabet/`](assets/architectural-alphabet/) | 26 architectural archetype photographs and mapping / 26 张建筑原型摄影及对应关系 |
 | [`assets/font/PanaceaArchitectural-Regular.ttf`](assets/font/PanaceaArchitectural-Regular.ttf) | Installable Panacea Architectural Regular font / 可安装字体 |
@@ -53,9 +53,9 @@ The 3D preview loads Three.js modules from `unpkg.com`, so it requires an intern
 
 ### 1. Architectural Alphabet / 建筑字母志
 
-**PANACEA — Architectural Alphabet** maps every glyph in Panacea Architectural Regular to an architectural archetype. The website presents 26 continuous spreads: the font glyph on a construction grid at left, and its architectural photograph at right.
+**PANACEA — Architectural Alphabet** maps every glyph in Panacea Architectural Regular to an architectural archetype. The website now presents the 26-part alphabet as a restrained interactive lattice: hover illuminates each unit, clicking a glyph opens the large glyph/photo specimen, and the final panacea mark opens the font tester and export tools.
 
-**PANACEA — Architectural Alphabet** 将字体中的每个字母对应到一种建筑原型。网页以 26 组连续双页呈现：左页是网格中的字体字形，右页是对应建筑摄影。
+**PANACEA — Architectural Alphabet** 将字体中的每个字母对应到一种建筑原型。网页现在以克制的交互格栅呈现 26 组字母：悬停时单元亮起，点击字母展开大幅字形与建筑照片样本，最后的 panacea 标记可打开字体试用与导出工具。
 
 Series constants / 系列统一规则：
 
@@ -134,7 +134,7 @@ These are contextual layers of one identity, not competing logos.
 
 ```text
 index.html                         Project entry / 项目入口
-panacea.html                       Type system + Architectural Alphabet
+panacea.html                       Interactive Architectural Alphabet lattice + font tools
 3d-preview.html                    Model 3 decal preview / 三维贴纸预览
 assets/
   architectural-alphabet/
