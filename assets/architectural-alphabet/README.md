@@ -44,7 +44,7 @@ This series maps every glyph in Panacea Architectural Regular to an architectura
 | u | Three-sided courtyard | 三面围合庭院 |
 | v | Concrete canyon | 混凝土峡谷 |
 | w | Four-bay colonnade group | 四跨柱廊群 |
-| x | Crossed structural joint | 交叉结构节点 |
+| x | Concrete structural crossing | 混凝土结构交会 |
 | y | Transport tower and bridge | 运输塔与运输桥 |
 | z | Switchback ramp and roof | 折返坡道与屋顶 |
 
