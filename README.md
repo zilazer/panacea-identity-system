@@ -32,57 +32,21 @@ Direct pages / 页面直达：
 - Architectural Type System + Alphabet / 建筑字体系统与建筑字母志：<https://zilazer.github.io/panacea-identity-system/panacea.html>
 - Model 3 3D Preview / Model 3 三维预览：<https://zilazer.github.io/panacea-identity-system/3d-preview.html>
 
-To view the project locally:
 
-如需本地查看，请在项目根目录启动静态服务器：
-
-```bash
-python3 -m http.server 8765
-```
-
-Then open / 然后打开：
-
-- `http://127.0.0.1:8765/`
-- `http://127.0.0.1:8765/panacea.html`
-- `http://127.0.0.1:8765/3d-preview.html`
-- `http://127.0.0.1:8765/panacea-sticker.html`
-
-The 3D preview loads Three.js modules from `unpkg.com`, so it requires an internet connection even though the vehicle model is stored locally.
-
-三维预览的车辆模型保存在本地，但 Three.js 模块从 `unpkg.com` 加载，因此使用时仍需联网。
 
 ## Three Active Programs / 三个当前项目
 
 ### 1. Architectural Alphabet / 建筑字母志
 
-**PANACEA — Architectural Alphabet** maps every glyph in Panacea Architectural Regular to an architectural archetype. The website now presents the 26-part alphabet as a restrained interactive lattice: hover illuminates each unit, clicking a glyph opens the large glyph/photo specimen, and the final panacea mark opens the font tester and export tools.
+**PANACEA — Architectural Alphabet** maps every glyph in Panacea Architectural Regular to an architectural archetype. 
 
-**PANACEA — Architectural Alphabet** 将字体中的每个字母对应到一种建筑原型。网页现在以克制的交互格栅呈现 26 组字母：悬停时单元亮起，点击字母展开大幅字形与建筑照片样本，最后的 panacea 标记可打开字体试用与导出工具。
+**PANACEA — Architectural Alphabet** 将字体中的每个字母对应到一种建筑原型。
 
-Series constants / 系列统一规则：
-
-- winter, 10:00 AM / 冬季上午 10 点
-- dense fog, no people / 大雾、无人
-- concrete industrial architecture / 混凝土工业建筑
-- wet ground and cool neutral gray / 湿地面与冷灰色调
-- telephoto compression and systematic composition / 长焦压缩与类型学构图
-- no logos, vehicles, signage, text, or plant subject / 无 Logo、车辆、标识、文字或植物主体
 
 ![Three concrete industrial towers for the glyph w](assets/architectural-alphabet/photos/w-colonnade-group.png)
 
 Full mapping / 完整映射：[Architectural Alphabet README](assets/architectural-alphabet/README.md)
 
-Recent photograph replacements / 最近摄影替换：
-
-| Glyph | Updated photograph description | 中文说明 |
-| --- | --- | --- |
-| a | Concrete portal gate with a smaller guard block and distant industrial frames | 混凝土门洞、左侧小型门卫体量与远处工业构架 |
-| b | Pair of industrial towers connected by diagonal enclosed conveyor bridges | 两座工业塔楼与两条斜向封闭运输廊桥 |
-| j | Solitary observation tower with a cantilevered top room and sloped base brace | 孤立观察塔、顶部悬挑房间与底部斜撑 |
-| k | Service tower with twin vertical cores, roof deck, and cantilevered lookout room | 双竖向核心服务塔、屋顶平台与悬挑观察室 |
-| t | Tall landmark tower with a horizontal viewing platform projecting from the top | 高耸地标塔与顶部横向观景平台 |
-| w | Three monumental concrete towers rising from a low industrial block | 低矮工业体量上升起的三座混凝土高塔 |
-| x | Concrete structural crossing with vertical tower, horizontal bridge, ladder, and wet forecourt | 竖向混凝土塔、横向连桥、爬梯与湿润前场构成的结构交会 |
 
 ### 2. Architectural Type System / 建筑字体系统
 
