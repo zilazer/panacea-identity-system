@@ -19,6 +19,7 @@ This is not a logo exploration folder. It is a maintainable system for vehicles,
 | [`index.html`](index.html) | Project landing page / 项目入口页 |
 | [`panacea.html`](panacea.html) | Interactive Architectural Alphabet lattice with click-to-open specimens and font export tools / 可交互建筑字母格栅、点击展开样本与字体导出工具 |
 | [`3d-preview.html`](3d-preview.html) | Tesla Model 3 PNG decal placement study / Tesla Model 3 PNG 贴纸三维位置研究 |
+| [`panacea-sticker.html`](panacea-sticker.html) | Panacea font sticker generator with outline controls and transparent PNG export / Panacea 字体贴纸生成器，支持描边控制与透明 PNG 输出 |
 | [`assets/architectural-alphabet/`](assets/architectural-alphabet/) | 26 architectural archetype photographs and mapping / 26 张建筑原型摄影及对应关系 |
 | [`assets/font/PanaceaArchitectural-Regular.ttf`](assets/font/PanaceaArchitectural-Regular.ttf) | Installable Panacea Architectural Regular font / 可安装字体 |
 
@@ -44,6 +45,7 @@ Then open / 然后打开：
 - `http://127.0.0.1:8765/`
 - `http://127.0.0.1:8765/panacea.html`
 - `http://127.0.0.1:8765/3d-preview.html`
+- `http://127.0.0.1:8765/panacea-sticker.html`
 
 The 3D preview loads Three.js modules from `unpkg.com`, so it requires an internet connection even though the vehicle model is stored locally.
 
@@ -136,6 +138,7 @@ These are contextual layers of one identity, not competing logos.
 index.html                         Project entry / 项目入口
 panacea.html                       Interactive Architectural Alphabet lattice + font tools
 3d-preview.html                    Model 3 decal preview / 三维贴纸预览
+panacea-sticker.html               Panacea outlined sticker PNG generator / Panacea 描边贴纸 PNG 生成器
 assets/
   architectural-alphabet/
     photos/                        26 architectural photographs / 26 张建筑摄影

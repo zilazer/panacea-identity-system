@@ -1,0 +1,683 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Panacea architectural font sticker generator with outline controls and transparent PNG export."
+    />
+    <link rel="icon" href="assets/logo/current/panacea-icon-a-current.svg" type="image/svg+xml" />
+    <title>panacea.sticker.generator</title>
+    <style>
+      @font-face {
+        font-family: "Panacea Architectural";
+        src: url("assets/font/PanaceaArchitectural-Regular.ttf?v=0.4.0") format("truetype");
+        font-style: normal;
+        font-weight: 400;
+        font-display: block;
+      }
+
+      :root {
+        --paper: #f5f5f2;
+        --ink: #111111;
+        --muted: #777777;
+        --line: #111111;
+        --soft-line: rgba(17, 17, 17, 0.22);
+        --field: #ffffff;
+        --error: #9b1c1c;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        min-height: 100%;
+        background: var(--paper);
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        color: var(--ink);
+        background: var(--paper);
+        font-family: Inter, "IBM Plex Sans", Arial, Helvetica, "PingFang SC", "Hiragino Sans GB", sans-serif;
+        font-size: 15px;
+        line-height: 1.35;
+      }
+
+      button,
+      input,
+      textarea {
+        font: inherit;
+      }
+
+      button {
+        cursor: pointer;
+      }
+
+      .page {
+        min-height: 100vh;
+        padding: clamp(18px, 3.8vw, 56px);
+      }
+
+      .tool {
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        gap: 24px;
+        width: min(1880px, 100%);
+        min-height: calc(100vh - clamp(18px, 3.8vw, 56px) * 2);
+        margin: 0 auto;
+        padding: clamp(18px, 2.6vw, 48px);
+        border: 1px solid var(--line);
+        background: var(--paper);
+      }
+
+      .tool__header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 24px;
+      }
+
+      h1 {
+        margin: 0;
+        max-width: 880px;
+        font-size: clamp(19px, 2.4vw, 38px);
+        line-height: 1;
+        font-weight: 700;
+        letter-spacing: 0;
+      }
+
+      .tool__meta {
+        margin: 10px 0 0;
+        color: var(--muted);
+      }
+
+      .tool__support {
+        margin: 0;
+        color: var(--muted);
+        text-align: right;
+        white-space: nowrap;
+      }
+
+      .workspace {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(304px, 360px);
+        gap: 24px;
+        min-height: 0;
+      }
+
+      .stage,
+      .controls {
+        min-width: 0;
+      }
+
+      .stage {
+        display: grid;
+        grid-template-rows: minmax(320px, 1fr) auto;
+        gap: 18px;
+        min-height: 0;
+      }
+
+      .preview {
+        display: grid;
+        place-items: center;
+        min-height: 0;
+        padding: clamp(18px, 2.2vw, 40px);
+        overflow: auto;
+        border: 1px solid var(--line);
+        background: var(--field);
+      }
+
+      .preview.is-checker {
+        background-color: #ffffff;
+        background-image:
+          linear-gradient(45deg, rgba(17, 17, 17, 0.14) 25%, transparent 25%),
+          linear-gradient(-45deg, rgba(17, 17, 17, 0.14) 25%, transparent 25%),
+          linear-gradient(45deg, transparent 75%, rgba(17, 17, 17, 0.14) 75%),
+          linear-gradient(-45deg, transparent 75%, rgba(17, 17, 17, 0.14) 75%);
+        background-size: 28px 28px;
+        background-position: 0 0, 0 14px, 14px -14px, -14px 0;
+      }
+
+      .preview.is-white {
+        background: #ffffff;
+      }
+
+      .preview.is-black {
+        background: #050505;
+      }
+
+      canvas {
+        display: block;
+        max-width: 100%;
+        height: auto;
+      }
+
+      .input-wrap {
+        display: grid;
+        gap: 12px;
+      }
+
+      .input-wrap label,
+      .section-title {
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      textarea {
+        width: 100%;
+        min-height: 98px;
+        resize: vertical;
+        padding: clamp(20px, 2.2vw, 36px);
+        border: 1px solid var(--line);
+        border-radius: 0;
+        outline: none;
+        background: transparent;
+        color: var(--ink);
+        font-family: "Panacea Architectural", sans-serif;
+        font-size: clamp(58px, 8vw, 132px);
+        line-height: 1.12;
+        white-space: pre-wrap;
+        overflow-wrap: break-word;
+      }
+
+      textarea:focus,
+      input:focus,
+      button:focus-visible {
+        outline: 1px solid var(--ink);
+        outline-offset: 2px;
+      }
+
+      .controls {
+        display: grid;
+        align-content: start;
+        gap: 22px;
+        padding: 24px;
+        border: 1px solid var(--line);
+      }
+
+      .control {
+        display: grid;
+        gap: 10px;
+        padding-bottom: 18px;
+        border-bottom: 1px solid var(--soft-line);
+      }
+
+      .control:last-child {
+        padding-bottom: 0;
+        border-bottom: 0;
+      }
+
+      .label-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+        color: var(--muted);
+      }
+
+      .value {
+        color: var(--ink);
+        font-variant-numeric: tabular-nums;
+      }
+
+      .color-line {
+        display: grid;
+        grid-template-columns: 52px minmax(0, 1fr);
+        gap: 10px;
+        align-items: center;
+      }
+
+      input[type="color"] {
+        width: 52px;
+        height: 42px;
+        padding: 3px;
+        border: 1px solid var(--line);
+        background: var(--paper);
+      }
+
+      input[type="text"] {
+        min-width: 0;
+        min-height: 42px;
+        padding: 0 12px;
+        border: 1px solid var(--line);
+        background: transparent;
+        color: var(--ink);
+      }
+
+      input[type="range"] {
+        width: 100%;
+        accent-color: var(--ink);
+      }
+
+      .segmented {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        border: 1px solid var(--line);
+      }
+
+      .segmented button {
+        min-height: 42px;
+        padding: 0 10px;
+        border: 0;
+        border-right: 1px solid var(--line);
+        background: transparent;
+        color: var(--muted);
+      }
+
+      .segmented button:last-child {
+        border-right: 0;
+      }
+
+      .segmented button.is-active,
+      .segmented button:hover {
+        background: var(--ink);
+        color: var(--paper);
+      }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 14px;
+      }
+
+      .primary,
+      .secondary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 56px;
+        padding: 0 28px;
+        border: 1px solid var(--line);
+        border-radius: 0;
+      }
+
+      .primary {
+        background: var(--ink);
+        color: var(--paper);
+      }
+
+      .secondary {
+        background: transparent;
+        color: var(--ink);
+      }
+
+      .primary:disabled,
+      .secondary:disabled {
+        cursor: not-allowed;
+        opacity: 0.42;
+      }
+
+      .status {
+        min-height: 24px;
+        color: var(--muted);
+      }
+
+      .status.is-error {
+        color: var(--error);
+      }
+
+      @media (max-width: 1080px) {
+        .tool {
+          min-height: auto;
+        }
+
+        .tool__header {
+          display: grid;
+        }
+
+        .tool__support {
+          text-align: left;
+          white-space: normal;
+        }
+
+        .workspace {
+          grid-template-columns: 1fr;
+        }
+
+        .stage {
+          grid-template-rows: auto auto;
+        }
+
+        .preview {
+          min-height: 300px;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .page {
+          padding: 16px;
+        }
+
+        .tool {
+          padding: 20px;
+        }
+
+        .preview {
+          min-height: 240px;
+          padding: 16px;
+        }
+
+        textarea {
+          min-height: 86px;
+          font-size: 58px;
+        }
+
+        .controls {
+          padding: 18px;
+        }
+
+        .actions {
+          display: grid;
+        }
+
+        .primary,
+        .secondary {
+          width: 100%;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <section class="tool" aria-labelledby="page-title">
+        <header class="tool__header">
+          <div>
+            <h1 id="page-title">Panacea sticker generator / 字体贴纸生成</h1>
+            <p class="tool__meta">Transparent PNG output / 透明 PNG 输出</p>
+          </div>
+          <p class="tool__support">A-Z · a-z · Space · , . ? · Line break</p>
+        </header>
+
+        <div class="workspace">
+          <section class="stage" aria-label="Type preview / 字体预览">
+            <div class="preview is-black" id="preview">
+              <canvas id="previewCanvas" width="1" height="1" aria-label="Outlined sticker preview / 描边贴纸预览"></canvas>
+            </div>
+
+            <div class="input-wrap">
+              <label for="textInput">Type specimen / 输入文字</label>
+              <textarea id="textInput" rows="2" wrap="soft" spellcheck="false">panacea</textarea>
+            </div>
+          </section>
+
+          <aside class="controls" aria-label="Sticker controls / 贴纸控制">
+            <section class="control">
+              <div class="label-row">
+                <label for="strokeColor">Outline color / 描边颜色</label>
+                <span class="value" id="strokeColorValue">#FFFFFF</span>
+              </div>
+              <div class="color-line">
+                <input id="strokeColor" type="color" value="#ffffff" />
+                <input id="strokeColorText" type="text" value="#ffffff" spellcheck="false" />
+              </div>
+            </section>
+
+            <section class="control">
+              <div class="label-row">
+                <label for="strokeWidth">Outline width / 描边粗细</label>
+                <span class="value"><span id="strokeWidthValue">14</span> px</span>
+              </div>
+              <input id="strokeWidth" type="range" min="0" max="96" step="1" value="14" />
+            </section>
+
+            <section class="control">
+              <div class="label-row">
+                <label for="canvasPadding">Canvas padding / 画布留白</label>
+                <span class="value"><span id="canvasPaddingValue">0</span> px</span>
+              </div>
+              <input id="canvasPadding" type="range" min="0" max="240" step="1" value="0" />
+            </section>
+
+            <section class="control">
+              <p class="section-title">Preview background / 预览背景</p>
+              <div class="segmented" id="backgroundButtons">
+                <button type="button" data-bg="checker">Grid / 透明格</button>
+                <button type="button" data-bg="white">White / 白底</button>
+                <button class="is-active" type="button" data-bg="black">Black / 黑底</button>
+              </div>
+            </section>
+          </aside>
+        </div>
+
+        <footer class="actions">
+          <button class="primary" id="downloadButton" type="button">Generate sticker PNG / 生成贴纸 PNG</button>
+          <button class="secondary" id="transparentButton" type="button">Export transparent PNG / 导出透明 PNG</button>
+          <output class="status" id="status" for="textInput strokeColor strokeWidth canvasPadding" aria-live="polite"></output>
+        </footer>
+      </section>
+    </main>
+
+    <script>
+      const FONT_FAMILY = "Panacea Architectural";
+      const FONT_SIZE = 240;
+      const LINE_HEIGHT = 300;
+      const PREVIEW_SCALE = 1;
+      const EXPORT_SCALE = 2;
+      const DEFAULT_PADDING = 0;
+
+      const state = {
+        renderTimer: 0,
+        renderToken: 0
+      };
+
+      const els = {
+        preview: document.querySelector("#preview"),
+        canvas: document.querySelector("#previewCanvas"),
+        input: document.querySelector("#textInput"),
+        strokeColor: document.querySelector("#strokeColor"),
+        strokeColorText: document.querySelector("#strokeColorText"),
+        strokeColorValue: document.querySelector("#strokeColorValue"),
+        strokeWidth: document.querySelector("#strokeWidth"),
+        strokeWidthValue: document.querySelector("#strokeWidthValue"),
+        canvasPadding: document.querySelector("#canvasPadding"),
+        canvasPaddingValue: document.querySelector("#canvasPaddingValue"),
+        backgroundButtons: document.querySelector("#backgroundButtons"),
+        downloadButton: document.querySelector("#downloadButton"),
+        transparentButton: document.querySelector("#transparentButton"),
+        status: document.querySelector("#status")
+      };
+
+      function normalizeHex(value) {
+        const raw = value.trim().replace(/^#/, "");
+        if (/^[0-9a-fA-F]{3}$/.test(raw)) {
+          return `#${raw.split("").map((char) => char + char).join("").toLowerCase()}`;
+        }
+        if (/^[0-9a-fA-F]{6}$/.test(raw)) {
+          return `#${raw.toLowerCase()}`;
+        }
+        return null;
+      }
+
+      function setStatus(message, isError = false) {
+        els.status.textContent = message;
+        els.status.classList.toggle("is-error", isError);
+      }
+
+      function updateLabels() {
+        const color = normalizeHex(els.strokeColor.value) || "#ffffff";
+        els.strokeColorValue.textContent = color.toUpperCase();
+        els.strokeColorText.value = color;
+        els.strokeWidthValue.textContent = els.strokeWidth.value;
+        els.canvasPaddingValue.textContent = els.canvasPadding.value;
+      }
+
+      function getSettings() {
+        return {
+          color: normalizeHex(els.strokeColor.value) || "#ffffff",
+          strokeWidth: Number(els.strokeWidth.value),
+          padding: Number(els.canvasPadding.value)
+        };
+      }
+
+      function safeFilename(text, suffix) {
+        const compact = text
+          .trim()
+          .replace(/\s+/g, "-")
+          .replace(/[^a-zA-Z-]/g, "")
+          .slice(0, 40);
+        return compact ? `panacea-${compact}-${suffix}.png` : `panacea-${suffix}.png`;
+      }
+
+      async function getMetrics(text, padding) {
+        await document.fonts.load(`${FONT_SIZE}px "${FONT_FAMILY}"`);
+        const lines = text.split("\n");
+        const measureCanvas = document.createElement("canvas");
+        const measureContext = measureCanvas.getContext("2d");
+        measureContext.font = `${FONT_SIZE}px "${FONT_FAMILY}"`;
+        const maxLineWidth = Math.max(...lines.map((line) => measureContext.measureText(line || " ").width));
+        const textHeight = FONT_SIZE * 1.11 + Math.max(0, lines.length - 1) * LINE_HEIGHT;
+        const logicalWidth = Math.ceil(maxLineWidth + padding * 2);
+        const logicalHeight = Math.ceil(textHeight + padding * 2);
+        const firstBaseline = padding + FONT_SIZE * 0.85;
+        return { lines, logicalWidth, logicalHeight, firstBaseline };
+      }
+
+      async function renderCanvas(canvas, options = {}) {
+        const text = els.input.value;
+        if (!text) {
+          canvas.width = 1;
+          canvas.height = 1;
+          canvas.style.width = "1px";
+          canvas.style.height = "auto";
+          return { width: 1, height: 1 };
+        }
+
+        const settings = getSettings();
+        const scale = options.scale || PREVIEW_SCALE;
+        const strokeWidth = options.withOutline ? settings.strokeWidth : 0;
+        const padding = (options.padding ?? settings.padding) + strokeWidth;
+        const { lines, logicalWidth, logicalHeight, firstBaseline } = await getMetrics(text, padding);
+
+        canvas.width = Math.max(1, logicalWidth * scale);
+        canvas.height = Math.max(1, logicalHeight * scale);
+        canvas.style.width = `${logicalWidth}px`;
+        canvas.style.height = "auto";
+
+        const context = canvas.getContext("2d");
+        context.setTransform(scale, 0, 0, scale, 0, 0);
+        context.clearRect(0, 0, logicalWidth, logicalHeight);
+        context.font = `${FONT_SIZE}px "${FONT_FAMILY}"`;
+        context.textBaseline = "alphabetic";
+        context.lineJoin = "miter";
+        context.miterLimit = 12;
+        context.fillStyle = "#000000";
+        context.strokeStyle = settings.color;
+        context.lineWidth = strokeWidth * 2;
+
+        lines.forEach((line, index) => {
+          const y = firstBaseline + index * LINE_HEIGHT;
+          if (strokeWidth > 0) {
+            context.strokeText(line, padding, y);
+          }
+          context.fillText(line, padding, y);
+        });
+
+        return { width: canvas.width, height: canvas.height };
+      }
+
+      function scheduleRender() {
+        updateLabels();
+        const isEmpty = els.input.value.length === 0;
+        els.downloadButton.disabled = isEmpty;
+        els.transparentButton.disabled = isEmpty;
+        window.clearTimeout(state.renderTimer);
+        state.renderTimer = window.setTimeout(renderPreview, 40);
+      }
+
+      async function renderPreview() {
+        const token = ++state.renderToken;
+        try {
+          await renderCanvas(els.canvas, { withOutline: true, scale: PREVIEW_SCALE });
+          if (token !== state.renderToken) return;
+        } catch (error) {
+          setStatus("Preview failed / 预览失败", true);
+          console.error(error);
+        }
+      }
+
+      function downloadCanvas(canvas, filename) {
+        canvas.toBlob((blob) => {
+          if (!blob) {
+            setStatus("Export failed / 导出失败", true);
+            return;
+          }
+          const url = URL.createObjectURL(blob);
+          const link = document.createElement("a");
+          link.href = url;
+          link.download = filename;
+          link.click();
+          URL.revokeObjectURL(url);
+        }, "image/png");
+      }
+
+      async function exportPng(withOutline) {
+        const text = els.input.value;
+        if (!text) return;
+        els.downloadButton.disabled = true;
+        els.transparentButton.disabled = true;
+        setStatus(withOutline ? "Rendering sticker / 正在生成贴纸" : "Rendering / 正在生成");
+        try {
+          const canvas = document.createElement("canvas");
+          const result = await renderCanvas(canvas, {
+            withOutline,
+            scale: EXPORT_SCALE,
+            padding: withOutline ? undefined : DEFAULT_PADDING
+          });
+          downloadCanvas(canvas, safeFilename(text, withOutline ? "sticker" : "transparent"));
+          setStatus(
+            withOutline
+              ? `${result.width} x ${result.height}px · Outlined transparent PNG / 描边透明 PNG`
+              : `${result.width} x ${result.height}px · Transparent / 透明背景`
+          );
+        } catch (error) {
+          setStatus(withOutline ? "Sticker export failed / 贴纸导出失败" : "Export failed / 导出失败", true);
+          console.error(error);
+        } finally {
+          scheduleRender();
+        }
+      }
+
+      function setBackground(mode) {
+        els.preview.classList.remove("is-checker", "is-white", "is-black");
+        els.preview.classList.add(`is-${mode}`);
+        for (const button of els.backgroundButtons.querySelectorAll("button")) {
+          button.classList.toggle("is-active", button.dataset.bg === mode);
+        }
+      }
+
+      els.input.addEventListener("input", scheduleRender);
+      for (const input of [els.strokeWidth, els.canvasPadding]) {
+        input.addEventListener("input", scheduleRender);
+        input.addEventListener("change", scheduleRender);
+      }
+      els.strokeColor.addEventListener("input", () => {
+        els.strokeColorText.value = els.strokeColor.value;
+        scheduleRender();
+      });
+      els.strokeColorText.addEventListener("change", () => {
+        const nextColor = normalizeHex(els.strokeColorText.value);
+        if (nextColor) {
+          els.strokeColor.value = nextColor;
+        } else {
+          els.strokeColorText.value = els.strokeColor.value;
+        }
+        scheduleRender();
+      });
+      els.backgroundButtons.addEventListener("click", (event) => {
+        const button = event.target.closest("button[data-bg]");
+        if (!button) return;
+        setBackground(button.dataset.bg);
+      });
+      els.downloadButton.addEventListener("click", () => exportPng(true));
+      els.transparentButton.addEventListener("click", () => exportPng(false));
+
+      updateLabels();
+      scheduleRender();
+    </script>
+  </body>
+</html>
