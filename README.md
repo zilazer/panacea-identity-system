@@ -68,9 +68,21 @@ Series constants / 系列统一规则：
 - telephoto compression and systematic composition / 长焦压缩与类型学构图
 - no logos, vehicles, signage, text, or plant subject / 无 Logo、车辆、标识、文字或植物主体
 
-![Four-bay concrete colonnade for the glyph w](assets/architectural-alphabet/photos/w-colonnade-group.png)
+![Three concrete industrial towers for the glyph w](assets/architectural-alphabet/photos/w-colonnade-group.png)
 
 Full mapping / 完整映射：[Architectural Alphabet README](assets/architectural-alphabet/README.md)
+
+Recent photograph replacements / 最近摄影替换：
+
+| Glyph | Updated photograph description | 中文说明 |
+| --- | --- | --- |
+| a | Concrete portal gate with a smaller guard block and distant industrial frames | 混凝土门洞、左侧小型门卫体量与远处工业构架 |
+| b | Pair of industrial towers connected by diagonal enclosed conveyor bridges | 两座工业塔楼与两条斜向封闭运输廊桥 |
+| j | Solitary observation tower with a cantilevered top room and sloped base brace | 孤立观察塔、顶部悬挑房间与底部斜撑 |
+| k | Service tower with twin vertical cores, roof deck, and cantilevered lookout room | 双竖向核心服务塔、屋顶平台与悬挑观察室 |
+| t | Tall landmark tower with a horizontal viewing platform projecting from the top | 高耸地标塔与顶部横向观景平台 |
+| w | Three monumental concrete towers rising from a low industrial block | 低矮工业体量上升起的三座混凝土高塔 |
+| x | Concrete structural crossing with vertical tower, horizontal bridge, ladder, and wet forecourt | 竖向混凝土塔、横向连桥、爬梯与湿润前场构成的结构交会 |
 
 ### 2. Architectural Type System / 建筑字体系统
 

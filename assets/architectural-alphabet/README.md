@@ -21,8 +21,8 @@ This series maps every glyph in Panacea Architectural Regular to an architectura
 
 | Glyph | Archetype | 中文 |
 | --- | --- | --- |
-| a | Single portal | 单门厂房 |
-| b | Warehouse with elevator shaft | 外挂电梯井仓库 |
+| a | Concrete portal gate with guard block | 混凝土门洞与门卫体量 |
+| b | Industrial towers with conveyor bridges | 工业塔楼与运输廊桥 |
 | c | Open L-shaped wall | L 型折墙 |
 | d | Factory with vertical core | 核心筒厂房 |
 | e | Cantilever slab | 混凝土挑板 |
@@ -30,8 +30,8 @@ This series maps every glyph in Panacea Architectural Regular to an architectura
 | g | Factory with underground ramp | 地下坡道厂房 |
 | h | Double-column colonnade | 双柱柱廊 |
 | i | Concrete tower | 混凝土塔 |
-| j | Bent signal tower | 折塔 |
-| k | Industrial fire stair | 工业消防楼梯 |
+| j | Observation tower with sloped base brace | 带斜撑的观察塔 |
+| k | Service tower with cantilevered lookout | 带悬挑观察室的服务塔 |
 | l | Concrete corner | 厂房转角 |
 | m | Three-bay factory | 三跨厂房 |
 | n | Two-bay factory | 双跨厂房 |
@@ -40,11 +40,11 @@ This series maps every glyph in Panacea Architectural Regular to an architectura
 | q | Sunken courtyard | 地下庭院 |
 | r | Gatehouse | 门卫室 |
 | s | Continuous folded wall | 连续折墙 |
-| t | Landmark tower with crossbeam | 横梁地标塔 |
+| t | Landmark tower with viewing platform | 带观景平台的地标塔 |
 | u | Three-sided courtyard | 三面围合庭院 |
 | v | Concrete canyon | 混凝土峡谷 |
-| w | Four-bay colonnade group | 四跨柱廊群 |
-| x | Concrete structural crossing | 混凝土结构交会 |
+| w | Three concrete industrial towers | 三座混凝土工业塔 |
+| x | Concrete tower and bridge crossing | 混凝土塔与连桥交会 |
 | y | Transport tower and bridge | 运输塔与运输桥 |
 | z | Switchback ramp and roof | 折返坡道与屋顶 |
 
