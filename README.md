@@ -51,7 +51,7 @@ The 3D preview loads Three.js modules from `unpkg.com`, so it requires an intern
 
 三维预览的车辆模型保存在本地，但 Three.js 模块从 `unpkg.com` 加载，因此使用时仍需联网。
 
-## Three Active Programs / 三个当前项目
+## Four Active Programs / 四个当前项目
 
 ### 1. Architectural Alphabet / 建筑字母志
 
@@ -130,6 +130,22 @@ The current deliverables include multi-view raster blueprints, placement specifi
 Important: the 3D model is for visual placement studies only. Final sticker dimensions require physical measurement on the actual vehicle.
 
 重要：三维模型只用于视觉位置研究，最终贴纸尺寸仍需在实车上测量。
+
+### 4. Panacea Sticker Generator / Panacea 字体贴纸生成器
+
+`panacea-sticker.html` is a production-oriented type sticker generator for the Panacea Architectural font. It renders custom text directly in the browser and exports transparent PNG files for sticker mockups, decal studies, and small-format identity tests.
+
+`panacea-sticker.html` 是面向生产测试的 Panacea Architectural 字体贴纸生成器。它在浏览器中实时渲染自定义文字，并导出透明 PNG，用于贴纸打样、车贴研究和小尺度识别测试。
+
+Current controls / 当前控制项：
+
+- supported input: `A-Z`, `a-z`, space, comma, period, question mark, and line breaks / 支持 `A-Z`、`a-z`、空格、逗号、句号、问号与换行
+- adjustable outline color and outline width / 可调描边颜色与描边粗细
+- adjustable canvas padding / 可调画布留白
+- preview backgrounds: transparent grid, white, and black / 预览背景支持透明格、白底与黑底
+- export modes: outlined sticker PNG and transparent PNG / 导出模式包括描边贴纸 PNG 与透明 PNG
+
+Live tool / 在线工具：<https://zilazer.github.io/panacea-identity-system/panacea-sticker.html>
 
 ## Brand Layers / 品牌层级
 
