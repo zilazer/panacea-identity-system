@@ -65,12 +65,14 @@ Runtime behavior:
 - the preview uses `GLTFLoader`, `DRACOLoader`, `OrbitControls`, and `DecalGeometry`
 - PNG files are loaded locally in the browser through a file input and are not committed to the repo automatically
 - the decal is placed by raycast and then rebuilt as geometry whenever position buttons, move step, size, rotation, or opacity changes
+- `window.panacea3D.getState()` exposes `decalPosition` for functional checks of button-based movement
 
 - 页面从 `assets/vehicle/3d/model3-highland-preview/Poppyseed.gltf` 加载本地 glTF
 - Three.js 模块从 `unpkg.com` 加载
 - 预览使用 `GLTFLoader`、`DRACOLoader`、`OrbitControls` 与 `DecalGeometry`
 - PNG 文件通过浏览器本地文件输入读取，不会自动提交到仓库
 - 贴纸先通过射线定位，再在位置按钮、移动步长、尺寸、旋转或透明度变化时重新生成为几何体
+- `window.panacea3D.getState()` 暴露 `decalPosition`，用于功能性检查方向按钮是否真的移动贴纸
 
 ## Limits / 限制
 

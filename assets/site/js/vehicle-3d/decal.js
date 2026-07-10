@@ -15,8 +15,11 @@ export function createDecalController(options) {
   } = options;
 
   const decalRaycaster = new THREE.Raycaster();
-  const pointer = new THREE.Vector2();
-  const projectedHit = new THREE.Vector3();
+  const cameraRight = new THREE.Vector3();
+  const cameraUp = new THREE.Vector3();
+  const moveDirection = new THREE.Vector3();
+  const probeOrigin = new THREE.Vector3();
+  const probeDirection = new THREE.Vector3();
   const fileInput = document.querySelector("#decalFile");
   const sizeInput = document.querySelector("#decalSize");
   const rotateInput = document.querySelector("#decalRotate");
@@ -101,12 +104,30 @@ export function createDecalController(options) {
   function nudgeDecal(deltaX, deltaY) {
     if (!state.texture || !state.hit || !getModelLoaded()) return;
     pauseViewMotion();
-    const rect = canvas.getBoundingClientRect();
-    if (!rect.width || !rect.height) return;
-    projectedHit.copy(state.hit.position).project(camera);
-    pointer.x = projectedHit.x + (deltaX / rect.width) * 2;
-    pointer.y = projectedHit.y + (deltaY / rect.height) * 2;
-    decalRaycaster.setFromCamera(pointer, camera);
+
+    const modelRadius = getModelRadius();
+    const worldStep = Math.max(0.01, (state.moveStep / 700) * modelRadius);
+    const normal = state.hit.normal;
+    camera.updateMatrixWorld();
+    cameraRight.setFromMatrixColumn(camera.matrixWorld, 0).projectOnPlane(normal);
+    cameraUp.setFromMatrixColumn(camera.matrixWorld, 1).projectOnPlane(normal);
+    if (cameraRight.lengthSq() < 0.000001 || cameraUp.lengthSq() < 0.000001) return;
+
+    cameraRight.normalize();
+    cameraUp.normalize();
+    moveDirection
+      .set(0, 0, 0)
+      .addScaledVector(cameraRight, Math.sign(deltaX))
+      .addScaledVector(cameraUp, Math.sign(deltaY));
+    if (moveDirection.lengthSq() < 0.000001) return;
+    moveDirection.normalize();
+
+    probeOrigin
+      .copy(state.hit.position)
+      .addScaledVector(moveDirection, worldStep)
+      .addScaledVector(normal, Math.max(modelRadius * 0.08, state.size));
+    probeDirection.copy(normal).multiplyScalar(-1);
+    decalRaycaster.set(probeOrigin, probeDirection);
     const hit = decalRaycaster.intersectObjects(carMeshes, false).find((item) => item.face);
     if (!hit) {
       setStatus("No car surface in that direction / 该方向没有车身表面");
@@ -206,6 +227,7 @@ export function createDecalController(options) {
     state,
     setDefaultHit,
     nudgeDecal,
+    getPosition: () => (state.hit ? state.hit.position.toArray() : null),
     hasDecal: () => Boolean(state.mesh)
   };
 }

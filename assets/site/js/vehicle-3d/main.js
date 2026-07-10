@@ -63,6 +63,7 @@ window.panacea3D = {
     decalSize: decalController.state.size,
     decalRotation: decalController.state.rotation * (180 / Math.PI),
     decalOpacity: decalController.state.opacity,
+    decalPosition: decalController.getPosition(),
     status: status.textContent,
     camera: camera.position.toArray(),
     canvas: [canvas.width, canvas.height]
