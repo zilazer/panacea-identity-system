@@ -30,7 +30,10 @@ const decalController = createDecalController({
   getModel: () => runtime.model,
   getModelLoaded: () => runtime.modelLoaded,
   getModelRadius: () => runtime.modelRadius,
-  setStatus
+  setStatus,
+  pauseViewMotion: () => {
+    controls.autoRotate = false;
+  }
 });
 
 loadVehicleModel({

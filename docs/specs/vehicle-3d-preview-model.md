@@ -45,7 +45,7 @@ Use this model for web-based 3D preview:
 - apply deep-blue body material override
 - import PNG decal artwork
 - project the PNG decal onto the visible car surface with `DecalGeometry`
-- drag the decal position directly on the model
+- move the decal with on-page direction buttons so canvas dragging remains reserved for orbit controls
 - adjust decal scale, rotation, and opacity
 - inspect placement from front, side, rear, and top camera presets
 - prototype orbit controls and screenshots
@@ -64,13 +64,13 @@ Runtime behavior:
 - Three.js modules are loaded from `unpkg.com`
 - the preview uses `GLTFLoader`, `DRACOLoader`, `OrbitControls`, and `DecalGeometry`
 - PNG files are loaded locally in the browser through a file input and are not committed to the repo automatically
-- the decal is rebuilt as geometry whenever placement, size, rotation, or opacity changes
+- the decal is placed by raycast and then rebuilt as geometry whenever position buttons, move step, size, rotation, or opacity changes
 
 - 页面从 `assets/vehicle/3d/model3-highland-preview/Poppyseed.gltf` 加载本地 glTF
 - Three.js 模块从 `unpkg.com` 加载
 - 预览使用 `GLTFLoader`、`DRACOLoader`、`OrbitControls` 与 `DecalGeometry`
 - PNG 文件通过浏览器本地文件输入读取，不会自动提交到仓库
-- 当位置、尺寸、旋转或透明度变化时，贴纸会被重新生成为几何体
+- 贴纸先通过射线定位，再在位置按钮、移动步长、尺寸、旋转或透明度变化时重新生成为几何体
 
 ## Limits / 限制
 

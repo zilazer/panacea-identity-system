@@ -24,7 +24,7 @@
 
 | File / 文件 | Status / 状态 | Notes / 说明 |
 | --- | --- | --- |
-| `3d/model3-highland-preview/Poppyseed.gltf` | Active preview model / 当前预览模型 | glTF 2.0 Model 3 preview asset used by the standalone `3d-preview.html` Three.js decal tool. Supports local PNG decal import, drag placement, scale, rotation, opacity, and camera presets. Uses `Poppyseed0.bin` and `textures/`. Source path verified as reachable at `https://teslawrapgallery.com/tesla_3d_models/Poppyseed.gltf`. / 独立 `3d-preview.html` Three.js 贴纸工具使用的 glTF 2.0 Model 3 预览资产，支持本地 PNG 贴纸导入、拖动定位、缩放、旋转、透明度与相机预设。依赖 `Poppyseed0.bin` 与 `textures/`。来源路径已验证可访问：`https://teslawrapgallery.com/tesla_3d_models/Poppyseed.gltf`。 |
+| `3d/model3-highland-preview/Poppyseed.gltf` | Active preview model / 当前预览模型 | glTF 2.0 Model 3 preview asset used by the standalone `3d-preview.html` Three.js decal tool. Supports local PNG decal import, on-page direction-button positioning, move-step control, scale, rotation, opacity, orbit controls, and camera presets. Uses `Poppyseed0.bin` and `textures/`. Source path verified as reachable at `https://teslawrapgallery.com/tesla_3d_models/Poppyseed.gltf`. / 独立 `3d-preview.html` Three.js 贴纸工具使用的 glTF 2.0 Model 3 预览资产，支持本地 PNG 贴纸导入、页面方向按钮定位、移动步长控制、缩放、旋转、透明度、车辆 orbit 控制与相机预设。依赖 `Poppyseed0.bin` 与 `textures/`。来源路径已验证可访问：`https://teslawrapgallery.com/tesla_3d_models/Poppyseed.gltf`。 |
 
 ## Handling Rules / 使用规则
 

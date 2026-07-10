@@ -127,6 +127,51 @@ body.vehicle-3d-page {
   text-align: right;
 }
 
+.viewer__nudge {
+  display: grid;
+  grid-template-columns: 42px 42px 42px;
+  grid-template-areas:
+    "label label label"
+    ". up ."
+    "left down right";
+  justify-content: center;
+  gap: 8px;
+  margin-top: 14px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(17, 17, 17, 0.14);
+}
+
+.viewer__nudge p {
+  grid-area: label;
+  margin: 0 0 2px;
+  color: #4d504d;
+  text-align: center;
+}
+
+.viewer__nudge-button {
+  width: 42px;
+  min-height: 38px;
+  padding: 0;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.viewer__nudge-button[data-decal-nudge="up"] {
+  grid-area: up;
+}
+
+.viewer__nudge-button[data-decal-nudge="left"] {
+  grid-area: left;
+}
+
+.viewer__nudge-button[data-decal-nudge="right"] {
+  grid-area: right;
+}
+
+.viewer__nudge-button[data-decal-nudge="down"] {
+  grid-area: down;
+}
+
 @media (max-width: 760px) {
   .viewer canvas {
     min-height: 720px;

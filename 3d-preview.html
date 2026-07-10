@@ -44,6 +44,18 @@
           <input id="decalOpacity" type="range" min="0.2" max="1" step="0.01" value="0.92" />
           <output id="decalOpacityValue">92</output>
         </div>
+        <div class="viewer__nudge" aria-label="Move PNG decal / 移动 PNG 贴纸">
+          <p>Position / 位置</p>
+          <button class="viewer__button viewer__nudge-button" type="button" data-decal-nudge="up" aria-label="Move decal up / 上移贴纸">↑</button>
+          <button class="viewer__button viewer__nudge-button" type="button" data-decal-nudge="left" aria-label="Move decal left / 左移贴纸">←</button>
+          <button class="viewer__button viewer__nudge-button" type="button" data-decal-nudge="right" aria-label="Move decal right / 右移贴纸">→</button>
+          <button class="viewer__button viewer__nudge-button" type="button" data-decal-nudge="down" aria-label="Move decal down / 下移贴纸">↓</button>
+        </div>
+        <div class="viewer__slider">
+          <span>Step</span>
+          <input id="decalMoveStep" type="range" min="4" max="80" step="2" value="20" />
+          <output id="decalMoveStepValue">20</output>
+        </div>
       </div>
       <div class="viewer__status" id="vehicle3dStatus">Loading local model / 正在加载本地模型</div>
     </main>
