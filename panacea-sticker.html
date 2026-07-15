@@ -259,6 +259,10 @@
         border: 1px solid var(--line);
       }
 
+      .segmented--two {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .segmented button {
         min-height: 42px;
         padding: 0 10px;
@@ -420,7 +424,11 @@
             <section class="control">
               <div class="label-row">
                 <label for="strokeWidth">Outline width / 描边粗细</label>
-                <span class="value"><span id="strokeWidthValue">14</span> px</span>
+                <span class="value" id="strokeWidthValue">14 px</span>
+              </div>
+              <div class="segmented segmented--two" id="strokeWidthModeButtons">
+                <button class="is-active" type="button" data-stroke-mode="px">px / 像素</button>
+                <button type="button" data-stroke-mode="percent">% / 笔画</button>
               </div>
               <input id="strokeWidth" type="range" min="0" max="96" step="1" value="14" />
             </section>
@@ -459,10 +467,12 @@
       const PREVIEW_SCALE = 1;
       const EXPORT_SCALE = 2;
       const DEFAULT_PADDING = 0;
+      const OUTLINE_BASE_WIDTH = 14;
 
       const state = {
         renderTimer: 0,
-        renderToken: 0
+        renderToken: 0,
+        strokeWidthMode: "px"
       };
 
       const els = {
@@ -474,6 +484,7 @@
         strokeColorValue: document.querySelector("#strokeColorValue"),
         strokeWidth: document.querySelector("#strokeWidth"),
         strokeWidthValue: document.querySelector("#strokeWidthValue"),
+        strokeWidthModeButtons: document.querySelector("#strokeWidthModeButtons"),
         canvasPadding: document.querySelector("#canvasPadding"),
         canvasPaddingValue: document.querySelector("#canvasPaddingValue"),
         backgroundButtons: document.querySelector("#backgroundButtons"),
@@ -502,16 +513,63 @@
         const color = normalizeHex(els.strokeColor.value) || "#ffffff";
         els.strokeColorValue.textContent = color.toUpperCase();
         els.strokeColorText.value = color;
-        els.strokeWidthValue.textContent = els.strokeWidth.value;
+        const strokeWidth = getEffectiveStrokeWidth();
+        els.strokeWidthValue.textContent =
+          state.strokeWidthMode === "percent"
+            ? `${els.strokeWidth.value}% = ${formatNumber(strokeWidth)} px`
+            : `${formatNumber(strokeWidth)} px`;
         els.canvasPaddingValue.textContent = els.canvasPadding.value;
+      }
+
+      function clamp(value, min, max) {
+        return Math.min(max, Math.max(min, value));
+      }
+
+      function formatNumber(value) {
+        return Number.isInteger(value) ? String(value) : value.toFixed(1);
+      }
+
+      function getEffectiveStrokeWidth() {
+        const rawWidth = Number(els.strokeWidth.value);
+        if (state.strokeWidthMode === "percent") {
+          return (OUTLINE_BASE_WIDTH * rawWidth) / 100;
+        }
+        return rawWidth;
       }
 
       function getSettings() {
         return {
           color: normalizeHex(els.strokeColor.value) || "#ffffff",
-          strokeWidth: Number(els.strokeWidth.value),
+          strokeWidth: getEffectiveStrokeWidth(),
           padding: Number(els.canvasPadding.value)
         };
+      }
+
+      function setStrokeWidthMode(mode) {
+        if (mode !== "px" && mode !== "percent") return;
+        if (mode === state.strokeWidthMode) return;
+
+        const effectiveWidth = getEffectiveStrokeWidth();
+        state.strokeWidthMode = mode;
+
+        if (mode === "percent") {
+          const percent = clamp(Math.round((effectiveWidth / OUTLINE_BASE_WIDTH) * 20) * 5, 0, 700);
+          els.strokeWidth.min = "0";
+          els.strokeWidth.max = "700";
+          els.strokeWidth.step = "5";
+          els.strokeWidth.value = String(percent);
+        } else {
+          const px = clamp(Math.round(effectiveWidth), 0, 96);
+          els.strokeWidth.min = "0";
+          els.strokeWidth.max = "96";
+          els.strokeWidth.step = "1";
+          els.strokeWidth.value = String(px);
+        }
+
+        for (const button of els.strokeWidthModeButtons.querySelectorAll("button")) {
+          button.classList.toggle("is-active", button.dataset.strokeMode === mode);
+        }
+        scheduleRender();
       }
 
       function safeFilename(text, suffix) {
@@ -523,18 +581,41 @@
         return compact ? `panacea-${compact}-${suffix}.png` : `panacea-${suffix}.png`;
       }
 
-      async function getMetrics(text, padding) {
+      function readTextMetric(metric, fallback) {
+        return Number.isFinite(metric) ? metric : fallback;
+      }
+
+      async function getMetrics(text, safeInset) {
         await document.fonts.load(`${FONT_SIZE}px "${FONT_FAMILY}"`);
         const lines = text.split("\n");
         const measureCanvas = document.createElement("canvas");
         const measureContext = measureCanvas.getContext("2d");
         measureContext.font = `${FONT_SIZE}px "${FONT_FAMILY}"`;
         const maxLineWidth = Math.max(...lines.map((line) => measureContext.measureText(line || " ").width));
-        const textHeight = FONT_SIZE * 1.11 + Math.max(0, lines.length - 1) * LINE_HEIGHT;
-        const logicalWidth = Math.ceil(maxLineWidth + padding * 2);
-        const logicalHeight = Math.ceil(textHeight + padding * 2);
-        const firstBaseline = padding + FONT_SIZE * 0.85;
-        return { lines, logicalWidth, logicalHeight, firstBaseline };
+        const bMetrics = measureContext.measureText("b");
+        const fMetrics = measureContext.measureText("F");
+        const referenceAscent = readTextMetric(bMetrics.actualBoundingBoxAscent, FONT_SIZE * 0.85);
+        const referenceDescent = readTextMetric(fMetrics.actualBoundingBoxDescent, FONT_SIZE * 0.26);
+        const referenceAdvance = Math.ceil(measureContext.measureText("a").width);
+        const referenceHeight = referenceAscent + referenceDescent;
+        const textHeight = referenceHeight + Math.max(0, lines.length - 1) * LINE_HEIGHT;
+        const logicalWidth = Math.ceil(maxLineWidth + referenceAdvance + safeInset * 2);
+        const logicalHeight = Math.ceil(textHeight + safeInset * 2);
+        const firstBaseline = safeInset + referenceAscent;
+        const textX = safeInset + referenceAdvance;
+        const referenceX = safeInset;
+        const referenceTop = firstBaseline - referenceAscent;
+        const referenceBottom = firstBaseline + referenceDescent;
+        return {
+          lines,
+          logicalWidth,
+          logicalHeight,
+          firstBaseline,
+          textX,
+          referenceX,
+          referenceTop,
+          referenceBottom
+        };
       }
 
       async function renderCanvas(canvas, options = {}) {
@@ -550,8 +631,17 @@
         const settings = getSettings();
         const scale = options.scale || PREVIEW_SCALE;
         const strokeWidth = options.withOutline ? settings.strokeWidth : 0;
-        const padding = (options.padding ?? settings.padding) + strokeWidth;
-        const { lines, logicalWidth, logicalHeight, firstBaseline } = await getMetrics(text, padding);
+        const safeInset = (options.padding ?? settings.padding) + strokeWidth;
+        const {
+          lines,
+          logicalWidth,
+          logicalHeight,
+          firstBaseline,
+          textX,
+          referenceX,
+          referenceTop,
+          referenceBottom
+        } = await getMetrics(text, safeInset);
 
         canvas.width = Math.max(1, logicalWidth * scale);
         canvas.height = Math.max(1, logicalHeight * scale);
@@ -572,10 +662,19 @@
         lines.forEach((line, index) => {
           const y = firstBaseline + index * LINE_HEIGHT;
           if (strokeWidth > 0) {
-            context.strokeText(line, padding, y);
+            context.strokeText(line, textX, y);
           }
-          context.fillText(line, padding, y);
+          context.fillText(line, textX, y);
         });
+
+        context.save();
+        context.strokeStyle = "#000000";
+        context.lineWidth = 1 / scale;
+        context.beginPath();
+        context.moveTo(referenceX + 0.5 / scale, referenceTop);
+        context.lineTo(referenceX + 0.5 / scale, referenceBottom);
+        context.stroke();
+        context.restore();
 
         return { width: canvas.width, height: canvas.height };
       }
@@ -672,6 +771,11 @@
         const button = event.target.closest("button[data-bg]");
         if (!button) return;
         setBackground(button.dataset.bg);
+      });
+      els.strokeWidthModeButtons.addEventListener("click", (event) => {
+        const button = event.target.closest("button[data-stroke-mode]");
+        if (!button) return;
+        setStrokeWidthMode(button.dataset.strokeMode);
       });
       els.downloadButton.addEventListener("click", () => exportPng(true));
       els.transparentButton.addEventListener("click", () => exportPng(false));
