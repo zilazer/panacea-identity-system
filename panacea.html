@@ -248,12 +248,21 @@
       }
 
       .lattice-signature__mark {
+        position: relative;
         width: clamp(240px, 20vw, 380px);
+        aspect-ratio: 2218 / 1680;
       }
 
       .lattice-signature__mark img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
         height: auto;
         object-fit: contain;
+      }
+
+      .lattice-signature__seal {
+        transform: translate(18%, -38%) scale(0.68);
       }
 
       .font-overlay {
@@ -1102,6 +1111,7 @@ form?</textarea>
         <div class="lattice-signature" aria-label="Panacea closing note">
           <div class="lattice-signature__mark" aria-hidden="true">
             <img src="assets/logo/current/panacea-outline-signature-original.png" alt="" loading="lazy">
+            <img class="lattice-signature__seal" src="assets/logo/current/renliang-print-transparent-2.png" alt="" loading="lazy">
           </div>
         </div>
       `;
