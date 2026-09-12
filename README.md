@@ -20,6 +20,7 @@ This is not a logo exploration folder. It is a maintainable system for vehicles,
 | [`panacea.html`](panacea.html) | Interactive Architectural Alphabet lattice with click-to-open specimens and font export tools / 可交互建筑字母格栅、点击展开样本与字体导出工具 |
 | [`3d-preview.html`](3d-preview.html) | Tesla Model 3 PNG decal placement study / Tesla Model 3 PNG 贴纸三维位置研究 |
 | [`panacea-sticker.html`](panacea-sticker.html) | Panacea font sticker generator with outline controls and transparent PNG export / Panacea 字体贴纸生成器，支持描边控制与透明 PNG 输出 |
+| [`license.html`](license.html) | Panacea font and visual asset license / Panacea 字体与视觉资产授权协议 |
 | [`assets/architectural-alphabet/`](assets/architectural-alphabet/) | 26 architectural archetype photographs and mapping / 26 张建筑原型摄影及对应关系 |
 | [`assets/font/PanaceaArchitectural-Regular.ttf`](assets/font/PanaceaArchitectural-Regular.ttf) | Installable Panacea Architectural Regular font / 可安装字体 |
 
@@ -31,6 +32,7 @@ Direct pages / 页面直达：
 
 - Architectural Type System + Alphabet / 建筑字体系统与建筑字母志：<https://zilazer.github.io/panacea-identity-system/panacea.html>
 - Model 3 3D Preview / Model 3 三维预览：<https://zilazer.github.io/panacea-identity-system/3d-preview.html>
+- License / 授权协议：<https://zilazer.github.io/panacea-identity-system/license.html>
 
 To view the project locally:
 
@@ -217,3 +219,7 @@ Raster logos in `assets/logo/legacy/` and `assets/logo/previous/` are retained a
 ## Repository / 仓库
 
 GitHub: <https://github.com/zilazer/panacea-identity-system>
+
+Contact / 联系邮箱: [zilazer@gmail.com](mailto:zilazer@gmail.com)
+
+License / 授权协议: [`license.html`](license.html)

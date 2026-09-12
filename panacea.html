@@ -386,6 +386,35 @@
         margin-left: auto;
       }
 
+      .font-modal__license {
+        margin: -8px 0 0;
+        color: var(--muted);
+        font-size: 13px;
+      }
+
+      .font-modal__license a,
+      .lattice-license {
+        color: inherit;
+        text-underline-offset: 0.22em;
+      }
+
+      .font-modal__license a:hover,
+      .font-modal__license a:focus-visible,
+      .lattice-license:hover,
+      .lattice-license:focus-visible {
+        color: var(--ink);
+      }
+
+      .lattice-license {
+        position: absolute;
+        left: 56px;
+        bottom: 40px;
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
       .overlay {
         position: fixed;
         inset: 0;
@@ -549,6 +578,11 @@
           padding: 28px 24px;
         }
 
+        .lattice-license {
+          left: 24px;
+          bottom: 28px;
+        }
+
         .lattice-signature {
           max-width: min(320px, 88%);
         }
@@ -655,6 +689,11 @@ form?</textarea>
             <a class="font-modal__button" href="assets/font/PanaceaArchitectural-Regular.ttf?v=0.4.0" download="PanaceaArchitectural-Regular.ttf">Download TTF / 下载字体</a>
             <output class="font-modal__status" id="font-export-status" for="font-preview-input" aria-live="polite"></output>
           </div>
+          <p class="font-modal__license">
+            Personal, non-commercial use only. Downloading does not grant commercial rights. /
+            仅限个人非商业使用，下载不代表获得商业授权。
+            <a href="license.html">Read the license / 阅读授权协议</a>
+          </p>
         </section>
       </div>
     </main>
@@ -1059,6 +1098,7 @@ form?</textarea>
       const spacer = document.createElement("div");
       spacer.className = "lattice-spacer";
       spacer.innerHTML = `
+        <a class="lattice-license" href="license.html">License / 授权协议</a>
         <div class="lattice-signature" aria-label="Panacea closing note">
           <div class="lattice-signature__mark" aria-hidden="true">
             <img src="assets/logo/current/panacea-outline-signature-original.png" alt="" loading="lazy">
