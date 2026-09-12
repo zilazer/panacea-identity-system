@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Panacea project license and usage terms." />
+    <title>Panacea License v1.0 / Panacea 授权协议 v1.0</title>
+    <link rel="icon" href="assets/logo/current/panacea-icon-a-current.svg" type="image/svg+xml" />
+    <style>
+      :root {
+        --paper: #f5f5f2;
+        --ink: #111111;
+        --muted: #6f6f6a;
+        --line: rgba(17, 17, 17, 0.34);
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: Inter, "IBM Plex Sans", Arial, Helvetica, "PingFang SC", "Hiragino Sans GB", sans-serif;
+        font-size: 15px;
+        line-height: 1.65;
+      }
+
+      a { color: inherit; text-underline-offset: 0.22em; }
+
+      .page {
+        width: min(1200px, calc(100% - 48px));
+        margin: 0 auto;
+        padding: 48px 0 96px;
+      }
+
+      .masthead {
+        display: grid;
+        grid-template-columns: minmax(0, 2fr) minmax(220px, 1fr);
+        gap: 48px;
+        padding-bottom: 48px;
+        border-bottom: 1px solid var(--ink);
+      }
+
+      .eyebrow,
+      .meta,
+      .section-number {
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+      }
+
+      h1 {
+        max-width: 760px;
+        margin: 12px 0 0;
+        font-size: clamp(48px, 8vw, 112px);
+        font-weight: 500;
+        letter-spacing: -0.055em;
+        line-height: 0.92;
+      }
+
+      .meta { align-self: end; }
+      .meta p { margin: 0; }
+
+      .notice {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+        padding: 32px 0;
+        border-bottom: 1px solid var(--line);
+        font-size: clamp(17px, 2vw, 24px);
+        line-height: 1.4;
+      }
+
+      .notice p { margin: 0; }
+
+      .notice p,
+      .term > div,
+      .meta {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+
+      .terms { counter-reset: section; }
+
+      .term {
+        display: grid;
+        grid-template-columns: 80px minmax(0, 1fr) minmax(0, 1fr);
+        gap: 32px;
+        padding: 40px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .term h2 {
+        margin: 0 0 16px;
+        font-size: 20px;
+        font-weight: 600;
+        line-height: 1.3;
+      }
+
+      .term p { margin: 0 0 12px; }
+      .term ul { margin: 0; padding-left: 1.2em; }
+      .term li + li { margin-top: 8px; }
+
+      .actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        padding-top: 40px;
+      }
+
+      .button {
+        display: inline-flex;
+        min-height: 52px;
+        align-items: center;
+        padding: 0 22px;
+        border: 1px solid var(--ink);
+        text-decoration: none;
+      }
+
+      .button:hover,
+      .button:focus-visible { background: var(--ink); color: var(--paper); }
+
+      @media (max-width: 760px) {
+        .page { width: min(100% - 32px, 1200px); padding-top: 24px; }
+        .masthead, .notice { grid-template-columns: 1fr; gap: 24px; }
+        .term { grid-template-columns: 40px minmax(0, 1fr); gap: 16px; }
+        .term__en { grid-column: 2; }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="masthead">
+        <div>
+          <div class="eyebrow">Panacea Identity System</div>
+          <h1>License<br />授权协议</h1>
+        </div>
+        <div class="meta">
+          <p>Version 1.0</p>
+          <p>Effective 12 September 2026 / 2026 年 9 月 12 日起生效</p>
+        </div>
+      </header>
+
+      <section class="notice" aria-label="License summary">
+        <p>个人、非商业项目可免费使用 Panacea Architectural 字体。任何商业使用、嵌入或再分发均需另行授权。</p>
+        <p>Panacea Architectural may be used free of charge for personal, non-commercial projects. Commercial use, embedding, and redistribution require separate permission.</p>
+      </section>
+
+      <div class="terms">
+        <section class="term">
+          <div class="section-number">01</div>
+          <div>
+            <h2>适用资产</h2>
+            <p>本协议分别管理 Panacea Architectural 字体软件、Architectural Alphabet 建筑摄影、Panacea 名称与标志、字形系统、视觉版式及网站代码。对某一项资产的许可不自动扩展至其他资产。</p>
+          </div>
+          <div class="term__en">
+            <h2>Covered assets</h2>
+            <p>This agreement separately governs the Panacea Architectural font software, Architectural Alphabet photography, Panacea names and marks, the glyph system, visual layouts, and website code. Permission for one asset does not extend to another.</p>
+          </div>
+        </section>
+
+        <section class="term">
+          <div class="section-number">02</div>
+          <div>
+            <h2>允许的非商业使用</h2>
+            <ul>
+              <li>个人学习、研究与非营利实验。</li>
+              <li>个人作品集中展示使用结果。</li>
+              <li>非商业作品的静态图像与印刷品。</li>
+              <li>按本页规定完整保留署名。</li>
+            </ul>
+          </div>
+          <div class="term__en">
+            <h2>Permitted non-commercial use</h2>
+            <ul>
+              <li>Personal study, research, and non-profit experimentation.</li>
+              <li>Showing the resulting work in a personal portfolio.</li>
+              <li>Static images and printed matter for non-commercial projects.</li>
+              <li>Use with the attribution required below.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="term">
+          <div class="section-number">03</div>
+          <div>
+            <h2>需要另行授权</h2>
+            <p>商业品牌、产品包装、广告、影视、出版销售、客户项目、付费活动、应用程序、网络服务、硬件、可编辑模板或任何直接或间接获利用途，均需在使用前取得书面商业授权。</p>
+          </div>
+          <div class="term__en">
+            <h2>Uses requiring a separate license</h2>
+            <p>Written commercial permission is required before use in branding, packaging, advertising, film, paid publishing, client work, ticketed events, apps, web services, hardware, editable templates, or any activity that directly or indirectly generates revenue.</p>
+          </div>
+        </section>
+
+        <section class="term">
+          <div class="section-number">04</div>
+          <div>
+            <h2>嵌入与修改</h2>
+            <p>将字体嵌入网站、App、电子书、视频游戏、设备、SaaS 或可供他人输出字形的工具，需单独授权。可为自己的非商业作品转曲或调整字形，但不得将修改版字体作为新字体发布。</p>
+          </div>
+          <div class="term__en">
+            <h2>Embedding and modification</h2>
+            <p>Embedding in websites, apps, ebooks, games, devices, SaaS products, or tools that let others generate output requires a separate license. Glyphs may be outlined or adjusted for your own non-commercial work, but a modified font may not be released as a new typeface.</p>
+          </div>
+        </section>
+
+        <section class="term">
+          <div class="section-number">05</div>
+          <div>
+            <h2>禁止行为</h2>
+            <ul>
+              <li>转售、转授权、上传或再分发字体文件。</li>
+              <li>改名、移除权利信息或声称原创。</li>
+              <li>将 Panacea 名称、标志、字形系统或高度近似形式注册为他人商标。</li>
+              <li>将字体、摄影或视觉资产用于训练、微调或评测生成式 AI 模型。</li>
+              <li>以违法、欺诈、仇恨或误导方式使用。</li>
+            </ul>
+          </div>
+          <div class="term__en">
+            <h2>Prohibited acts</h2>
+            <ul>
+              <li>Reselling, sublicensing, uploading, or redistributing the font files.</li>
+              <li>Renaming the work, removing rights notices, or claiming authorship.</li>
+              <li>Registering Panacea names, marks, the glyph system, or confusingly similar forms as another party's trademark.</li>
+              <li>Using the font, photography, or visual assets to train, fine-tune, or evaluate generative AI models.</li>
+              <li>Any illegal, fraudulent, hateful, or misleading use.</li>
+            </ul>
+          </div>
+        </section>
+
+        <section class="term">
+          <div class="section-number">06</div>
+          <div>
+            <h2>摄影、标志与网站</h2>
+            <p>Architectural Alphabet 建筑图片、Panacea 标志、字标、视觉版式及网站代码保留全部权利。可在学习、评论和项目介绍中链接或引用小尺寸页面截图，但不得将原图、标志或页面设计作为自由可用素材。</p>
+          </div>
+          <div class="term__en">
+            <h2>Photography, marks, and website</h2>
+            <p>All rights are reserved in the Architectural Alphabet images, Panacea marks and wordmarks, visual layouts, and website code. Links and small page screenshots may be used for study, critique, and project commentary, but the source images, marks, and page design are not stock assets.</p>
+          </div>
+        </section>
+
+        <section class="term">
+          <div class="section-number">07</div>
+          <div>
+            <h2>署名</h2>
+            <p>在项目说明、版权页或可合理查找的位置标注：“Panacea Architectural by Zila He”，并链接至 Panacea 项目网站。获得的商业授权可以另行约定署名方式。</p>
+          </div>
+          <div class="term__en">
+            <h2>Attribution</h2>
+            <p>Credit “Panacea Architectural by Zila He” in project notes, credits, or another reasonably discoverable location, with a link to the Panacea project website. A commercial license may specify different attribution terms.</p>
+          </div>
+        </section>
+
+        <section class="term">
+          <div class="section-number">08</div>
+          <div>
+            <h2>权利、终止与免责</h2>
+            <p>所有未明确授予的权利均由 Panacea 项目权利人保留。违反本协议时，授权自动终止，使用者应停止使用并删除所有字体副本。资产按现状提供，不承诺适用于特定目的；在适用法律允许范围内，权利人不承担因使用而产生的间接损失。</p>
+          </div>
+          <div class="term__en">
+            <h2>Rights, termination, and disclaimer</h2>
+            <p>All rights not expressly granted are reserved by the Panacea project rights holder. This license terminates automatically upon breach; use must stop and all font copies must be deleted. Assets are provided as-is without fitness warranties, and the rights holder is not liable for indirect loss to the extent permitted by applicable law.</p>
+          </div>
+        </section>
+
+        <section class="term">
+          <div class="section-number">09</div>
+          <div>
+            <h2>商业授权与协议语言</h2>
+            <p>商业授权请发送邮件至 <a href="mailto:zilazer@gmail.com">zilazer@gmail.com</a>，并说明使用方、项目类型、发布媒介、地区与期限。本协议中英文并列；如理解不一致，以中文版为准。特定商业授权的书面条款优先。</p>
+          </div>
+          <div class="term__en">
+            <h2>Commercial licensing and language</h2>
+            <p>For commercial licensing, email <a href="mailto:zilazer@gmail.com">zilazer@gmail.com</a> and state the licensee, project type, media, territory, and term. Chinese and English are presented together; the Chinese text controls if interpretations differ. Written terms for a specific commercial license take priority.</p>
+          </div>
+        </section>
+      </div>
+
+      <nav class="actions" aria-label="License actions">
+        <a class="button" href="panacea.html">Return to Panacea / 返回 Panacea</a>
+        <a class="button" href="mailto:zilazer@gmail.com">Commercial license enquiry / 商业授权咨询</a>
+      </nav>
+    </main>
+  </body>
+</html>
