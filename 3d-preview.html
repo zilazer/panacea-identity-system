@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/site/css/base.css" />
     <link rel="stylesheet" href="assets/site/css/vehicle-3d.css" />
     <title>panacea.design.system.v0.1</title>
+    <link rel="stylesheet" href="assets/site/css/system-signature.css" />
   </head>
   <body class="vehicle-3d-page">
     <main class="viewer" aria-labelledby="preview-title">
@@ -44,6 +45,18 @@
           <input id="decalOpacity" type="range" min="0.2" max="1" step="0.01" value="0.92" />
           <output id="decalOpacityValue">92</output>
         </div>
+        <div class="viewer__nudge" aria-label="Move PNG decal / 移动 PNG 贴纸">
+          <p>Position / 位置</p>
+          <button class="viewer__button viewer__nudge-button" type="button" data-decal-nudge="up" aria-label="Move decal up / 上移贴纸">↑</button>
+          <button class="viewer__button viewer__nudge-button" type="button" data-decal-nudge="left" aria-label="Move decal left / 左移贴纸">←</button>
+          <button class="viewer__button viewer__nudge-button" type="button" data-decal-nudge="right" aria-label="Move decal right / 右移贴纸">→</button>
+          <button class="viewer__button viewer__nudge-button" type="button" data-decal-nudge="down" aria-label="Move decal down / 下移贴纸">↓</button>
+        </div>
+        <div class="viewer__slider">
+          <span>Step</span>
+          <input id="decalMoveStep" type="range" min="4" max="80" step="2" value="20" />
+          <output id="decalMoveStepValue">20</output>
+        </div>
       </div>
       <div class="viewer__status" id="vehicle3dStatus">Loading local model / 正在加载本地模型</div>
     </main>
@@ -56,5 +69,6 @@
       }
     </script>
     <script type="module" src="assets/site/js/vehicle-3d/main.js"></script>
+    <footer class="system-signature" aria-label="Panacea 人間良藥 system signature"><div class="system-signature__lockup"><img class="system-signature__mark" src="assets/logo/current/panacea-outline-signature-mark.png" alt="panacea" /><p class="system-signature__claim">人間良藥<br />一個沒有主體產品<br />只有周邊的個人計劃</p></div></footer>
   </body>
 </html>

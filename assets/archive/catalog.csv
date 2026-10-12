@@ -1,0 +1,66 @@
+id,title,status,legacy_path,notes
+ARC-0001,営業中,verified,../2026-09-23/new-chat/outputs/,纵排三字
+ARC-0002,美米,verified,../2026-09-23/new-chat/outputs/case-02/,白色双字标识
+ARC-0003,東北,verified,../2026-09-23/new-chat/outputs/case-03/,蓝色双字
+ARC-0004,人生就是急也没用,verified,../2026-09-23/new-chat/outputs/case-04/,多行挤压字形
+ARC-0005,觉悟,verified,../2026-09-23/new-chat/outputs/case-05/,用户确认题名
+ARC-0006,魅惑,verified,../2026-09-23/new-chat/outputs/case-06/,装饰性连字
+ARC-0007,祭,verified,../2026-09-23/new-chat/outputs/case-07/,单字车身标记
+ARC-0008,有明确终点的时代［前文待辨］,needs_review,../2026-09-23/new-chat/outputs/case-08/,手写长句
+ARC-0009,喫茶ゾウメシ,verified,../2026-09-23/new-chat/outputs/case-09/,图形与日文组合
+ARC-0010,放工啤一啤,verified,../2026-09-23/new-chat/outputs/case-10/,中英文组合标识
+ARC-0011,自由,verified,../2026-09-23/new-chat/outputs/case-11/,纵排双字
+ARC-0012,餐室 RICE BOWL 飯林,verified,../2026-09-23/new-chat/outputs/case-12/,碗身中英文组合
+ARC-0013,觀山,verified,../2026-09-23/new-chat/outputs/case-13/,海报主字
+ARC-0014,地面濕滑 敬請小心,verified,../2026-09-23/new-chat/outputs/case-14/,顶部英文残缺
+ARC-0015,通渠,verified,../2026-09-23/new-chat/outputs/case-15/,原照轮廓优先
+ARC-0016,不准弃置垃圾,verified,../2026-09-23/new-chat/outputs/case-16/,清除涂鸦
+ARC-0017,モア,verified,../2026-09-23/new-chat/outputs/case-17/,多色分层与网点
+ARC-0018,コルバー 珈琲館,needs_review,../2026-09-23/new-chat/outputs/case-18/,顶部片假名待复核
+ARC-0019,中央劇場 ロマン中央,verified,../2026-09-23/new-chat/outputs/case-19/,红紫双色分层
+ARC-0020,天地無用,verified,../2026-09-23/new-chat/outputs/case-20/,边框圆点箭头完整
+ARC-0021,酒,verified,records/ARC-0021-酒/,橙底白色文字与卡通图形
+ARC-0022,美酒佳肴,verified,records/ARC-0022-美酒佳肴/,深褐底绿色竖排四字
+ARC-0023,满寿［左字残缺］,verified,records/ARC-0023-满寿［左字残缺］/,保留左侧可见残字
+ARC-0024,瘦肉,verified,records/ARC-0024-瘦肉/,白底红字纵排吊牌与复合路径字腔
+ARC-0025,とびだし注意,verified,records/ARC-0025-とびだし注意/,圆形双色警示牌；保留人物与放射装饰
+ARC-0026,とびだしちゅうい！,verified,records/ARC-0026-とびだしちゅうい！/,黄色人物造型与手写警示牌
+ARC-0027,北極,verified,records/ARC-0027-北極/,红蓝双色卷帘彩绘；保留企鹅小字与电话
+ARC-0028,WEEK ENDER,verified,records/ARC-0028-WEEK ENDER/,黄色弧面底板手势香烟与双烟线
+ARC-0029,coffee shop 光線,verified,records/ARC-0029-coffee shop 光線/,由高清正视基准重提并保留完整速度线
+ARC-0030,折曲厳禁,verified,records/ARC-0030-折曲厳禁/,红底白框猫与手的警示图形
+ARC-0031,冷凍,verified,records/ARC-0031-冷凍/,深色笔芯重提并保留内部留白与分离笔画
+ARC-0032,餃子とビールは文化です。,verified,records/ARC-0032-餃子とビールは文化です。/,三列日文发光灯箱手写字
+ARC-0033,順利 SOON LEE,verified,records/ARC-0033-順利 SOON LEE/,中英文字编号侧款与印章
+ARC-0034,LET’S PLAY 道場 アウトドア,verified,records/ARC-0034-LET’S PLAY 道場 アウトドア/,车身侧面三层字样与菱形标记；按可见轮廓展开
+ARC-0035,LOST MERCH CO.,verified,records/ARC-0035-LOST MERCH CO./,车身右向箭头反白英文与下方抽象图形
+ARC-0036,開喜 OPEN SMILE,verified,records/ARC-0036-開喜 OPEN SMILE/,橙白门头字样保留中央V形分割字腔与巨大右端E
+ARC-0037,天生麗質 A BORN BEAUTY / NICE TO MEET YOU,verified / needs_review,records/ARC-0037-天生麗質 A BORN BEAUTY NICE TO MEET YOU/,中文明确短缺口已补英文强反光区仍待复核
+ARC-0038,出血サービス,verified,records/ARC-0038-出血サービス/,黑色手工曲线标题及下方日文小字
+ARC-0039,ものづくり 日本の奇跡,verified,records/ARC-0039-ものづくり 日本の奇跡/,黑色节目标题与浅灰几何构图辅助线分层保存
+ARC-0040,CRAZY CLUB 發瘋俱樂部,verified,records/ARC-0040-CRAZY CLUB 發瘋俱樂部/,旧板面上下两层红字保留封闭孔洞磨损边缘与小缺口
+ARC-0041,隔,verified,records/ARC-0041-隔/,橙底粉色单字与黑色粗轮廓右侧下一字残边未收录
+ARC-0042,鰻魚,verified,records/ARC-0042-鰻魚/,黑色书写式繁体双字保留宽松字距与原始笔形
+ARC-0043,FISH SMOKING A CIGARETTE,verified,records/ARC-0043-FISH SMOKING A CIGARETTE/,五色手绘字图保留鱼香烟与漩涡烟线
+ARC-0044,飞猫,verified,records/ARC-0044-飞猫/,无可见文字以主体描述命名保留羽翼眼睛镜空与悬浮阴影
+ARC-0045,纸袋猫,verified,records/ARC-0045-纸袋猫/,无可见文字以主体描述命名保留环形眼睛纸袋留白与弯曲尾巴
+ARC-0046,關門紅,verified,records/ARC-0046-關門紅/,粗重书写式繁体三字排除左侧贴边黑点
+ARC-0047,歩行者通路 自転車通れません,verified,records/ARC-0047-歩行者通路 自転車通れません/,上下双层日文通道标牌保留细小字腔与左向红色箭头
+ARC-0048,日本南極地域観測隊,verified,records/ARC-0048-日本南極地域観測隊/,橙色履带车车身米白喷涂字局部门扣遮挡按笔画连续性修复
+ARC-0049,光洋電気商会,verified,records/ARC-0049-光洋電気商会/,纵排六字商号竖牌底部保留TEL 23-0144
+ARC-0050,浪漫,verified,records/ARC-0050-浪漫/,橙黄底深红图形字折带形三点水与字内槽口
+ARC-0051,海辺,verified,records/ARC-0051-海辺/,米白底红色纵排图形字顶部残缺THE SEA未收入主图
+ARC-0052,出口 EXIT,verified,records/ARC-0052-出口 EXIT/,暗红色几何出口字与三枚右向箭头保留双语禁烟附属字样
+ARC-0053,PRIVATE 関係者以外 立入禁止,verified,records/ARC-0053-PRIVATE 関係者以外 立入禁止/,黑红三行警示牌保留PRIVATE原始模板字做旧缺口
+ARC-0054,邪道,verified,records/ARC-0054-邪道/,近黑色粗重手绘字排除定位十字与纸面折线
+ARC-0055,心地の駅,verified,records/ARC-0055-心地の駅/,黑底暖白模块化几何字清除屏幕扫描纹并保留宽黑负形
+ARC-0056,異文化処理,verified,records/ARC-0056-異文化処理/,深灰黑共笔式几何字排除纸缝与胶带折痕并保留构字小孔
+ARC-0057,薬用,verified,records/ARC-0057-薬用/,圆形药膏标签保留外圈双语字人物线稿小字价格框与黄色色块
+ARC-0058,好想出去玩,verified,records/ARC-0058-好想出去玩/,红蓝徽章式构图保留上弧拼音放射线侧字中央小章与飘带
+ARC-0059,人間良藥,verified,records/ARC-0059-人間良藥/,用户二次建模与3D打印成品以复合路径保留红色横条字腔及狭窄负形
+ARC-0060,仙豆夜酒 Senzu Nightcap,verified,records/ARC-0060-仙豆夜酒 Senzu Nightcap/,暖黄竖向灯箱双色复合路径保留豆夜酒及英文孔洞与拳击人物
+ARC-0061,冒険回,verified / needs_review,records/ARC-0061-冒険回/,黑白满版错位字完整保留切缝三角负形与右字双框释文待复核
+ARC-0062,大江印刷廠,verified,records/ARC-0062-大江印刷廠/,传统右向左牌匾字排除右上电线保留五字粗重手写轮廓
+ARC-0063,OUT OF SERVICE,verified,records/ARC-0063-OUT OF SERVICE/,红色设备停用吊牌保留旋转排版复选框孔环与反白底栏
+ARC-0064,POPEYE 真夏のホラー大冒険。,verified,records/ARC-0064-POPEYE 真夏のホラー大冒険。/,24色杂志封面路径保留泡状标题字腔恐怖角色群像与刊号信息
+ARC-0065,POPEYE,verified,records/ARC-0065-POPEYE/,独立黑色泡状字标复合路径保留弧形高光全部字腔及注册标记

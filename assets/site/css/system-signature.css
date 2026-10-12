@@ -1,0 +1,43 @@
+.system-signature {
+  display: grid;
+  align-items: end;
+  justify-items: end;
+  min-height: 250px;
+  padding: 40px 56px;
+  border-top: 1px solid #111111;
+  background: #f8f8f5;
+}
+
+.system-signature__lockup {
+  display: grid;
+  justify-items: end;
+  gap: 18px;
+  width: min(420px, 86%);
+}
+
+.system-signature__mark {
+  width: min(240px, 62%);
+  height: auto;
+}
+
+.system-signature__claim {
+  width: 100%;
+  margin: 0;
+  color: #111111;
+  font-family: "Songti SC", "Noto Serif CJK TC", "PMingLiU", serif;
+  font-size: clamp(18px, 2.15vw, 30px);
+  font-weight: 400;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+@media (max-width: 720px) {
+  .system-signature {
+    min-height: 220px;
+    padding: 28px 24px;
+  }
+
+  .system-signature__lockup {
+    width: min(360px, 92%);
+  }
+}

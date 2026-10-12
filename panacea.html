@@ -240,31 +240,6 @@
         background: #f8f8f5;
       }
 
-      .lattice-signature {
-        display: grid;
-        justify-items: end;
-        max-width: min(420px, 82%);
-        pointer-events: none;
-      }
-
-      .lattice-signature__mark {
-        position: relative;
-        width: clamp(240px, 20vw, 380px);
-        aspect-ratio: 2218 / 1680;
-      }
-
-      .lattice-signature__mark img {
-        position: absolute;
-        inset: 0;
-        width: 100%;
-        height: auto;
-        object-fit: contain;
-      }
-
-      .lattice-signature__seal {
-        transform: translate(18%, -38%) scale(0.68);
-      }
-
       .font-overlay {
         position: fixed;
         inset: 0;
@@ -422,6 +397,22 @@
         font-size: 12px;
         letter-spacing: 0.08em;
         text-transform: uppercase;
+      }
+
+      .lattice-archive {
+        position: absolute;
+        left: 56px;
+        bottom: 68px;
+        color: var(--muted);
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-underline-offset: 0.22em;
+      }
+
+      .lattice-archive:hover,
+      .lattice-archive:focus-visible {
+        color: var(--ink);
       }
 
       .overlay {
@@ -592,12 +583,9 @@
           bottom: 28px;
         }
 
-        .lattice-signature {
-          max-width: min(320px, 88%);
-        }
-
-        .lattice-signature__mark {
-          width: min(260px, 46vw);
+        .lattice-archive {
+          left: 24px;
+          bottom: 54px;
         }
 
         .font-modal {
@@ -653,6 +641,7 @@
         }
       }
     </style>
+    <link rel="stylesheet" href="assets/site/css/system-signature.css" />
   </head>
   <body>
     <main class="page">
@@ -1108,12 +1097,7 @@ form?</textarea>
       spacer.className = "lattice-spacer";
       spacer.innerHTML = `
         <a class="lattice-license" href="license.html">License / 授权协议</a>
-        <div class="lattice-signature" aria-label="Panacea closing note">
-          <div class="lattice-signature__mark" aria-hidden="true">
-            <img src="assets/logo/current/panacea-outline-signature-original.png" alt="" loading="lazy">
-            <img class="lattice-signature__seal" src="assets/logo/current/renliang-print-transparent-2.png" alt="" loading="lazy">
-          </div>
-        </div>
+        <a class="lattice-archive" href="archive.html">Archive / 街头文字档案</a>
       `;
       lattice.appendChild(spacer);
 
@@ -1122,5 +1106,6 @@ form?</textarea>
       selectEntry(initialEntry, false);
       updateFontButtons();
     </script>
+    <footer class="system-signature" aria-label="Panacea 人間良藥 system signature"><div class="system-signature__lockup"><img class="system-signature__mark" src="assets/logo/current/panacea-outline-signature-mark.png" alt="panacea" /><p class="system-signature__claim">人間良藥<br />一個沒有主體產品<br />只有周邊的個人計劃</p></div></footer>
   </body>
 </html>
