@@ -1,0 +1,545 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="ARCHIVE — a vernacular lettering archive by Panacea." />
+    <title>archive.vernacular.lettering.system.v0.1</title>
+    <link rel="icon" href="assets/logo/current/panacea-icon-a-current.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="assets/site/css/system-signature.css" />
+    <style>
+      @font-face {
+        font-family: "Panacea Architectural";
+        src: url("assets/font/PanaceaArchitectural-Regular.ttf?v=0.4.0") format("truetype");
+        font-style: normal;
+        font-weight: 400;
+        font-display: block;
+      }
+
+      :root {
+        --paper: #f5f5f2;
+        --ink: #111111;
+        --muted: #6f6f6a;
+        --line: #111111;
+        --soft-line: rgba(17, 17, 17, 0.2);
+        --panel: #ededE9;
+        --unit: 8px;
+        --ease: cubic-bezier(0.5, 0, 0, 0.75);
+      }
+
+      * { box-sizing: border-box; }
+      html { scroll-behavior: smooth; }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Panacea Architectural", "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", sans-serif;
+        font-size: 14px;
+        line-height: 1.45;
+      }
+      body.is-locked { overflow: hidden; }
+      a { color: inherit; text-decoration: none; }
+      button, input { border: 0; border-radius: 0; color: inherit; font: inherit; }
+      button { padding: 0; background: transparent; cursor: pointer; }
+      img { display: block; max-width: 100%; }
+
+      .masthead {
+        position: fixed;
+        z-index: 30;
+        top: 0;
+        left: 0;
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 16px 24px;
+        color: #fff;
+        mix-blend-mode: difference;
+        font-size: 12px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        pointer-events: none;
+      }
+      .masthead a { pointer-events: auto; }
+      .masthead a:hover, .masthead a:focus-visible { text-decoration: underline; text-underline-offset: 0.3em; }
+      .masthead__right { display: flex; gap: 24px; }
+
+      .hero {
+        min-height: 100svh;
+        display: grid;
+        grid-template-columns: repeat(12, minmax(0, 1fr));
+        grid-template-rows: 1fr auto;
+        gap: 24px;
+        padding: 88px 48px 48px;
+        border-bottom: 1px solid var(--line);
+      }
+      .hero__title {
+        grid-column: 1 / 12;
+        align-self: start;
+        margin: 0;
+        font-family: "Panacea Architectural", sans-serif;
+        font-size: clamp(88px, 17.6vw, 330px);
+        font-weight: 400;
+        letter-spacing: -0.02em;
+        line-height: 0.78;
+      }
+      .hero__intro {
+        grid-column: 1 / 5;
+        max-width: 35em;
+        margin: 0;
+        font-size: clamp(17px, 1.45vw, 24px);
+        line-height: 1.5;
+      }
+      .hero__statement {
+        grid-column: 7 / 10;
+        align-self: end;
+        margin: 0;
+        color: var(--muted);
+      }
+      .hero__count {
+        grid-column: 11 / 13;
+        align-self: end;
+        text-align: right;
+        font-variant-numeric: tabular-nums;
+      }
+      .hero__count strong {
+        display: block;
+        font-family: "Panacea Architectural", sans-serif;
+        font-size: clamp(52px, 7vw, 112px);
+        font-weight: 400;
+        line-height: 0.8;
+      }
+      .hero__count span { display: block; margin-top: 16px; color: var(--muted); font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; }
+
+      .archive-section { border-bottom: 1px solid var(--line); }
+      .archive-head {
+        position: sticky;
+        z-index: 20;
+        top: 0;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        min-height: 72px;
+        padding: 12px 24px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(245,245,242,.94);
+        backdrop-filter: blur(12px);
+      }
+      .filters { display: flex; flex-wrap: wrap; gap: 6px 20px; }
+      .filter { color: var(--muted); font-size: 12px; letter-spacing: .04em; text-transform: uppercase; }
+      .filter:hover, .filter:focus-visible, .filter.is-active { color: var(--ink); text-decoration: underline; text-underline-offset: .35em; }
+      .archive-head__count { color: var(--muted); font-variant-numeric: tabular-nums; }
+
+      .archive-grid {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        background: var(--line);
+        gap: 1px;
+      }
+      .record {
+        min-width: 0;
+        display: grid;
+        grid-template-rows: minmax(250px, 23vw) auto;
+        background: var(--paper);
+        text-align: left;
+        transition: background 160ms var(--ease);
+      }
+      .record:hover, .record:focus-visible { outline: none; background: #fff; }
+      .record__image { display: grid; place-items: center; overflow: hidden; padding: 20px; background: #e0e0dc; }
+      .record__image img { width: 100%; height: 100%; object-fit: contain; filter: grayscale(1) saturate(0) brightness(.78) contrast(.92); transition: filter 220ms var(--ease), transform 260ms var(--ease); }
+      .record:hover .record__image img, .record:focus-visible .record__image img { filter: grayscale(0) saturate(1) brightness(1) contrast(1); transform: scale(1.012); }
+      .record__meta { min-height: 116px; display: grid; grid-template-columns: 80px 1fr; gap: 12px; padding: 16px; border-top: 1px solid var(--soft-line); }
+      .record__id { color: var(--muted); font-size: 11px; font-variant-numeric: tabular-nums; letter-spacing: .04em; }
+      .record__title { margin: 0; font-size: 15px; font-weight: 500; line-height: 1.35; }
+      .record__tags { grid-column: 2; align-self: end; color: var(--muted); font-size: 10px; letter-spacing: .05em; text-transform: uppercase; }
+      .archive-end {
+        min-width: 0;
+        min-height: 366px;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        background: #f8f8f5;
+      }
+      .archive-end__identity {
+        display: grid;
+        justify-items: start;
+        gap: 18px;
+        width: min(220px, 86%);
+        transform: translateY(-10px);
+      }
+      .archive-end__word {
+        font-family: "Panacea Architectural", sans-serif;
+        font-size: clamp(46px, 5.2vw, 76px);
+        font-weight: 400;
+        line-height: .82;
+      }
+      .archive-end__subtitle {
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(9px, .9vw, 12px);
+        line-height: 1.08;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+      .empty { display: none; min-height: 40vh; place-items: center; color: var(--muted); }
+
+      .detail-overlay {
+        position: fixed;
+        z-index: 60;
+        inset: 0;
+        overflow: auto;
+        background: var(--paper);
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(18px);
+        transition: opacity 180ms var(--ease), transform 240ms var(--ease);
+      }
+      .detail-overlay.is-open { opacity: 1; pointer-events: auto; transform: none; }
+      .detail-bar {
+        position: sticky;
+        z-index: 5;
+        top: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        min-height: 64px;
+        padding: 12px 24px;
+        border-bottom: 1px solid var(--line);
+        background: rgba(245,245,242,.94);
+        backdrop-filter: blur(12px);
+      }
+      .detail-close { width: 40px; height: 40px; display: grid; place-items: center; border: 1px solid var(--line); font-size: 22px; }
+      .detail-close:hover, .detail-close:focus-visible { background: var(--ink); color: var(--paper); outline: none; }
+      .detail-layout { display: grid; grid-template-columns: minmax(0, 3fr) minmax(320px, 1fr); min-height: calc(100svh - 64px); }
+      .inspection { min-width: 0; padding: 32px; border-right: 1px solid var(--line); }
+      .inspection__stage { position: relative; min-height: min(72vh, 920px); display: grid; place-items: center; overflow: hidden; background-color: #deded9; background-image: linear-gradient(45deg,#d3d3ce 25%,transparent 25%),linear-gradient(-45deg,#d3d3ce 25%,transparent 25%),linear-gradient(45deg,transparent 75%,#d3d3ce 75%),linear-gradient(-45deg,transparent 75%,#d3d3ce 75%); background-size: 24px 24px; background-position: 0 0,0 12px,12px -12px,-12px 0; }
+      .inspection__stage img { width: 100%; height: min(72vh, 920px); object-fit: contain; }
+      .compare { position: relative; width: 100%; height: min(72vh, 920px); overflow: hidden; }
+      .compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+      .compare__after { clip-path: inset(0 0 0 var(--split, 50%)); }
+      .compare__rule { position: absolute; z-index: 2; top: 0; bottom: 0; left: var(--split, 50%); width: 1px; background: var(--ink); pointer-events: none; }
+      .compare__range { position: absolute; z-index: 3; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; }
+      .compare__label { position: absolute; z-index: 2; top: 12px; padding: 5px 8px; background: var(--paper); font-size: 10px; letter-spacing: .06em; text-transform: uppercase; }
+      .compare__label--before { left: 12px; }
+      .compare__label--after { right: 12px; }
+      .inspection__tools { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; margin-top: 16px; }
+      .stage-tabs { display: flex; flex-wrap: wrap; gap: 8px 18px; }
+      .stage-tab { color: var(--muted); font-size: 11px; letter-spacing: .05em; text-transform: uppercase; }
+      .stage-tab:hover, .stage-tab:focus-visible, .stage-tab.is-active { color: var(--ink); text-decoration: underline; text-underline-offset: .35em; }
+      .stage-tab[hidden] { display: none; }
+      .inspection__hint { color: var(--muted); font-size: 11px; }
+      .detail-copy { display: flex; flex-direction: column; padding: 32px 24px; }
+      .detail-copy__id { color: var(--muted); font-size: 12px; letter-spacing: .06em; }
+      .detail-copy h2 { margin: 32px 0 12px; font-size: clamp(32px, 4vw, 68px); font-weight: 400; line-height: 1.05; }
+      .detail-copy__status { margin: 0; color: var(--muted); text-transform: uppercase; }
+      .detail-copy__note { margin: 64px 0 0; font-size: 16px; line-height: 1.6; }
+      .detail-copy dl { margin: auto 0 0; border-top: 1px solid var(--line); }
+      .detail-copy dl div { display: grid; grid-template-columns: 104px 1fr; gap: 16px; padding: 10px 0; border-bottom: 1px solid var(--soft-line); }
+      .detail-copy dt { color: var(--muted); }
+      .detail-copy dd { margin: 0; }
+
+      @media (max-width: 1180px) {
+        .archive-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        .record { grid-template-rows: minmax(260px, 34vw) auto; }
+        .archive-end { min-height: calc(max(260px, 34vw) + 116px); }
+        .detail-layout { grid-template-columns: 1fr; }
+        .inspection { border-right: 0; border-bottom: 1px solid var(--line); }
+        .detail-copy { min-height: 560px; }
+      }
+      @media (max-width: 720px) {
+        .masthead { padding: 14px 16px; }
+        .masthead__right span:first-child { display: none; }
+        .hero { min-height: 86svh; grid-template-columns: repeat(6, 1fr); grid-template-rows: auto 1fr auto; gap: 16px; padding: 96px 16px 24px; }
+        .hero__title { grid-column: 1 / -1; font-size: clamp(76px, 28vw, 156px); }
+        .hero__intro { grid-column: 1 / 6; align-self: center; }
+        .hero__statement { display: none; }
+        .hero__count { grid-column: 5 / 7; }
+        .archive-head { align-items: start; gap: 12px; padding: 14px 16px; }
+        .filters { gap: 7px 14px; }
+        .archive-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .record { grid-template-rows: minmax(190px, 58vw) auto; }
+        .record__image { padding: 12px; }
+        .record__meta { min-height: 126px; display: block; padding: 12px; }
+        .record__id,
+        .record__title,
+        .record__tags { display: block; }
+        .record__title { margin-top: 8px; }
+        .record__tags { margin-top: 18px; }
+        .archive-end { min-height: calc(max(190px, 58vw) + 126px); padding: 16px; }
+        .archive-end__identity { width: min(180px, 84%); }
+        .inspection { padding: 16px; }
+        .inspection__stage, .compare, .inspection__stage img { min-height: 0; height: 58svh; }
+        .inspection__hint { display: none; }
+        .detail-copy { min-height: 520px; padding: 24px 16px; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="masthead">
+      <a href="panacea.html">panacea</a>
+      <div class="masthead__right"><span>Vernacular Lettering Archive</span><span>v0.1</span></div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="page-title">
+        <h1 class="hero__title" id="page-title">archive</h1>
+        <p class="hero__intro">保存现实中已经存在、可能正在消失的民间文字形态。</p>
+        <p class="hero__statement">The photograph is the evidence. Perspective correction, conservative restoration and vector extraction remain separate, inspectable layers.</p>
+        <div class="hero__count"><strong id="hero-count">065</strong><span>registered records</span></div>
+      </section>
+
+      <section class="archive-section" id="index" aria-labelledby="index-title">
+        <div class="archive-head">
+          <div class="filters" id="filters" aria-label="Filter archive records">
+            <button class="filter is-active" type="button" data-filter="all" id="index-title">All</button>
+            <button class="filter" type="button" data-filter="han">汉字</button>
+            <button class="filter" type="button" data-filter="japanese">Japanese</button>
+            <button class="filter" type="button" data-filter="latin">Latin</button>
+            <button class="filter" type="button" data-filter="mixed">Mixed</button>
+            <button class="filter" type="button" data-filter="object">3D / Object</button>
+            <button class="filter" type="button" data-filter="review">Needs review</button>
+          </div>
+          <span class="archive-head__count" id="visible-count">065 / 065</span>
+        </div>
+        <div class="archive-grid" id="archive-grid" aria-live="polite"></div>
+        <div class="empty" id="empty-state">No matching records.</div>
+      </section>
+
+    </main>
+
+    <footer class="system-signature" aria-label="Panacea 人間良藥 system signature">
+      <div class="system-signature__lockup">
+        <img class="system-signature__mark" src="assets/logo/current/panacea-outline-signature-mark.png" alt="panacea" />
+        <p class="system-signature__claim">人間良藥<br />一個沒有主體產品<br />只有周邊的個人計劃</p>
+      </div>
+    </footer>
+
+    <div class="detail-overlay" id="detail-overlay" aria-hidden="true">
+      <div class="detail-bar">
+        <span id="detail-bar-id">ARC-0001</span>
+        <button class="detail-close" id="detail-close" type="button" aria-label="Close record">×</button>
+      </div>
+      <article class="detail-layout" role="dialog" aria-modal="true" aria-labelledby="detail-title">
+        <section class="inspection">
+          <div class="inspection__stage" id="inspection-stage"></div>
+          <div class="inspection__tools">
+            <div class="stage-tabs" id="stage-tabs">
+              <button class="stage-tab is-active" type="button" data-stage="compare">Compare</button>
+              <button class="stage-tab" type="button" data-stage="source">Source</button>
+              <button class="stage-tab" type="button" data-stage="corrected">Corrected</button>
+              <button class="stage-tab" type="button" data-stage="restored">Restored</button>
+              <button class="stage-tab" type="button" data-stage="vector">Vector</button>
+            </div>
+            <span class="inspection__hint">Drag the image to inspect negative space / 拖动对照线检查字腔</span>
+          </div>
+        </section>
+        <aside class="detail-copy">
+          <span class="detail-copy__id" id="detail-id"></span>
+          <h2 id="detail-title"></h2>
+          <p class="detail-copy__status" id="detail-status"></p>
+          <p class="detail-copy__note" id="detail-note"></p>
+          <dl>
+            <div><dt>Script</dt><dd id="detail-script"></dd></div>
+            <div><dt>Record</dt><dd id="detail-record"></dd></div>
+            <div><dt>Layers</dt><dd id="detail-layers"></dd></div>
+          </dl>
+        </aside>
+      </article>
+    </div>
+
+    <script src="assets/archive/catalog.js"></script>
+    <script>
+      const archiveState = { records: [], filter: "all", current: null, stage: "compare" };
+      const objectIds = new Set(["ARC-0021", "ARC-0029", "ARC-0043", "ARC-0052", "ARC-0059", "ARC-0065"]);
+      const recordsWithoutCorrectedLayer = new Set(["ARC-0027", "ARC-0028", "ARC-0029", "ARC-0030"]);
+      const grid = document.querySelector("#archive-grid");
+      const emptyState = document.querySelector("#empty-state");
+      const visibleCount = document.querySelector("#visible-count");
+      const overlay = document.querySelector("#detail-overlay");
+      const stage = document.querySelector("#inspection-stage");
+
+      function scriptType(title) {
+        const hasHan = /[\u3400-\u9fff]/u.test(title);
+        const hasKana = /[\u3040-\u30ff]/u.test(title);
+        const hasLatin = /[A-Za-z]/u.test(title);
+        if ((hasHan || hasKana) && hasLatin) return "mixed";
+        if (hasKana) return "japanese";
+        if (hasHan) return "han";
+        if (hasLatin) return "latin";
+        return "mixed";
+      }
+
+      function normalizeRecord(row) {
+        const number = Number(row.id.slice(4));
+        return {
+          ...row,
+          number,
+          script: scriptType(row.title),
+          migrated: number >= 21,
+          object: objectIds.has(row.id),
+          review: row.status.includes("needs_review"),
+          base: `assets/archive/records/${row.id}`
+        };
+      }
+
+      function tagsFor(record) {
+        const labels = { han: "Han", japanese: "Japanese", latin: "Latin", mixed: "Mixed" };
+        return [labels[record.script], record.migrated ? "full record" : "legacy record", record.object ? "object" : ""].filter(Boolean).join(" · ");
+      }
+
+      function recordMatches(record) {
+        if (archiveState.filter === "all") return true;
+        if (archiveState.filter === "object") return record.object;
+        if (archiveState.filter === "review") return record.review;
+        return record.script === archiveState.filter;
+      }
+
+      function renderGrid() {
+        const records = archiveState.records.filter(recordMatches).sort((a, b) => b.number - a.number);
+        const nodes = records.map(record => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "record";
+          button.dataset.id = record.id;
+          button.setAttribute("aria-label", `${record.id} ${record.title}`);
+          button.innerHTML = `
+            <span class="record__image"><img src="${record.base}/thumb.jpg" alt="" loading="lazy" decoding="async"></span>
+            <span class="record__meta">
+              <span class="record__id">${record.id}</span>
+              <span class="record__title">${record.title}</span>
+              <span class="record__tags">${tagsFor(record)}</span>
+            </span>`;
+          button.addEventListener("click", () => openRecord(record));
+          return button;
+        });
+        if (archiveState.filter === "all") {
+          const endTile = document.createElement("div");
+          endTile.className = "archive-end";
+          endTile.setAttribute("aria-label", "archive the letters in my lens");
+          endTile.innerHTML = `
+            <div class="archive-end__identity">
+              <div class="archive-end__word">archive</div>
+              <p class="archive-end__subtitle">the letters<br>in my lens</p>
+            </div>`;
+          nodes.push(endTile);
+        }
+        grid.replaceChildren(...nodes);
+        emptyState.style.display = records.length ? "none" : "grid";
+        visibleCount.textContent = `${String(records.length).padStart(3, "0")} / ${String(archiveState.records.length).padStart(3, "0")}`;
+      }
+
+      function stageAsset(record, name) {
+        if (name === "vector") return `${record.base}/artwork.svg`;
+        return `${record.base}/${name}.jpg`;
+      }
+
+      async function updateStageAvailability(record) {
+        const names = ["source", "corrected", "restored", "vector"];
+        const checks = location.protocol === "file:"
+          ? names.map(name => [name, name !== "corrected" || !recordsWithoutCorrectedLayer.has(record.id)])
+          : await Promise.all(names.map(async name => {
+              try {
+                const response = await fetch(stageAsset(record, name), { method: "HEAD" });
+                return [name, response.ok];
+              } catch (_) {
+                return [name, false];
+              }
+            }));
+        if (archiveState.current !== record) return;
+        const available = Object.fromEntries(checks);
+        document.querySelectorAll(".stage-tab").forEach(tab => {
+          const name = tab.dataset.stage;
+          tab.hidden = name === "compare" ? !(available.source && available.restored) : !available[name];
+        });
+        const labels = { source: "Source", corrected: "Corrected", restored: "Restored", vector: "SVG" };
+        document.querySelector("#detail-layers").textContent = names.filter(name => available[name]).map(name => labels[name]).join(", ") || "Archive image only";
+      }
+
+      function renderStage(name) {
+        const record = archiveState.current;
+        archiveState.stage = name;
+        document.querySelectorAll(".stage-tab").forEach(tab => tab.classList.toggle("is-active", tab.dataset.stage === name));
+        stage.replaceChildren();
+        if (!record.migrated) {
+          const image = new Image();
+          image.src = `${record.base}/thumb.jpg`;
+          image.alt = record.title;
+          stage.append(image);
+          return;
+        }
+        if (name === "compare") {
+          const compare = document.createElement("div");
+          compare.className = "compare";
+          compare.style.setProperty("--split", "50%");
+          compare.innerHTML = `
+            <img src="${stageAsset(record, "source")}" alt="${record.title} source photograph">
+            <img class="compare__after" src="${stageAsset(record, "restored")}" alt="${record.title} restored artwork">
+            <span class="compare__label compare__label--before">Source</span>
+            <span class="compare__label compare__label--after">Restored</span>
+            <span class="compare__rule"></span>
+            <input class="compare__range" type="range" min="0" max="100" value="50" aria-label="Compare source and restored image">`;
+          compare.querySelector("input").addEventListener("input", event => compare.style.setProperty("--split", `${event.target.value}%`));
+          stage.append(compare);
+        } else {
+          const image = new Image();
+          image.src = stageAsset(record, name);
+          image.alt = `${record.title} ${name}`;
+          image.onerror = () => {
+            image.src = `${record.base}/thumb.jpg`;
+            image.alt = `${record.title} archive image`;
+          };
+          stage.append(image);
+        }
+      }
+
+      function openRecord(record) {
+        archiveState.current = record;
+        document.querySelector("#detail-bar-id").textContent = record.id;
+        document.querySelector("#detail-id").textContent = `${record.id} / ${String(record.number).padStart(3, "0")}`;
+        document.querySelector("#detail-title").textContent = record.title;
+        document.querySelector("#detail-status").textContent = record.status.replace("_", " ");
+        document.querySelector("#detail-note").textContent = record.notes || "Archive record.";
+        document.querySelector("#detail-script").textContent = tagsFor(record).split(" · ")[0];
+        document.querySelector("#detail-record").textContent = record.migrated ? "Standard archive record" : "Legacy record / pending migration";
+        document.querySelector("#detail-layers").textContent = record.migrated ? "Checking available layers…" : "Archive image only";
+        document.querySelectorAll(".stage-tab").forEach(tab => { tab.hidden = !record.migrated && tab.dataset.stage !== "source"; });
+        renderStage(record.migrated ? "compare" : "source");
+        if (record.migrated) updateStageAvailability(record);
+        overlay.classList.add("is-open");
+        overlay.setAttribute("aria-hidden", "false");
+        document.body.classList.add("is-locked");
+        history.replaceState(null, "", `#${record.id}`);
+        document.querySelector("#detail-close").focus();
+      }
+
+      function closeRecord() {
+        overlay.classList.remove("is-open");
+        overlay.setAttribute("aria-hidden", "true");
+        document.body.classList.remove("is-locked");
+        history.replaceState(null, "", location.pathname + location.search);
+      }
+
+      document.querySelector("#filters").addEventListener("click", event => {
+        const button = event.target.closest("[data-filter]");
+        if (!button) return;
+        archiveState.filter = button.dataset.filter;
+        document.querySelectorAll(".filter").forEach(filter => filter.classList.toggle("is-active", filter === button));
+        renderGrid();
+      });
+      document.querySelector("#stage-tabs").addEventListener("click", event => {
+        const button = event.target.closest("[data-stage]");
+        if (button) renderStage(button.dataset.stage);
+      });
+      document.querySelector("#detail-close").addEventListener("click", closeRecord);
+      document.addEventListener("keydown", event => { if (event.key === "Escape" && overlay.classList.contains("is-open")) closeRecord(); });
+
+      archiveState.records = (window.ARCHIVE_CATALOG || []).map(normalizeRecord);
+      document.querySelector("#hero-count").textContent = String(archiveState.records.length).padStart(3, "0");
+      renderGrid();
+      const initial = archiveState.records.find(record => `#${record.id}` === location.hash);
+      if (initial) openRecord(initial);
+    </script>
+  </body>
+</html>
