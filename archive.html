@@ -309,7 +309,7 @@
         <h1 class="hero__title" id="page-title">archive</h1>
         <p class="hero__intro">保存现实中已经存在、可能正在消失的民间文字形态。</p>
         <p class="hero__statement">The photograph is the evidence. Perspective correction, conservative restoration and vector extraction remain separate, inspectable layers.</p>
-        <div class="hero__count"><strong id="hero-count">091</strong><span>registered records</span></div>
+        <div class="hero__count"><strong id="hero-count">100</strong><span>registered records</span></div>
       </section>
 
       <section class="archive-section" id="index" aria-labelledby="index-title">
@@ -323,7 +323,7 @@
             <button class="filter" type="button" data-filter="object">3D / Object</button>
             <button class="filter" type="button" data-filter="review">Needs review</button>
           </div>
-          <span class="archive-head__count" id="visible-count">080 / 080</span>
+          <span class="archive-head__count" id="visible-count">100 / 100</span>
         </div>
         <div class="archive-grid" id="archive-grid" aria-live="polite"></div>
         <div class="empty" id="empty-state">No matching records.</div>
@@ -454,7 +454,8 @@
 
       function stageAsset(record, name) {
         if (name === "vector") return `${record.base}/artwork.svg`;
-        return `${record.base}/${name}.jpg`;
+        const ext = record.number >= 92 && name === "restored" ? "png" : "jpg";
+        return `${record.base}/${name}.${ext}`;
       }
 
       async function updateStageAvailability(record) {
